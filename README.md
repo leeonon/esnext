@@ -1,0 +1,2 @@
+# esnext
+esnext core
