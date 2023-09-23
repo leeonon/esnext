@@ -1,0 +1,20 @@
+{
+  "name": "esnext",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx -y only-allow pnpm",
+    "dev:site": "pnpm --filter @esnext/site dev",
+    "start:site": "pnpm --filter @esnext/site start"
+  },
+  "keywords": [],
+  "author": "yang",
+  "license": "ISC",
+  "peerDependencies": {
+    "@types/node": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.3"
+  }
+}
