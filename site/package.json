@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "db:push": "prisma db push",
+    "db:seed": "prisma db seed",
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
@@ -41,10 +42,14 @@
     "prettier-plugin-tailwindcss": "^0.5.1",
     "prisma": "^5.1.1",
     "tailwindcss": "^3.3.3",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "ct3aMetadata": {
     "initVersion": "7.20.2"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "packageManager": "pnpm@8.3.1"
 }
