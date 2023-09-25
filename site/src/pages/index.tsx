@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
-
+import { Button } from '@nextui-org/react';
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -42,6 +42,8 @@ export default function Home() {
                 to deploy it.
               </div>
             </Link>
+            <Button>Button</Button>
+            <Button color="primary">Primary</Button>
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">
