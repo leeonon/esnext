@@ -7,6 +7,9 @@
     "preinstall": "npx -y only-allow pnpm",
     "db:push": "pnpm --filter @esnext/site db:push",
     "db:seed": "pnpm --filter @esnext/site db:seed",
+    "db:migrate": "pnpm --filter @esnext/site db:migrate",
+    "db:migrate:apply": "pnpm --filter @esnext/site db:migrate:apply",
+    "db:generate": "pnpm --filter @esnext/site db:generate",
     "dev:site": "pnpm --filter @esnext/site dev",
     "start:site": "pnpm --filter @esnext/site start"
   },

@@ -3,25 +3,30 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.example.create({
+  await prisma.project.create({
     data: {
-      description: 'Test Description',
-      fullName: 'Test FullName',
-      name: 'Test',
-      ownerId: 1,
-      slug: 'test-slug',
-      stars: 5,
-      tags: 'testTag'
+      name: 'React',
+      fullName: 'facebook/react',
+      description: 'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
+      homePage: 'https://reactjs.dev/',
+      stars: 167000,
+      projectCreateTime: new Date(),
+      lastCommitTime: new Date(),
+      version: '17.0.2',
+      versionUpdateTime: new Date(),
+      readme: 'https://raw.githubusercontent.com/facebook/react/master/README.md',
+      logo: 'https://raw.githubusercontent.com/facebook/react/master/logo.png',
+      owner: 'facebook',
     }
   });
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
   })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
