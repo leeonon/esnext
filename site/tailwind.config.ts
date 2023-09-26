@@ -13,14 +13,16 @@ export default {
   darkMode: "class",
   plugins: [
     nextui({
+      prefix: "esnext",
       themes: {
         dark: {
           colors: {
-            default: 'red',
-            primary: {
-              DEFAULT: "blue",
-            }
-          }
+            background: {
+              500: 'red'
+            },
+            foreground: {},
+            primary: {},
+          },
         }
       }
     })
