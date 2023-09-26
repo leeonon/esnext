@@ -3,7 +3,7 @@
  */
 const config = {
   arrowParens: "always",
-  printWidth: 120,
+  printWidth: 80,
   singleQuote: false,
   jsxSingleQuote: false,
   semi: true,
