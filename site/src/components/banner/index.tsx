@@ -1,8 +1,10 @@
 "use client";
 
+import Search from "~/components/banner/Search";
+
 export default function ESNextBanner() {
   return (
-    <section className="relative flex h-[360px] items-center justify-center md:h-[620px]">
+    <section className="relative flex h-[360px] items-center justify-center border-b-1 border-b-default-100 md:h-[480px]">
       <div className="flex flex-col items-center">
         <b
           className="
@@ -13,7 +15,15 @@ export default function ESNextBanner() {
           Your Frontend Arsenal
         </b>
         <br />
-        <b className="text-2xl">Every Tool, Every Framework, Every Victory.</b>
+        <p className="text-default-400 md:text-base lg:text-2xl">
+          Every Tool, Every Framework, Every Victory.
+        </p>
+        <p className="text-default-400 md:text-base lg:text-2xl">
+          100,0+ Frontend library & node library.
+        </p>
+        <div className="flex w-full items-center justify-center">
+          <Search />
+        </div>
       </div>
     </section>
   );
