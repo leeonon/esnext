@@ -3,10 +3,14 @@ import Head from "next/head";
 
 import ESNextBanner from "~/components/banner";
 import ESNextNavbar from "~/components/navbar";
+import Project from "~/pages/_home/project";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const hello = api.example.hello.useQuery(
+    { text: "from tRPC" },
+    { refetchOnWindowFocus: false },
+  );
 
   return (
     <>
@@ -17,6 +21,7 @@ export default function Home() {
       </Head>
       <ESNextNavbar />
       <ESNextBanner />
+      <Project />
       <main className="bg-primary-color flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="flex flex-col items-center gap-2">

@@ -14,8 +14,8 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 
-import { LogoLong } from "~/components/logo";
-import ThemeButton from "~/components/themeButton";
+import { LogoLong } from "~/components/Logos";
+import ThemeButton from "~/components/ThemeButton";
 
 export default function ESNextNavbar() {
   return (
