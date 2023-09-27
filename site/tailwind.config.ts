@@ -1,5 +1,5 @@
+import { nextui } from "@nextui-org/react";
 import { type Config } from "tailwindcss";
-import { nextui } from '@nextui-org/react';
 
 export default {
   content: [
@@ -18,13 +18,14 @@ export default {
         dark: {
           colors: {
             background: {
-              500: 'red'
+              500: "red",
             },
             foreground: {},
             primary: {},
           },
-        }
-      }
-    })
-  ]
+        },
+        light: {},
+      },
+    }),
+  ],
 } satisfies Config;

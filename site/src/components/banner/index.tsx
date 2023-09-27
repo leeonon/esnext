@@ -4,7 +4,7 @@ import Search from "~/components/banner/Search";
 
 export default function ESNextBanner() {
   return (
-    <section className="relative flex h-[360px] items-center justify-center border-b-1 border-b-default-100 md:h-[480px]">
+    <section className="relative flex h-[360px] items-center justify-center border-b-1 border-b-default-50 md:h-[480px]">
       <div className="flex flex-col items-center">
         <b
           className="

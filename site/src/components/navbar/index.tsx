@@ -15,6 +15,7 @@ import {
 import React from "react";
 
 import { LogoLong } from "~/components/logo";
+import ThemeButton from "~/components/themeButton";
 
 export default function ESNextNavbar() {
   return (
@@ -31,6 +32,11 @@ export default function ESNextNavbar() {
         <NavbarItem>
           <Link color="foreground" href="#">
             Tags
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Ranking
           </Link>
         </NavbarItem>
         <Dropdown>
@@ -101,6 +107,7 @@ export default function ESNextNavbar() {
         </NavbarItem>
       </NavbarContent> */}
       <NavbarContent as="div" justify="end">
+        <ThemeButton />
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
