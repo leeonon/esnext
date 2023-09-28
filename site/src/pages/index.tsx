@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import ESNextBanner from "~/components/banner";
 import ESNextNavbar from "~/components/navbar";
-import Project from "~/pages/_home/project";
+import Project from "~/pages/_home/Project";
 import { api } from "~/utils/api";
 
 export default function Home() {
