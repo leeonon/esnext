@@ -3,23 +3,30 @@
 import type { ProjectItemType } from "~/types";
 
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
   Divider,
   Image,
-  Link,
 } from "@nextui-org/react";
+
+import ESNextTag from "~/components/Tag";
 
 export type ProjectBoxProps = {
   item: ProjectItemType;
+  className?: string;
 };
 
 export default function ProjectBox(props: ProjectBoxProps) {
-  const { item } = props;
+  const { item, className } = props;
   return (
-    <Card className="max-h-[200px] max-w-[400px] cursor-pointer rounded-md">
+    <Card
+      isPressable
+      isFooterBlurred
+      className={`max-h-[200px] w-full rounded-md ${className}`}
+    >
       <CardHeader className="flex gap-3">
         <Image
           alt="nextui logo"
@@ -29,24 +36,22 @@ export default function ProjectBox(props: ProjectBoxProps) {
           radius="sm"
           src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col items-start">
           <p className="text-md">{item.name}</p>
-          <p className="text-small text-default-500">{item.description}</p>
+          <p className="line-clamp-2 text-left text-small text-default-500">
+            {item.description}
+          </p>
         </div>
       </CardHeader>
       <Divider />
-      <CardBody>
-        <p>Make beautiful websites regardless of your design experience.</p>
+      <CardBody className="flex flex-row items-center justify-start gap-2 overflow-hidden">
+        Star
       </CardBody>
       <Divider />
-      <CardFooter>
-        <Link
-          isExternal
-          showAnchorIcon
-          href="https://github.com/nextui-org/nextui"
-        >
-          Visit source code on GitHub.
-        </Link>
+      <CardFooter className="gap-2">
+        <ESNextTag>React</ESNextTag>
+        <ESNextTag>Vue</ESNextTag>
+        <ESNextTag>TypeScript</ESNextTag>
       </CardFooter>
     </Card>
   );
