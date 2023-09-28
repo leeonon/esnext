@@ -2,19 +2,49 @@
 
 import Search from "~/components/banner/Search";
 
+import styles from "./styles.module.css";
+
 export default function ESNextBanner() {
-  return (
-    <section className="relative flex h-[360px] items-center justify-center border-b-1 border-b-default-50 md:h-[480px]">
-      <div className="flex flex-col items-center">
-        <b
-          className="
-            bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))]
-            from-rose-400 via-fuchsia-500 via-60% to-indigo-500 bg-clip-text
-            text-2xl text-transparent md:text-5xl md:leading-snug lg:text-6xl lg:leading-normal"
+  const renderWord = (word: string, startingDelay: number) => {
+    return word.split("").map((letter, index) => {
+      const delay = startingDelay + index * 50;
+      return (
+        <span
+          key={index}
+          style={{ animationDelay: `${delay}ms` }}
+          className={`animate-fall translate-y-[-150%] text-default-foreground`}
         >
-          Your Frontend Arsenal
-        </b>
-        <br />
+          {letter}
+        </span>
+      );
+    });
+  };
+
+  return (
+    <section
+      className="relative flex h-[360px] max-w-[100vw] items-center justify-center
+        overflow-hidden border-b-1 border-b-default-50 md:h-[480px]"
+    >
+      <div className="flex flex-col items-center">
+        <div
+          className={`
+            ${styles.gradientText} flex items-center overflow-hidden text-2xl font-black
+            text-transparent md:text-5xl md:leading-snug lg:text-6xl lg:leading-normal`}
+        >
+          <span
+            className={`via-60%to-indigo-500 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 bg-clip-text`}
+          >
+            Your Frontend
+          </span>
+          <span className="relative mx-2 ml-2 inline-flex overflow-hidden p-2">
+            <div className="flex flex-row">{renderWord("Arsenal", 0)}</div>
+            <span className="absolute bottom-0 top-0">
+              <div className="flex flex-row">
+                {renderWord("Favorites", 1500)}
+              </div>
+            </span>
+          </span>
+        </div>
         <p className="text-default-400 md:text-base lg:text-2xl">
           Every Tool, Every Framework, Every Victory.
         </p>

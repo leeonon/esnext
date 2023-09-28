@@ -10,6 +10,8 @@ export const projectRouter = createTRPCRouter({
     return all;
   }),
 
+  // query: publicProcedure.query(async ({ ctx, input }) => { }),
+
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.db.example.findMany();
   }),

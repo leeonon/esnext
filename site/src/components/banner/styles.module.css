@@ -1,0 +1,16 @@
+.gradientText {
+  animation-name: scrollScale;
+  animation-timeline: scroll(root);
+  animation-duration: auto;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards; /* 添加这一行 */
+}
+
+@keyframes scrollScale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(3);
+  }
+}
