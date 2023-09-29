@@ -1,18 +1,11 @@
 import type { ButtonProps } from "@nextui-org/react";
 import type { FC, PropsWithChildren } from "react";
 
-import { Button } from "@nextui-org/react";
-
 const ESNextTag: FC<PropsWithChildren & ButtonProps> = ({ children }) => {
   return (
-    <Button
-      size="sm"
-      variant="shadow"
-      radius="sm"
-      className="h-6 w-fit min-w-min px-2 text-white shadow-lg"
-    >
+    <span className="inline-flex h-6 w-fit min-w-min items-center justify-center rounded-small bg-default px-2 text-tiny font-normal shadow-sm shadow-default/50">
       {children}
-    </Button>
+    </span>
   );
 };
 

@@ -3,7 +3,6 @@
 import type { ProjectItemType } from "~/types";
 
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
