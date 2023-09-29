@@ -1,9 +1,10 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 
-import ESNextBanner from "~/components/banner";
-import ESNextNavbar from "~/components/navbar";
-import Project from "~/pages/_home/Project";
+import ESNextBanner from "~/components/Banner";
+import ESNextNavbar from "~/components/Navbar";
+import Categories from "~/pages/_home/categories";
+import Project from "~/pages/_home/project";
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -21,7 +22,10 @@ export default function Home() {
       </Head>
       <ESNextNavbar />
       <ESNextBanner />
-      <Project />
+      <div className="mx-auto mt-4 flex max-w-screen-xl">
+        <Categories />
+        <Project />
+      </div>
       <main className="bg-primary-color flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="flex flex-col items-center gap-2">

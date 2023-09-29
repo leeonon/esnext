@@ -7,14 +7,9 @@
 }
 .iconTransition {
   transition-property: transform;
-  transition-duration: 1000ms;
+  transition-duration: 800ms;
   transform-origin: center center;
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-}
-.reactIcon {
-  position: absolute;
-  left: 2rem;
-  top: 8rem;
 }
 .svelteIcon {
   position: absolute;

@@ -31,7 +31,7 @@ export default function ESNextNavbar() {
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Tags
+            Categories
           </Link>
         </NavbarItem>
         <NavbarItem>
