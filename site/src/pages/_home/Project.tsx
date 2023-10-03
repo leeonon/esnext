@@ -8,7 +8,7 @@ export default function Project() {
     refetchOnWindowFocus: false,
   });
   return (
-    <div className="flex flex-grow flex-wrap gap-4">
+    <div className="flex h-fit flex-grow flex-wrap gap-4">
       {data?.map((project) => (
         <ProjectBox
           className="w-full flex-auto sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4"

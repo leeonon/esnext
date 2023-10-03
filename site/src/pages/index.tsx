@@ -1,17 +1,24 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useCallback, useState } from "react";
 import Head from "next/head";
 
 import ESNextBanner from "~/components/Banner";
 import ESNextNavbar from "~/components/Navbar";
 import Categories from "~/pages/_home/categories";
 import Project from "~/pages/_home/project";
+import Tags from "~/pages/_home/tags";
 import { api } from "~/utils/api";
 
 export default function Home() {
+  const [filterVisible, setFilterVisible] = useState(true);
   const hello = api.example.hello.useQuery(
     { text: "from tRPC" },
     { refetchOnWindowFocus: false },
   );
+
+  const onChangeFilterVisible = useCallback(() => {
+    setFilterVisible((prev) => !prev);
+  }, []);
 
   return (
     <>
@@ -22,9 +29,13 @@ export default function Home() {
       </Head>
       <ESNextNavbar />
       <ESNextBanner />
-      <div className="mx-auto mt-4 flex max-w-screen-xl">
-        <Categories />
-        <Project />
+      <div></div>
+      <div className="mx-auto mt-4 flex w-full max-w-screen-xl flex-col px-8">
+        <Tags onChangeFilter={onChangeFilterVisible} />
+        <div className="flex">
+          <Categories visible={filterVisible} />
+          <Project />
+        </div>
       </div>
       <main className="bg-primary-color flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
