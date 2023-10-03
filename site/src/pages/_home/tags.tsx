@@ -33,7 +33,7 @@ const Tag: FC<TagProps> = ({ children, value }) => {
 export default function Tags(props: TagsProps) {
   const { onChangeFilter } = props;
   return (
-    <div className="mb-4 flex w-full">
+    <div className="sticky top-16 z-20 flex h-16 w-full items-center bg-[hsl(var(--esnext-background))] shadow-[0_1px_10px_2px_hsl(var(--esnext-background))]">
       <Button
         onClick={onChangeFilter}
         color="primary"

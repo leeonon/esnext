@@ -40,7 +40,7 @@ export default function Categories(props: CategoriesProps) {
       aria-label="Categories Menu"
       onAction={(key) => alert(key)}
       className={cn(
-        "transition-max-width mr-4 h-fit gap-0 divide-y divide-default-300/50 overflow-visible rounded-medium bg-content1 p-0 shadow-small transition-all dark:divide-default-100/80",
+        "transition-max-width sticky top-32 mr-4 h-fit gap-0 divide-y divide-default-300/50 overflow-visible rounded-medium bg-content1 p-0 shadow-small transition-all dark:divide-default-100/80 ",
         visible ? "max-w-[300px]" : "max-w-[55px]",
       )}
       itemClasses={{
