@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import { Button } from "@nextui-org/react";
 import { useEffect, useMemo, useRef } from "react";
 
@@ -66,6 +67,14 @@ export default function Project() {
           <ProjectSkeleton />
         </div>
       )}
+      <div className="flex h-60 flex-col items-center justify-center">
+        <p className="mb-4">
+          Can&apos;t find the project you&apos;re looking for?
+        </p>
+        <Button startContent={<Icon icon="mdi:plus" fontSize="24" />}>
+          Request new project
+        </Button>
+      </div>
     </div>
   );
 }
