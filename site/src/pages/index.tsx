@@ -4,8 +4,9 @@ import Head from "next/head";
 
 import ESNextBanner from "~/components/Banner";
 import ESNextNavbar from "~/components/Navbar";
+import Top from "~/components/Top";
+import Project from "~/pages/_home/_project";
 import Categories from "~/pages/_home/categories";
-import Project from "~/pages/_home/project";
 import Tags from "~/pages/_home/tags";
 
 // import { api } from "~/utils/api";
@@ -41,6 +42,7 @@ export default function Home() {
           <Project />
         </div>
       </div>
+      <Top />
       {/* <main className="bg-primary-color flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="flex flex-col items-center gap-2">

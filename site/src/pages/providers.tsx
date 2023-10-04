@@ -2,12 +2,15 @@
 
 import { NextUIProvider } from "@nextui-org/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider } from "next-themes";
 
-export function NextUIProviders({ children }: { children: React.ReactNode }) {
+export function ESNextProviders({ children }: { children: React.ReactNode }) {
   return (
     <NextUIProvider>
-      {children}
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider attribute="class" storageKey="theme" defaultTheme="dark">
+        {children}
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </NextUIProvider>
   );
 }

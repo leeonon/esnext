@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { Button } from "@nextui-org/react";
+import { Button, Spinner } from "@nextui-org/react";
 import { useEffect, useMemo, useRef } from "react";
 
 import ProjectBox, { ProjectSkeleton } from "~/components/ProjectBox";
@@ -55,17 +55,7 @@ export default function Project() {
           ))}
       </div>
       {hasNextPage && (
-        <div
-          className="mt-4 flex h-fit flex-grow flex-wrap gap-4"
-          ref={loadingRef}
-        >
-          <ProjectSkeleton />
-          <ProjectSkeleton />
-          <ProjectSkeleton />
-          <ProjectSkeleton />
-          <ProjectSkeleton />
-          <ProjectSkeleton />
-        </div>
+        <Spinner ref={loadingRef} className="mx-auto my-8 flex w-fit" />
       )}
       <div className="flex h-60 flex-col items-center justify-center">
         <p className="mb-4">
