@@ -32,7 +32,7 @@ export default function Home() {
       <ESNextNavbar />
       <ESNextBanner />
       <div></div>
-      <div className="mx-auto flex w-full max-w-screen-xl flex-col px-8">
+      <div className="mx-auto flex w-full max-w-screen-2xl flex-col px-5 md:px-10 lg:px-16">
         <Tags
           onChangeFilter={onChangeFilterVisible}
           categoryVisible={filterVisible}

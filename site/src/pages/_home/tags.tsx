@@ -61,7 +61,7 @@ export default function Tags(props: TagsProps) {
   };
 
   return (
-    <div className="sticky top-16 z-20 flex h-16 w-full items-center bg-[hsl(var(--esnext-background))] shadow-[0_1px_10px_2px_hsl(var(--esnext-background))]">
+    <div className="sticky top-16 z-20 flex h-16 w-full items-center bg-[hsl(var(--esnext-background))]">
       <Button
         onClick={onChangeFilter}
         radius="sm"
