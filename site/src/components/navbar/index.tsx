@@ -1,3 +1,5 @@
+import type { FC, PropsWithChildren } from "react";
+
 import { Icon } from "@iconify/react";
 import {
   Avatar,
@@ -13,32 +15,44 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import React from "react";
+import NextLink from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 import { LogoLong } from "~/components/Logos";
 import ThemeButton from "~/components/ThemeButton";
 
+type LinkItemProps = {
+  link: string;
+};
+
+const LinkItem: FC<PropsWithChildren<LinkItemProps>> = ({ link, children }) => {
+  const pathname = usePathname();
+  const isActive = pathname === link;
+  return (
+    <NavbarItem isActive={true}>
+      <Link
+        as={NextLink}
+        href={link}
+        aria-current="page"
+        color={isActive ? "primary" : "foreground"}
+      >
+        {children}
+      </Link>
+    </NavbarItem>
+  );
+};
+
 export default function ESNextNavbar() {
+  const router = useRouter();
   return (
     <Navbar isBordered isBlurred>
-      <NavbarBrand className="mr-3 grow-0">
+      <NavbarBrand className="mr-3 grow-0" onClick={() => router.push("/")}>
         <LogoLong width={115} height={30} />
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="start">
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page" color="primary">
-            Projects
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Categories
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Ranking
-          </Link>
-        </NavbarItem>
+        <LinkItem link="/projects">Projects</LinkItem>
+        <LinkItem link="/tags">Tags</LinkItem>
+        <LinkItem link="/ranking">Ranking</LinkItem>
         <Dropdown>
           <NavbarItem>
             <DropdownTrigger>

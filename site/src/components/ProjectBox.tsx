@@ -49,7 +49,7 @@ export default function ProjectBox(props: ProjectBoxProps) {
     <Card
       isPressable
       isFooterBlurred
-      className={`max-h-[200px] w-full rounded-md ${className}`}
+      className={`max-h-[200px] w-full rounded-md ${className} hover:bg-default-100`}
     >
       <CardHeader className="flex gap-3">
         <Image

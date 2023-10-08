@@ -3,6 +3,7 @@ import { type Session } from "next-auth";
 import { type AppType } from "next/app";
 
 import Footer from "~/components/Footer";
+import ESNextNavbar from "~/components/Navbar";
 import { ESNextProviders } from "~/pages/providers";
 import { api } from "~/utils/api";
 
@@ -15,6 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <ESNextProviders>
+        <ESNextNavbar />
         <Component {...pageProps} />
         <Footer />
       </ESNextProviders>

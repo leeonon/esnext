@@ -13,6 +13,7 @@ export function LogoLong(props: LogoProps) {
       width={props.width ?? 296}
       height={props.height ?? 77}
       viewBox="0 0 370 96.08298806873167"
+      className="cursor-pointer"
     >
       <defs id="SvgjsDefs9275">
         <linearGradient id="SvgjsLinearGradient9280">
