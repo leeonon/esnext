@@ -11,6 +11,8 @@ import {
   Image,
   Skeleton,
 } from "@nextui-org/react";
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import ESNextTag from "~/components/Tag";
 
@@ -45,10 +47,36 @@ export function ProjectSkeleton() {
 
 export default function ProjectBox(props: ProjectBoxProps) {
   const { item, className } = props;
+  const router = useRouter();
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const onPushDetail = () => {
+    router.push(`/info?name=${item.fullName}`);
+  };
+
+  const onClick = () => {
+    onPushDetail();
+    // const doc = document as Document & {
+    //   startViewTransition?: (callback: () => void) => void;
+    // };
+    // if (!doc.startViewTransition) {
+    //   onPushDetail();
+    //   return;
+    // }
+    // const img = imgRef.current;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // https://github.com/vercel/next.js/discussions/46300
+    // img.style.viewTransitionName = "projectBoxImage";
+    // console.log("🚀 ~ file: ProjectBox.tsx:69 ~ onClick ~ img:", img);
+    // doc.startViewTransition(onPushDetail);
+  };
+
   return (
     <Card
       isPressable
       isFooterBlurred
+      onClick={onClick}
       className={`max-h-[200px] w-full rounded-md ${className} hover:bg-default-100`}
     >
       <CardHeader className="flex gap-3">
@@ -58,6 +86,7 @@ export default function ProjectBox(props: ProjectBoxProps) {
           height={40}
           width={40}
           radius="sm"
+          ref={imgRef}
           src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
         />
         <div className="flex flex-col items-start">

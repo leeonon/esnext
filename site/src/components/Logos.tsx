@@ -269,8 +269,8 @@ export function Logo2() {
     <svg viewBox="0 0 350 75" width={240} height={70}>
       <defs id="SvgjsDefs11561">
         <linearGradient id="SvgjsLinearGradient11564">
-          <stop id="SvgjsStop11565" stop-color="#6d7cff" offset="0"></stop>
-          <stop id="SvgjsStop11566" stop-color="#ff51ff" offset="1"></stop>
+          <stop id="SvgjsStop11565" stopColor="#6d7cff" offset="0"></stop>
+          <stop id="SvgjsStop11566" stopColor="#ff51ff" offset="1"></stop>
         </linearGradient>
       </defs>
       <g
