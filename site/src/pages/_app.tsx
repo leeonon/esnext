@@ -17,7 +17,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <ESNextProviders>
         <ESNextNavbar />
-        <Component {...pageProps} />
+        <div className="mx-auto w-full max-w-screen-2xl px-5 md:px-10 lg:px-16">
+          <Component {...pageProps} />
+        </div>
         <Footer />
       </ESNextProviders>
     </SessionProvider>

@@ -45,7 +45,7 @@ const LinkItem: FC<PropsWithChildren<LinkItemProps>> = ({ link, children }) => {
 export default function ESNextNavbar() {
   const router = useRouter();
   return (
-    <Navbar isBordered isBlurred>
+    <Navbar isBordered isBlurred maxWidth="2xl">
       <NavbarBrand className="mr-3 grow-0" onClick={() => router.push("/")}>
         <LogoLong width={115} height={30} />
       </NavbarBrand>
