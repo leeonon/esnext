@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import Icons from "~/components/Banner/icons";
-import Search from "~/components/Banner/search";
+import Icons from "~/components/Banner/Icons";
+import Search from "~/components/Banner/Search";
 
 import styles from "./styles.module.css";
 

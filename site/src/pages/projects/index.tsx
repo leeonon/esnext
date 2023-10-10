@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 import Head from "next/head";
 
 import Top from "~/components/Top";
-import Categories from "~/pages/projects/categories";
-import ProjectList from "~/pages/projects/list";
-import Tags from "~/pages/projects/tags";
+import Categories from "~/pages/projects/_categories";
+import ProjectList from "~/pages/projects/_list";
+import Tags from "~/pages/projects/_tags";
 
 export default function ProjectPage() {
   const [filterVisible, setFilterVisible] = useState(true);

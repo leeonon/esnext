@@ -3,13 +3,13 @@ import type { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useParams } from "next/navigation";
 
-import ProjectBaseInfo from "~/pages/info/base";
+import ProjectBaseInfo from "~/components/Info/Base";
 
 export default function ProjectInfo() {
   const { name } = useParams();
 
   return (
-    <div className="py-8">
+    <div className="max-w-screen-xl py-8">
       <Head>
         <title>ESNext - {name}</title>
       </Head>
