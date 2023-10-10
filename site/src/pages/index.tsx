@@ -1,25 +1,16 @@
 // import { signIn, signOut, useSession } from "next-auth/react";
-import { useCallback, useState } from "react";
 import Head from "next/head";
 
 import ESNextBanner from "~/components/Banner";
-import Top from "~/components/Top";
-import Project from "~/pages/_home/_project";
-import Categories from "~/pages/_home/categories";
-import Tags from "~/pages/_home/tags";
+import Popular from "~/pages/_home/popular";
 
 // import { api } from "~/utils/api";
 
 export default function Home() {
-  const [filterVisible, setFilterVisible] = useState(true);
   // const hello = api.example.hello.useQuery(
   //   { text: "from tRPC" },
   //   { refetchOnWindowFocus: false },
   // );
-
-  const onChangeFilterVisible = useCallback(() => {
-    setFilterVisible((prev) => !prev);
-  }, []);
 
   return (
     <>
@@ -29,18 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ESNextBanner />
-      <div></div>
-      <div className="mx-auto flex w-full max-w-screen-2xl flex-col px-5 md:px-10 lg:px-16">
-        <Tags
-          onChangeFilter={onChangeFilterVisible}
-          categoryVisible={filterVisible}
-        />
-        <div className="flex">
-          <Categories visible={filterVisible} />
-          <Project />
-        </div>
-      </div>
-      <Top />
+      <Popular />
       {/* <main className="bg-primary-color flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="flex flex-col items-center gap-2">
