@@ -1,10 +1,19 @@
+import type { ProjectDetailType } from "~/types";
+import type { FC } from "react";
+
 import { Icon } from "@iconify/react";
 import { Button, Image } from "@nextui-org/react";
 import NextImage from "next/image";
 
 import ESNextTag from "~/components/Tag";
 
-export default function ProjectBaseInfo() {
+export type ProjectBaseInfoProps = {
+  project: ProjectDetailType;
+};
+
+export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
+  const { project } = props;
+
   return (
     <div className="flex items-center justify-between border-b-1 border-default-50 pb-6">
       <div className="flex flex-col">
@@ -22,12 +31,12 @@ export default function ProjectBaseInfo() {
             />
           </div>
           <div>
-            <div className="text-2xl font-bold">Stack</div>
-            <div className="text-default-500">Dribble/shots</div>
+            <div className="text-2xl font-bold">{project.name}</div>
+            <div className="text-default-500">{project.fullName}</div>
             <div className="mt-auto flex gap-2">
               <div>
                 <span className="mr-1 text-sm font-bold text-default-600">
-                  124k
+                  {project.stars}K
                 </span>
                 <span className="text-xs text-default-400">Star</span>
               </div>
@@ -47,8 +56,7 @@ export default function ProjectBaseInfo() {
           </div>
         </div>
         <div className="pt-2 text-sm text-default-500">
-          Stack Server Is a Custom Server Demo. Stack Server Is a Custom Server,
-          Yellow Solar Stars Minimalistic Bold.
+          {project.description}
         </div>
       </div>
       <div className="flex items-center gap-3">
