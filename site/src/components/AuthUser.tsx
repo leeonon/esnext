@@ -18,7 +18,10 @@ export default function AuthUser() {
 
   const { data: userInfo } = api.user.userInfo.useQuery(
     undefined, // no input
-    { enabled: sessionData?.user !== undefined },
+    {
+      enabled: sessionData?.user !== undefined,
+      refetchOnWindowFocus: false,
+    },
   );
 
   if (!userInfo) {

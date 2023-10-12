@@ -11,7 +11,9 @@ import { api } from "~/utils/api";
 
 export default function ProjectInfo() {
   const name = useParams().name as string;
-  const { error, data, isLoading } = api.project.detail.useQuery(name);
+  const { error, data, isLoading } = api.project.detail.useQuery(name, {
+    refetchOnWindowFocus: false,
+  });
 
   if (error) {
     return <div>Error</div>;
@@ -27,7 +29,7 @@ export default function ProjectInfo() {
         <title>ESNext - {name}</title>
       </Head>
       <ProjectBaseInfo project={data} />
-      <div className="flex gap-2">
+      <div className="mt-3 flex gap-2">
         <div className="flex-1">
           <Tabs aria-label="Options" variant="light" color="secondary">
             <Tab
@@ -43,8 +45,8 @@ export default function ProjectInfo() {
               }
             >
               <Card radius="sm">
-                <CardBody>
-                  <ProjectOverview />
+                <CardBody className="p-0">
+                  <ProjectOverview readme={data.readme?.content} />
                 </CardBody>
               </Card>
             </Tab>
@@ -60,8 +62,8 @@ export default function ProjectInfo() {
             </Tab>
           </Tabs>
         </div>
-        <Card title="Links" className="h-auto min-h-full w-[250px]">
-          Links
+        <Card title="Links" className="mt-[3.2rem] h-fit">
+          <CardBody className="h-fit w-[250px]">Links</CardBody>
         </Card>
       </div>
     </div>

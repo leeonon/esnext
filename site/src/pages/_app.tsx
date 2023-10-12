@@ -8,6 +8,7 @@ import { ESNextProviders } from "~/pages/providers";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import "~/styles/readme.css";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,

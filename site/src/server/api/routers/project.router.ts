@@ -56,6 +56,9 @@ export const projectRouter = createTRPCRouter({
       where: {
         name: input,
       },
+      include: {
+        readme: true,
+      },
     });
     return project;
   }),

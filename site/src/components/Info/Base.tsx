@@ -15,7 +15,7 @@ export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
   const { project } = props;
 
   return (
-    <div className="flex items-center justify-between border-b-1 border-default-50 pb-6">
+    <div className="flex items-center justify-between border-b-1 border-default-50 pb-3">
       <div className="flex flex-col">
         <div className="flex items-center gap-4">
           <div className="overflow-hidden rounded-sm shadow-[0_1px_4px_0px] shadow-default-100">
