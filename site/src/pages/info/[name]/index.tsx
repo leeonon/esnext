@@ -6,7 +6,10 @@ import Head from "next/head";
 import { useParams } from "next/navigation";
 
 import ProjectBaseInfo from "~/components/Info/Base";
+import NpmInfo from "~/components/Info/NpmInfo";
 import ProjectOverview from "~/components/Info/Overview";
+import Recommend from "~/components/Info/Recommend";
+import ProjectTags from "~/components/Info/TagsCard";
 import { api } from "~/utils/api";
 
 export default function ProjectInfo() {
@@ -44,11 +47,7 @@ export default function ProjectInfo() {
                 </div>
               }
             >
-              <Card radius="sm">
-                <CardBody className="p-0">
-                  <ProjectOverview readme={data.readme?.content} />
-                </CardBody>
-              </Card>
+              <ProjectOverview readme={data.readme?.content} />
             </Tab>
             <Tab key="music" title="Music">
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -62,9 +61,11 @@ export default function ProjectInfo() {
             </Tab>
           </Tabs>
         </div>
-        <Card title="Links" className="mt-[3.2rem] h-fit">
-          <CardBody className="h-fit w-[250px]">Links</CardBody>
-        </Card>
+        <div className="mt-[3.2rem] flex w-[250px] flex-col gap-4">
+          <ProjectTags />
+          <NpmInfo />
+          <Recommend />
+        </div>
       </div>
     </div>
   );
