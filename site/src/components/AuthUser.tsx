@@ -10,11 +10,14 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import React, { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 import { api } from "~/utils/api";
 
 export default function AuthUser() {
   const { data: sessionData } = useSession();
+  const router = useRouter();
 
   const { data: userInfo } = api.user.userInfo.useQuery(
     undefined, // no input
@@ -22,6 +25,17 @@ export default function AuthUser() {
       enabled: sessionData?.user !== undefined,
       refetchOnWindowFocus: false,
     },
+  );
+
+  const onClick = useCallback(
+    (key: React.Key) => {
+      if (key === "signOut") {
+        void signOut();
+        return;
+      }
+      key && router.push(key as string);
+    },
+    [router],
   );
 
   if (!userInfo) {
@@ -47,22 +61,23 @@ export default function AuthUser() {
           src={userInfo.image ?? ""}
         />
       </DropdownTrigger>
-      <DropdownMenu aria-label="Profile Actions" variant="flat">
-        <DropdownItem key="profile" className="h-14 gap-2">
-          <p className="font-semibold">Signed in as</p>
+      <DropdownMenu
+        aria-label="Profile Actions"
+        variant="flat"
+        onAction={onClick}
+        disabledKeys={["email"]}
+      >
+        <DropdownItem key="email" className="h-14 gap-2" textValue="email">
+          <p className="font-semibold">{userInfo.name}</p>
           <p className="font-semibold">{userInfo.email}</p>
         </DropdownItem>
-        <DropdownItem key="settings">My Settings</DropdownItem>
+        <DropdownItem key={`user`}>Your Profile</DropdownItem>
         <DropdownItem key="team_settings">Team Settings</DropdownItem>
         <DropdownItem key="analytics">Analytics</DropdownItem>
         <DropdownItem key="system">System</DropdownItem>
         <DropdownItem key="configurations">Configurations</DropdownItem>
         <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-        <DropdownItem
-          key="logout"
-          color="danger"
-          onClick={() => void signOut()}
-        >
+        <DropdownItem key="signOut" color="danger">
           SignOut
         </DropdownItem>
       </DropdownMenu>
