@@ -21,6 +21,7 @@ model Project {
     versionUpdateTime       DateTime?   @map("version_update_time")
     logo                    String?
     owner                   String?
+    license                 String
     readme                  ProjectReadme?
     tags                    TagOnProject[]
 

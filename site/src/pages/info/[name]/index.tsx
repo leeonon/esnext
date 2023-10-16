@@ -75,7 +75,7 @@ export default function ProjectInfo() {
         </div>
         <div className="mt-[3.2rem] flex w-[250px] flex-col gap-4">
           <ProjectTags tags={data?.tags} />
-          <NpmInfo />
+          <NpmInfo project={data} />
           <Recommend />
         </div>
       </div>

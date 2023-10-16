@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `projects` ADD COLUMN `license` VARCHAR(191) NOT NULL DEFAULT 'MIT';
