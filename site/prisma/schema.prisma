@@ -22,6 +22,7 @@ model Project {
     logo                    String?
     owner                   String?
     readme                  ProjectReadme?
+    tags                    TagOnProject[]
 
     @@map("projects")
 }
@@ -33,6 +34,26 @@ model ProjectReadme {
   project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@map("project_readme")
+}
+
+model Tag {
+  id                    Int       @id @default(autoincrement())
+  name                  String    @unique
+  projects             TagOnProject[]
+
+  @@map("tags")
+}
+
+// TagOnProject 是一个连接表，表示 Project 和 Tag 之间的多对多关系。
+// 这个表使用 tagId 和 projectId 作为外键，并建立了与 Project 和 Tag 的关系。
+model TagOnProject {
+  tagId                Int      @map("tag_id")
+  projectId            Int      @map("project_id")
+  tag                  Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  project              Project  @relation(fields: [projectId], references: [id])
+
+  @@id([tagId, projectId])
+  @@map("tag_on_project")
 }
 
 model Example {

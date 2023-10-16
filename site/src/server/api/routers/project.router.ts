@@ -52,14 +52,34 @@ export const projectRouter = createTRPCRouter({
    * @returns {Promise<Project>} A promise that resolves to the project object.
    */
   detail: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    const project = await ctx.db.project.findFirstOrThrow({
+    const projectData = await ctx.db.project.findFirst({
       where: {
         name: input,
       },
       include: {
         readme: true,
+        tags: {
+          include: {
+            tag: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
       },
     });
+
+    let project;
+    if (projectData) {
+      project = {
+        ...projectData,
+        tags: projectData.tags
+          ? projectData.tags.map((tagRelation) => tagRelation.tag.name)
+          : undefined,
+      };
+    }
+
     return project;
   }),
 });

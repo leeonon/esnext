@@ -1,9 +1,19 @@
 import { Image } from "@nextui-org/react";
 import NextImage from "next/image";
+import { useRouter } from "next/navigation";
 
 const RecommendCard = () => {
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push(`/info/react`);
+  };
+
   return (
-    <div className="grid max-w-full cursor-pointer grid-cols-[60px_1fr]">
+    <div
+      className="grid max-w-full cursor-pointer grid-cols-[60px_1fr]"
+      onClick={onClick}
+    >
       <Image
         as={NextImage}
         isBlurred
@@ -18,7 +28,7 @@ const RecommendCard = () => {
         alt=""
       />
       <p className="col-span-1 text-sm">Static</p>
-      <p className="col-span-1 line-clamp-2 max-w-full text-xs text-default-400">
+      <p className="col-span-1 line-clamp-2 h-[32px] max-w-full text-xs text-default-400">
         Boost.space tech stack Were aware of 11 technologies that tech stack Ne
         Recent launches cloud
       </p>

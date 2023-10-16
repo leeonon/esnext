@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext } from "next";
 
 import { Icon } from "@iconify/react";
-import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
+import { Tab, Tabs } from "@nextui-org/react";
 import Head from "next/head";
 import { useParams } from "next/navigation";
 
@@ -11,6 +11,19 @@ import ProjectOverview from "~/components/Info/Overview";
 import Recommend from "~/components/Info/Recommend";
 import ProjectTags from "~/components/Info/TagsCard";
 import { api } from "~/utils/api";
+
+const Title = ({
+  children,
+  icon,
+}: {
+  children: React.ReactNode;
+  icon: string;
+}) => (
+  <div className="flex items-center space-x-2">
+    <Icon icon={icon} fontSize={18} />
+    <span>{children}</span>
+  </div>
+);
 
 export default function ProjectInfo() {
   const name = useParams().name as string;
@@ -38,31 +51,30 @@ export default function ProjectInfo() {
             <Tab
               key="photos"
               title={
-                <div className="flex items-center space-x-2">
-                  <Icon
-                    icon="material-symbols:text-snippet-rounded"
-                    fontSize={18}
-                  />
-                  <span>Overview</span>
-                </div>
+                <Title icon="material-symbols:text-snippet-rounded">
+                  OverView
+                </Title>
               }
             >
-              <ProjectOverview readme={data.readme?.content} />
+              <ProjectOverview readme={data?.readme?.content} />
             </Tab>
-            <Tab key="music" title="Music">
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </Tab>
-            <Tab key="videos" title="Videos">
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
+            <Tab
+              key="trend"
+              defaultChecked
+              title={<Title icon="material-symbols:compare">Compare</Title>}
+            >
+              <div className="flex h-[300px] items-center justify-center">
+                <i>⚠️</i>
+                <span>
+                  We&lsquo;re working hard to bring this feature to you. Stay
+                  tuned!
+                </span>
+              </div>
             </Tab>
           </Tabs>
         </div>
         <div className="mt-[3.2rem] flex w-[250px] flex-col gap-4">
-          <ProjectTags />
+          <ProjectTags tags={data?.tags} />
           <NpmInfo />
           <Recommend />
         </div>
