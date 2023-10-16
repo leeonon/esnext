@@ -14,6 +14,10 @@ export type ProjectBaseInfoProps = {
 export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
   const { project } = props;
 
+  if (!project) {
+    return null;
+  }
+
   return (
     <div className="flex items-center justify-between border-b-1 border-default-50 pb-3">
       <div className="flex flex-col">
