@@ -13,7 +13,6 @@ interface Project {
   lastCommitTime: Date | null;
   version: string | null;
   versionUpdateTime: Date | null;
-  readme: string | null;
   logo: string | null;
   owner: string | null;
 }
