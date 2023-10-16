@@ -4,7 +4,7 @@ import { type AppType } from "next/app";
 
 import Footer from "~/components/Footer";
 import ESNextNavbar from "~/components/Navbar";
-import { ESNextProviders } from "~/pages/providers";
+import { ESNextProviders } from "~/components/Providers";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
