@@ -1,11 +1,7 @@
 import type { ProjectDetailType } from "~/types";
-import type { FC } from "react";
-
 import { Icon } from "@iconify/react";
 import { Button, Image } from "@nextui-org/react";
 import NextImage from "next/image";
-
-import ESNextTag from "~/components/Tag";
 
 export type ProjectBaseInfoProps = {
   project: ProjectDetailType;
