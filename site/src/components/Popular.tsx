@@ -1,26 +1,30 @@
+"use client";
+
+import type { ProjectItemType } from "~/types";
+
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 
-import ProjectBox, { ProjectSkeleton } from "~/components/ProjectBox";
-import { api } from "~/utils/api";
+import ProjectBox from "~/components/ProjectBox";
 
-export default function Popular() {
+export type PopularProps = {
+  projects: ProjectItemType[];
+};
+
+export default function Popular(props: PopularProps) {
   const router = useRouter();
-  const { data, isLoading } = api.project.all.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-  });
+  const { projects } = props;
 
   return (
     <div className="mt-6">
       <div className="flex h-fit flex-grow flex-wrap gap-4">
-        {!isLoading &&
-          data?.map((project) => (
-            <ProjectBox
-              className="w-full flex-auto sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4"
-              key={project.id}
-              item={project}
-            />
-          ))}
+        {projects.map((project) => (
+          <ProjectBox
+            className="w-full flex-auto sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4"
+            key={project.id}
+            item={project}
+          />
+        ))}
       </div>
       <div
         className="mt-4 flex cursor-pointer items-center justify-center rounded bg-default-50 py-2 transition-background hover:bg-default-100"

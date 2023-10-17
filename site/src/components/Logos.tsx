@@ -1,7 +1,5 @@
 "use client";
 
-import { type FC } from "react";
-
 export type LogoProps = {
   width?: number;
   height?: number;

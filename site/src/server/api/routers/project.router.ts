@@ -1,16 +1,21 @@
 import { z } from "zod";
 
 import { QueryProjectListSchema } from "~/schema/project.schema";
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 /**
  * TRPC router for project-related API endpoints.
  */
 export const projectRouter = createTRPCRouter({
+  popular: publicProcedure.query(async ({ ctx }) => {
+    const result = await ctx.db.project.findMany({
+      orderBy: {
+        stars: "desc",
+      },
+      take: 10,
+    });
+    return result;
+  }),
   /**
    * Public procedure to retrieve all projects.
    * @returns {Promise<Project[]>} A promise that resolves to an array of all projects.

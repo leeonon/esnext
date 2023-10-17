@@ -1,8 +1,7 @@
-import type { GetServerSidePropsContext } from "next";
+"use client";
 
 import { Icon } from "@iconify/react";
 import { Tab, Tabs } from "@nextui-org/react";
-import Head from "next/head";
 import { useParams } from "next/navigation";
 
 import ProjectBaseInfo from "~/components/Info/Base";
@@ -10,7 +9,7 @@ import NpmInfo from "~/components/Info/NpmInfo";
 import ProjectOverview from "~/components/Info/Overview";
 import Recommend from "~/components/Info/Recommend";
 import ProjectTags from "~/components/Info/TagsCard";
-import { api } from "~/utils/api";
+import { api } from "~/trpc/react";
 
 const Title = ({
   children,
@@ -41,9 +40,6 @@ export default function ProjectInfo() {
 
   return (
     <div className="max-w-screen-xl py-8">
-      <Head>
-        <title>ESNext - {name}</title>
-      </Head>
       <ProjectBaseInfo project={data} />
       <div className="mt-3 flex gap-2">
         <div className="flex-1">
@@ -82,15 +78,3 @@ export default function ProjectInfo() {
     </div>
   );
 }
-
-export const getServerSideProps = (context: GetServerSidePropsContext) => {
-  const { query } = context;
-  const { name } = query;
-  if (!name) {
-    return { redirect: { destination: "/404" } };
-  }
-
-  return {
-    props: {},
-  };
-};

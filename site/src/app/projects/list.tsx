@@ -1,11 +1,12 @@
 "use client";
 
-import { Icon } from "@iconify/react";
-import { Button, Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
+import { api } from "~/trpc/react";
 import { useEffect, useMemo, useRef } from "react";
 
-import ProjectBox, { ProjectSkeleton } from "~/components/ProjectBox";
-import { api } from "~/utils/api";
+import ProjectBox from "~/components/ProjectBox";
+
+// import { api } from "~/trpc/server";
 
 export default function Project() {
   const loadingRef = useRef<HTMLDivElement>(null);
