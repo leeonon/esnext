@@ -75,7 +75,7 @@ export default function ESNextBanner() {
             <div className="flex flex-row">{renderWord("Arsenal", 0)}</div>
             <span className="absolute bottom-0 top-0">
               <div className="flex flex-row">
-                {renderWord("Favorites", 1500)}
+                {renderWord("Favorites", 4500)}
               </div>
             </span>
           </span>

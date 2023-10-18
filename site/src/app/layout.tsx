@@ -31,9 +31,7 @@ export default function RootLayout({
         <TRPCReactProvider headers={headers()}>
           <ESNextProviders>
             <Navbar />
-            <div className="mx-auto w-full max-w-screen-2xl px-20 max-lg:px-12 max-md:px-5">
-              {children}
-            </div>
+            <div className="mx-auto w-full">{children}</div>
             <Footer />
           </ESNextProviders>
         </TRPCReactProvider>

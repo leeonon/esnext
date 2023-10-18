@@ -31,7 +31,7 @@ export default {
         dark: {
           colors: {
             background: {
-              500: "red",
+              // DEFAULT: "#212121",
             },
             foreground: {},
             primary: {},

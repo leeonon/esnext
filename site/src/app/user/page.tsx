@@ -1,3 +1,9 @@
+import Sidebar from "./components/Sidebar";
+
 export default function Page() {
-  return <div>UserInfo</div>;
+  return (
+    <div>
+      <Sidebar />
+    </div>
+  );
 }
