@@ -1,20 +1,14 @@
 "use client";
 
-import { useState } from "react";
-
 import Icons from "~/components/Banner/Icons";
 import Search from "~/components/Banner/Search";
 
 import styles from "./styles.module.css";
 
 export default function ESNextBanner() {
-  const [isHover, setIsHover] = useState(false);
-
   return (
     <section
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      className={`${styles.banner} relative z-10 flex max-w-[100vw] justify-center overflow-hidden border-b-1 border-b-default-50 pt-[150px]`}
+      className={`${styles.banner} relative z-10 flex max-w-[100vw] justify-center overflow-hidden pt-[150px]`}
     >
       <div className="relative flex flex-col items-center">
         <div
@@ -35,7 +29,7 @@ export default function ESNextBanner() {
         <div className="flex w-full items-center justify-center">
           <Search />
         </div>
-        <Icons isHover={isHover} />
+        <Icons />
       </div>
     </section>
   );

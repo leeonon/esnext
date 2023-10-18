@@ -16,7 +16,7 @@ export default function ProjectPage() {
 
   return (
     <>
-      <div className="mx-auto flex w-full max-w-screen-2xl flex-col px-5 md:px-10 lg:px-16">
+      <div className="flex w-full flex-col ">
         <Tags
           onChangeFilter={onChangeFilterVisible}
           categoryVisible={filterVisible}

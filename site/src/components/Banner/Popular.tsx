@@ -32,7 +32,10 @@ const PopularList = ({
 const Popular: FC<PopularListProps> = ({ className }) => {
   return (
     <div className={cn(className, styles.popularContainer)}>
-      <PopularList className={cn(styles.popularList, styles.popularListLeft)} />
+      <PopularList
+        warpStyle={{ justifyContent: "flex-star" }}
+        className={cn(styles.popularList, styles.popularListLeft)}
+      />
       <PopularList
         warpStyle={{ justifyContent: "flex-end" }}
         className={cn(styles.popularList, styles.popularListRight)}

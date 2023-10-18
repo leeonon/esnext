@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
+import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
 
 export default function Sidebar() {
   return (

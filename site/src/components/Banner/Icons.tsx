@@ -5,11 +5,7 @@ import { motion } from "framer-motion";
 
 import styles from "./styles.module.css";
 
-type IconsProps = {
-  isHover: boolean;
-};
-
-export default function Icons(props: IconsProps) {
+export default function Icons() {
   return (
     <>
       <motion.div
@@ -29,19 +25,16 @@ export default function Icons(props: IconsProps) {
         <Icon
           icon="logos:react"
           fontSize={40}
-          data-hover={props.isHover}
           className={`${styles.reactIcon} ${styles.iconTransition}`}
         />
       </motion.div>
       <Icon
         icon="logos:svelte-icon"
         fontSize={50}
-        data-hover={props.isHover}
         className={`${styles.svelteIcon} ${styles.iconTransition}`}
       />
       <Icon
         icon="logos:bun"
-        data-hover={props.isHover}
         fontSize={50}
         className={`${styles.bunIcon} ${styles.iconTransition}`}
       />
