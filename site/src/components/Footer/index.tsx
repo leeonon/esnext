@@ -7,8 +7,8 @@ import { Logo2 } from "~/components/Logos";
 
 export default function Footer() {
   return (
-    <div className="mx-auto mt-10">
-      <div className="flex h-60 flex-col items-center justify-center">
+    <div className="mx-auto">
+      <div className="flex h-60 flex-col items-center">
         <Icon
           icon="material-symbols:auto-awesome-rounded"
           className="text-4xl text-yellow-300"
@@ -16,7 +16,10 @@ export default function Footer() {
         <p className="mb-4">
           Can&apos;t find the project you&apos;re looking for?
         </p>
-        <Button startContent={<Icon icon="mdi:plus" fontSize="24" />}>
+        <Button
+          color="secondary"
+          startContent={<Icon icon="mdi:plus" fontSize="24" />}
+        >
           Request new project
         </Button>
       </div>

@@ -1,16 +1,16 @@
 import Banner from "~/components/Banner";
-import Popular from "~/components/Popular";
-import { api } from "~/trpc/server";
+import Popular from "~/components/Banner/Popular";
 
+// https://nextjs.org/docs/messages/app-static-to-dynamic-error
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  const data = await api.project.popular.query();
-
+export default function Home() {
   return (
     <main>
-      <Banner />
-      <Popular projects={data} />
+      <div className="relative">
+        <Banner />
+        <Popular className="translate-y-[-20px]" />
+      </div>
     </main>
   );
 }

@@ -18,7 +18,7 @@
 }
 .bunIcon {
   position: absolute;
-  bottom: -2rem;
+  top: 3rem;
   right: -6rem;
 }
 .reactIcon[data-hover="true"] {
@@ -45,5 +45,41 @@
   }
   100% {
     transform: scale(3);
+  }
+}
+
+.popularContainer {
+  display: flex;
+  flex-direction: column;
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, rgba(29, 31, 34, 0.8) 0%, rgba(29, 31, 34, 0.8) 60%, transparent 100%);
+}
+
+.popularList {
+  animation-timeline: scroll(root);
+  animation-duration: auto;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+.popularListLeft {
+  animation-name: scrollTranslateLeft;
+}
+.popularListRight {
+  animation-name: scrollTranslateRight;
+}
+@keyframes scrollTranslateLeft {
+  0% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(calc(-20% - 50px));
+  }
+}
+
+@keyframes scrollTranslateRight {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(calc(20% + 50px));
   }
 }
