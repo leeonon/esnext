@@ -4,10 +4,10 @@ import type { FC, PropsWithChildren } from "react";
 
 import { Icon } from "@iconify/react";
 import { cn } from "@nextui-org/react";
-import { useCallback } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { category } from "~/constant/category";
+
+export type onChangeParams = (name: string, value: string) => void;
 
 const IconWrapper: FC<
   PropsWithChildren<{ className?: string; styles?: React.CSSProperties }>
@@ -26,26 +26,13 @@ const IconWrapper: FC<
 function SidebarItem({
   item,
   isActive,
+  onChangeParams,
 }: {
   item: (typeof category)[0];
   isActive: boolean;
+  onChangeParams: onChangeParams;
 }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams],
-  );
-
-  const onClick = () => {
-    router.push(pathname + "?" + createQueryString("category", item.name));
-  };
+  const onClick = () => onChangeParams("category", item.name);
   return (
     <div
       className={cn(
@@ -63,13 +50,18 @@ function SidebarItem({
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({
+  onChangeParams,
+}: {
+  onChangeParams: onChangeParams;
+}) {
   return (
-    <div className="px-4 pt-20">
+    <div className="mt-20 px-4">
       {category.map((item) => (
         <SidebarItem
           key={item.name}
           item={item}
+          onChangeParams={onChangeParams}
           isActive={item.name === "ALL"}
         />
       ))}

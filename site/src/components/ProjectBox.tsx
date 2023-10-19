@@ -2,10 +2,10 @@
 
 import type { ProjectItemType } from "~/types";
 
+import { Icon } from "@iconify/react";
 import {
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Divider,
   Image,
@@ -56,39 +56,32 @@ export default function ProjectBox(props: ProjectBoxProps) {
 
   const onClick = () => {
     onPushDetail();
-    // const doc = document as Document & {
-    //   startViewTransition?: (callback: () => void) => void;
-    // };
-    // if (!doc.startViewTransition) {
-    //   onPushDetail();
-    //   return;
-    // }
-    // const img = imgRef.current;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // https://github.com/vercel/next.js/discussions/46300
-    // img.style.viewTransitionName = "projectBoxImage";
-    // console.log("🚀 ~ file: ProjectBox.tsx:69 ~ onClick ~ img:", img);
-    // doc.startViewTransition(onPushDetail);
+  };
+
+  const linkToGithub = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    window.open(`https://github.com/${item.fullName}`);
   };
 
   return (
     <Card
       isPressable
-      isFooterBlurred
       onClick={onClick}
-      className={`max-h-[200px] w-full rounded-md ${className} hover:bg-default-100`}
+      className={`max-h-[200px] w-full rounded-md ${className} cursor-pointer hover:bg-default-100`}
     >
       <CardHeader className="flex gap-3">
-        <Image
-          alt="nextui logo"
-          className="min-w-[40px]"
-          height={40}
-          width={40}
-          radius="sm"
-          ref={imgRef}
-          src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-        />
+        <div className="h-[40px] w-[40px]">
+          <Image
+            isBlurred
+            alt="nextui logo"
+            className="min-w-[40px]"
+            height={40}
+            width={40}
+            radius="sm"
+            ref={imgRef}
+            src="https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202310181428834.png"
+          />
+        </div>
         <div className="flex flex-col items-start">
           <p className="text-md">{item.name}</p>
           <p className="line-clamp-2 text-left text-small text-default-500">
@@ -97,15 +90,20 @@ export default function ProjectBox(props: ProjectBoxProps) {
         </div>
       </CardHeader>
       <Divider />
-      <CardBody className="flex flex-row items-center justify-start gap-2 overflow-hidden">
-        Star
+      <CardBody className="relative overflow-hidden p-2">
+        <div>12</div>
+        <div className="flex flex-row items-center justify-start gap-2">
+          <ESNextTag>React</ESNextTag>
+          <ESNextTag>Vue</ESNextTag>
+          <ESNextTag>TypeScript</ESNextTag>
+        </div>
+        <div
+          onClick={linkToGithub}
+          className="absolute -bottom-1 -right-1 flex items-center justify-center rounded-md bg-default-100 p-2 transition-background hover:bg-primary"
+        >
+          <Icon icon="mdi:github" fontSize={24} />
+        </div>
       </CardBody>
-      <Divider />
-      <CardFooter className="gap-2">
-        <ESNextTag>React</ESNextTag>
-        <ESNextTag>Vue</ESNextTag>
-        <ESNextTag>TypeScript</ESNextTag>
-      </CardFooter>
     </Card>
   );
 }
