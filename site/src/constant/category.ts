@@ -1,5 +1,11 @@
 export const category = [
   {
+    name: "ALL",
+    icon: "fxemoji:fire",
+    count: 1123,
+    color: "##FF8F1F30",
+  },
+  {
     name: "Most Popular",
     icon: "fxemoji:fire",
     count: 13,

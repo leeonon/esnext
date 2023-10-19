@@ -2,8 +2,8 @@
 
 import { useCallback, useState } from "react";
 
-import Categories from "~/app/projects/categories";
 import ProjectList from "~/app/projects/list";
+import Sidebar from "~/app/projects/sidebar";
 import Tags from "~/app/projects/tags";
 import Top from "~/components/Top";
 
@@ -16,14 +16,16 @@ export default function ProjectPage() {
 
   return (
     <>
-      <div className="flex w-full flex-col ">
-        <Tags
-          onChangeFilter={onChangeFilterVisible}
-          categoryVisible={filterVisible}
-        />
+      <div>
         <div className="flex">
-          <Categories visible={filterVisible} />
-          <ProjectList />
+          <Sidebar />
+          {/* <div className="flex-auto">
+            <Tags
+              onChangeFilter={onChangeFilterVisible}
+              categoryVisible={filterVisible}
+            />
+            <ProjectList />
+          </div> */}
         </div>
       </div>
       <Top />
