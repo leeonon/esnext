@@ -14,9 +14,13 @@ export default function ProjectPage() {
   const searchParams = useSearchParams();
 
   const onChangeParams = useCallback(
-    (name: string, value: string) => {
+    (name: string, value: string, isDelete?: boolean) => {
       const params = new URLSearchParams(searchParams);
-      params.set(name, value);
+      if (isDelete) {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
       router.push(pathname + "?" + params.toString());
     },
     [pathname, router, searchParams],
@@ -27,7 +31,7 @@ export default function ProjectPage() {
       <div>
         <div className="flex">
           <Sidebar onChangeParams={onChangeParams} />
-          <div className="flex flex-1 flex-col overflow-hidden px-8">
+          <div className="m-auto flex max-w-screen-xl flex-1 flex-col overflow-hidden px-8">
             <Tags onChangeParams={onChangeParams} />
             <ProjectList />
           </div>

@@ -36,8 +36,8 @@ function SidebarItem({
   return (
     <div
       className={cn(
-        "flex h-12 cursor-pointer items-center gap-4 rounded-lg px-4 transition-background hover:bg-default-200",
-        isActive && "bg-default-200",
+        "flex h-12 cursor-pointer items-center gap-4 rounded-lg px-4 transition-background hover:bg-default/40",
+        isActive && "bg-default/40",
       )}
       onClick={onClick}
     >
@@ -56,7 +56,7 @@ export default function Sidebar({
   onChangeParams: onChangeParams;
 }) {
   return (
-    <div className="mt-20 px-4">
+    <div className="mt-4 px-4">
       {category.map((item) => (
         <SidebarItem
           key={item.name}
