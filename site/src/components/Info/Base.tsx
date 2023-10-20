@@ -4,6 +4,8 @@ import { Icon } from "@iconify/react";
 import { Button, Image } from "@nextui-org/react";
 import NextImage from "next/image";
 
+import CollectionButton from "~/components/Info/Favorites";
+
 export type ProjectBaseInfoProps = {
   project: ProjectDetailType;
 };
@@ -61,9 +63,7 @@ export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Button isIconOnly size="md">
-          <Icon icon="material-symbols:bookmark-add-outline" fontSize={22} />
-        </Button>
+        <CollectionButton />
         <Button
           startContent={<Icon icon="mdi:github" fontSize={22} />}
           radius="sm"

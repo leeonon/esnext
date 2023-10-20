@@ -9,4 +9,16 @@ export const userRouter = createTRPCRouter({
     });
     return user;
   }),
+  userFavorites: protectedProcedure.query(async ({ ctx }) => {
+    const favorites = await ctx.db.favorites.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+      select: {
+        name: true,
+        id: true,
+      },
+    });
+    return favorites;
+  }),
 });
