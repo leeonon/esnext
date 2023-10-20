@@ -7,6 +7,8 @@ import { darcula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
+import "~/styles/readme.css";
+
 export type OverViewProps = {
   readme?: string;
 };

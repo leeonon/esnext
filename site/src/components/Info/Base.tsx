@@ -1,4 +1,5 @@
 import type { ProjectDetailType } from "~/types";
+
 import { Icon } from "@iconify/react";
 import { Button, Image } from "@nextui-org/react";
 import NextImage from "next/image";
@@ -60,33 +61,24 @@ export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Button isIconOnly size="sm">
+        <Button isIconOnly size="md">
           <Icon icon="material-symbols:bookmark-add-outline" fontSize={22} />
         </Button>
         <Button
           startContent={<Icon icon="mdi:github" fontSize={22} />}
           radius="sm"
-          size="sm"
+          size="md"
         >
-          Repository
+          View on Github
         </Button>
         <Button
           startContent={<Icon icon="tabler:home" fontSize={22} />}
           radius="sm"
-          size="sm"
+          size="md"
         >
-          Home
+          Visit Website
         </Button>
       </div>
-      {/* <div className="py-4">Tags</div> */}
-      {/* <div className="flex flex-wrap gap-2 text-sm text-default-500">
-        <ESNextTag>Peace</ESNextTag>
-        <ESNextTag>Love</ESNextTag>
-        <ESNextTag>Bio</ESNextTag>
-        <ESNextTag>Stack</ESNextTag>
-        <ESNextTag>WAS</ESNextTag>
-      </div>
-      <div className="py-4">Github</div> */}
     </div>
   );
 }

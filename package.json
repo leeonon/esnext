@@ -9,6 +9,7 @@
     "db:migrate": "pnpm --filter @esnext/site db:migrate",
     "db:migrate:apply": "pnpm --filter @esnext/site db:migrate:apply",
     "db:generate": "pnpm --filter @esnext/site db:generate",
+    "db:format": "pnpm --filter @esnext/site db:format",
     "dev:site": "pnpm --filter @esnext/site dev",
     "start:site": "pnpm --filter @esnext/site start"
   },

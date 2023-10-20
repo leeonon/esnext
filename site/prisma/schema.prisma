@@ -1,46 +1,46 @@
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Project {
-    id                      Int         @id @default(autoincrement())
-    name                    String
-    fullName                String      @map("full_name")
-    description             String
-    homePage                String?     @map("home_page")
-    stars                   Int
-    projectCreateTime       DateTime?   @map("project_create_time")
-    lastCommitTime          DateTime?   @map("last_commit_time")
-    version                 String?
-    versionUpdateTime       DateTime?   @map("version_update_time")
-    logo                    String?
-    owner                   String?
-    license                 String
-    readme                  ProjectReadme?
-    tags                    TagOnProject[]
+  id                  Int                   @id @default(autoincrement())
+  name                String
+  fullName            String                @map("full_name")
+  description         String
+  homePage            String?               @map("home_page")
+  stars               Int
+  projectCreateTime   DateTime?             @map("project_create_time")
+  lastCommitTime      DateTime?             @map("last_commit_time")
+  version             String?
+  versionUpdateTime   DateTime?             @map("version_update_time")
+  logo                String?
+  owner               String?
+  license             String
+  readme              ProjectReadme?
+  tags                TagOnProject[]
+  projectInCollection ProjectInCollection[]
 
-    @@map("projects")
+  @@map("projects")
 }
 
 model ProjectReadme {
-  id          Int       @id @default(autoincrement())
-  content     String    @db.MediumText
-  projectId   Int       @unique           @map("project_id")
-  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  id        Int     @id @default(autoincrement())
+  content   String  @db.MediumText
+  projectId Int     @unique @map("project_id")
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@map("project_readme")
 }
 
 model Tag {
-  id                    Int       @id @default(autoincrement())
-  name                  String    @unique
-  projects             TagOnProject[]
+  id       Int            @id @default(autoincrement())
+  name     String         @unique
+  projects TagOnProject[]
 
   @@map("tags")
 }
@@ -48,76 +48,97 @@ model Tag {
 // TagOnProject 是一个连接表，表示 Project 和 Tag 之间的多对多关系。
 // 这个表使用 tagId 和 projectId 作为外键，并建立了与 Project 和 Tag 的关系。
 model TagOnProject {
-  tagId                Int      @map("tag_id")
-  projectId            Int      @map("project_id")
-  tag                  Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
-  project              Project  @relation(fields: [projectId], references: [id])
+  tagId     Int     @map("tag_id")
+  projectId Int     @map("project_id")
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  project   Project @relation(fields: [projectId], references: [id])
 
   @@id([tagId, projectId])
   @@map("tag_on_project")
 }
 
 model Example {
-    id          Int       @id @default(autoincrement())
-    description String
-    fullName    String   @map("full_name")
-    name        String
-    ownerId     Int      @map("owner_id")
-    slug        String
-    stars       Int
-    tags        String
+  id          Int    @id @default(autoincrement())
+  description String
+  fullName    String @map("full_name")
+  name        String
+  ownerId     Int    @map("owner_id")
+  slug        String
+  stars       Int
+  tags        String
 
-    @@map("examples")
-    @@index([name])
+  @@index([name])
+  @@map("examples")
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? // @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? // @db.Text
+  access_token      String? // @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? // @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@map("accounts")
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@map("sessions")
+  @@map("sessions")
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+  id            String       @id @default(cuid())
+  name          String?
+  email         String?      @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  collection    Collection[]
 
-    @@map("users")
+  @@map("users")
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@map("verification_tokens")
-    @@unique([identifier, token])
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Collection {
+  id       Int                   @id @default(autoincrement())
+  name     String // 收藏夹名称
+  user     User                  @relation(fields: [userId], references: [id])
+  userId   String // 关联到 User
+  projects ProjectInCollection[]
+
+  @@map("collections")
+}
+
+model ProjectInCollection {
+  id           Int        @id @default(autoincrement())
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId Int
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId    Int
+
+  @@map("projects_in_collections")
 }

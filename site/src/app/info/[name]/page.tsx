@@ -11,7 +11,6 @@ export async function generateMetadata({
   params,
   searchParams,
 }: Props): Promise<Metadata> {
-  console.log("🚀 ~ file: page.tsx:20 ~ params:", params, searchParams);
   return Promise.resolve({
     title: `ESNext - ${params.name}`,
   });
