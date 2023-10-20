@@ -4,6 +4,7 @@ import type { FC, PropsWithChildren } from "react";
 
 import { Icon } from "@iconify/react";
 import { cn } from "@nextui-org/react";
+import { memo } from "react";
 
 import { category } from "~/constant/category";
 
@@ -50,7 +51,7 @@ function SidebarItem({
   );
 }
 
-export default function Sidebar({
+export default memo(function Sidebar({
   onChangeParams,
 }: {
   onChangeParams: onChangeParams;
@@ -67,4 +68,4 @@ export default function Sidebar({
       ))}
     </div>
   );
-}
+});

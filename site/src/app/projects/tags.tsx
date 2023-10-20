@@ -26,8 +26,17 @@ const Tag: FC<TagProps> = ({ children, value, onChangeParams }) => {
     () => tag.split(",").some((item) => item === value),
     [tag, value],
   );
-  const onClick = () =>
-    onChangeParams("tag", tag ? tag + "," + value : value, isActive);
+  const onClick = () => {
+    if (isActive) {
+      const newVal = tag
+        .split(",")
+        .filter((item) => item !== value)
+        .join(",");
+      onChangeParams("tag", newVal, newVal === "");
+      return;
+    }
+    onChangeParams("tag", tag ? tag + "," + value : value);
+  };
 
   return (
     <div

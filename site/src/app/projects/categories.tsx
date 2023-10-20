@@ -4,7 +4,7 @@ import type { FC, PropsWithChildren } from "react";
 
 import { Icon } from "@iconify/react";
 import { cn, Listbox, ListboxItem } from "@nextui-org/react";
-import React from "react";
+import React, { memo } from "react";
 
 import { category } from "~/constant/category";
 
@@ -33,7 +33,7 @@ const ItemCounter: FC<{ number: number }> = ({ number }) => (
   </div>
 );
 
-export default function Categories(props: CategoriesProps) {
+export default memo(function Categories(props: CategoriesProps) {
   const { visible } = props;
   return (
     <Listbox
@@ -62,4 +62,4 @@ export default function Categories(props: CategoriesProps) {
       ))}
     </Listbox>
   );
-}
+});
