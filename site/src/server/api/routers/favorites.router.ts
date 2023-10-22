@@ -9,6 +9,7 @@ export const favoritesRouter = createTRPCRouter({
         data: {
           name: input.name,
           userId: ctx.session.user.id,
+          ...(input.description ? { description: input.description } : {}),
         },
       });
     }),

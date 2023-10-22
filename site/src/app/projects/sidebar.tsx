@@ -57,7 +57,10 @@ export default memo(function Sidebar({
   onChangeParams: onChangeParams;
 }) {
   return (
-    <div className="mt-4 px-4">
+    <div className="sticky top-[calc(4rem+1px)] self-start px-4 pt-4">
+      <div className="mb-4 text-small font-bold text-fuchsia-500">
+        Categories
+      </div>
       {category.map((item) => (
         <SidebarItem
           key={item.name}

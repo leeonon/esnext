@@ -1,6 +1,6 @@
 "use client";
 
-import type { ProjectDetailType } from "~/types";
+import type { UserFavoritesItemType } from "~/types";
 import type { FC } from "react";
 
 import { Icon } from "@iconify/react";
@@ -15,17 +15,14 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { api } from "~/trpc/react";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import FavoritesModal from "~/components/FavoritesModal";
 
+import { type FavoritesButtonProps } from "./Favorites";
 import FavoritesItem from "./FavoritesItem";
 
-export type FavoritesButtonProps = {
-  project: ProjectDetailType;
-};
-
-const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
+export const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
   const [checkedKeys, setCheckedKeys] = useState<Set<number>>(new Set([]));
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { data: userFavorites } = api.user.userFavorites.useQuery(undefined, {
@@ -43,7 +40,14 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
       });
       setCheckedKeys(next);
     }
-  }, [userFavorites, project]);
+  }, [userFavorites]);
+
+  const checkedItems = useCallback(
+    (item: UserFavoritesItemType) => {
+      return item.projects.some((p) => p.id === project?.id);
+    },
+    [project],
+  );
 
   const onCheck = useCallback((id: number) => {
     setCheckedKeys((prev) => {
@@ -59,7 +63,7 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
         <FavoritesItem
           key={favorite.id}
           item={favorite}
-          isChecked={checkedKeys.has(favorite.id)}
+          isChecked={checkedItems(favorite)}
           onCheck={onCheck}
         />
       ));
@@ -69,7 +73,7 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
         Haven created favorites yet
       </div>
     );
-  }, [checkedKeys, onCheck, userFavorites]);
+  }, [checkedItems, onCheck, userFavorites]);
 
   return (
     <div>
@@ -103,5 +107,3 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
     </div>
   );
 };
-
-export default memo(FavoritesButton);
