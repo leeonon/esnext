@@ -36,6 +36,9 @@ const Configuration: UserConfig = {
       ],
     ],
   },
+  /**
+   * cz-git configuration
+   */
   prompt: {
     alias: { fd: "docs: fix typos" },
     messages: {
