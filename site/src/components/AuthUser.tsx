@@ -72,7 +72,7 @@ export default function AuthUser() {
           <p className="font-semibold">{userInfo.name}</p>
           <p className="font-semibold">{userInfo.email}</p>
         </DropdownItem>
-        <DropdownItem key={`user`}>Your Profile</DropdownItem>
+        <DropdownItem key={`/user/info`}>Your Profile</DropdownItem>
         <DropdownItem key="team_settings">Team Settings</DropdownItem>
         <DropdownItem key="analytics">Analytics</DropdownItem>
         <DropdownItem key="system">System</DropdownItem>
