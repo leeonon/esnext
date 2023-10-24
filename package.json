@@ -11,7 +11,11 @@
     "db:generate": "pnpm --filter @esnext/site db:generate",
     "db:format": "pnpm --filter @esnext/site db:format",
     "dev:site": "pnpm --filter @esnext/site dev",
-    "start:site": "pnpm --filter @esnext/site start"
+    "start:site": "pnpm --filter @esnext/site start",
+    "prepare": "husky install",
+    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
+    "lint": "pnpm lint:lint-staged",
+    "log": "npx conventional-changelog --config ./node_modules/@commitlint/cli -i CHANGELOG.md -s -r 0"
   },
   "keywords": [],
   "author": "yang",
@@ -20,6 +24,8 @@
     "@types/node": "*"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.0.0",
+    "@commitlint/config-conventional": "^18.0.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@types/eslint": "^8.44.2",
     "@types/node": "^18.16.0",
@@ -29,6 +35,10 @@
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "^8.47.0",
     "eslint-config-next": "^13.4.19",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.1",
     "prisma": "^5.1.1",
