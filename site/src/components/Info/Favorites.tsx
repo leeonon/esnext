@@ -1,8 +1,5 @@
 "use client";
 
-import type { ProjectDetailType } from "~/types";
-import type { FC } from "react";
-
 import { Icon } from "@iconify/react";
 import {
   Button,
@@ -16,28 +13,35 @@ import {
 } from "@nextui-org/react";
 import { api } from "~/trpc/react";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 
+import { useProjectInfoContext } from "~/app/info/[name]/context";
 import FavoritesModal from "~/components/FavoritesModal";
 
 import FavoritesItem from "./FavoritesItem";
 
-export type FavoritesButtonProps = {
-  project: ProjectDetailType;
-};
-
-const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
+const FavoritesButton = () => {
+  const { project, onRefresh } = useProjectInfoContext();
   const [checkedKeys, setCheckedKeys] = useState<Set<number>>(new Set([]));
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { data: userFavorites } = api.user.userFavorites.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-    enabled: isOpen,
-  });
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { data: userFavorites, refetch } = api.user.userFavorites.useQuery(
+    undefined,
+    {
+      refetchOnWindowFocus: false,
+      enabled: isOpen,
+    },
+  );
   const collectionProject = api.project.collection.useMutation({
     onSuccess: () => {
-      alert("Collection project successfully");
+      onClose();
+      toast.success("Collection project successfully", {
+        position: "top-center",
+      });
+      // This will refetch this project info
+      onRefresh && onRefresh();
     },
     onError: (err) => {
-      alert(err.message);
+      toast.error(err.message, { position: "top-center" });
     },
   });
 
@@ -63,7 +67,7 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
 
   const itemList = useMemo(() => {
     if (userFavorites && userFavorites.length > 0) {
-      return userFavorites.map((favorite) => (
+      return userFavorites.map((favorite: (typeof userFavorites)[number]) => (
         <FavoritesItem
           key={favorite.id}
           item={favorite}
@@ -80,15 +84,21 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
   }, [checkedKeys, onCheck, userFavorites]);
 
   const onOk = useCallback(() => {
+    if (!project) return;
     collectionProject.mutate({
       favoriteIds: Array.from(checkedKeys),
-      projectId: project!.id,
+      projectId: project.id,
     });
   }, [checkedKeys, collectionProject, project]);
 
   return (
     <div>
-      <Button isIconOnly size="md" onClick={onOpen}>
+      <Button
+        isIconOnly
+        size="md"
+        onClick={onOpen}
+        color={project?.isCollection ? "secondary" : "default"}
+      >
         <Icon icon="material-symbols:bookmark-add-outline" fontSize={22} />
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
@@ -105,7 +115,11 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
                 </div>
               </ModalBody>
               <ModalFooter className="border-t-1 border-default-100">
-                <FavoritesModal />
+                <FavoritesModal
+                  onSuccess={() => {
+                    void refetch();
+                  }}
+                />
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Cancel
                 </Button>

@@ -1,17 +1,12 @@
-import type { ProjectDetailType } from "~/types";
-
 import { Icon } from "@iconify/react";
 import { Button, Image } from "@nextui-org/react";
 import NextImage from "next/image";
 
+import { useProjectInfoContext } from "~/app/info/[name]/context";
 import CollectionButton from "~/components/Info/Favorites";
 
-export type ProjectBaseInfoProps = {
-  project: ProjectDetailType;
-};
-
-export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
-  const { project } = props;
+export default function ProjectBaseInfo() {
+  const { project } = useProjectInfoContext();
 
   if (!project) {
     return null;
@@ -63,7 +58,7 @@ export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <CollectionButton project={project} />
+        <CollectionButton />
         <Button
           startContent={<Icon icon="mdi:github" fontSize={22} />}
           radius="sm"

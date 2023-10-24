@@ -16,8 +16,11 @@ import {
 } from "@nextui-org/react";
 import { api } from "~/trpc/react";
 import { memo, useState } from "react";
+import { toast } from "sonner";
 
-const FavoritesModal: FC = () => {
+const FavoritesModal: FC<{
+  onSuccess: () => void;
+}> = ({ onSuccess }) => {
   const { onClose, isOpen, onOpenChange, onOpen } = useDisclosure();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -25,11 +28,14 @@ const FavoritesModal: FC = () => {
 
   const createFavorites = api.favorites.create.useMutation({
     onSuccess: () => {
-      alert("success");
       onClose();
+      onSuccess();
+      toast.success("Create favorites successfully", {
+        position: "top-center",
+      });
     },
     onError: (err) => {
-      alert(err.message);
+      toast.error(err.message, { position: "top-center" });
     },
   });
   const onCreate = async () => {
