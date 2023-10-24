@@ -142,5 +142,6 @@ model ProjectInFavorites {
   project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId   Int
 
+  @@unique([projectId, favoritesId])
   @@map("projects_in_favorites")
 }

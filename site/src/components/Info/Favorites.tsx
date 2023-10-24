@@ -32,6 +32,14 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
     refetchOnWindowFocus: false,
     enabled: isOpen,
   });
+  const collectionProject = api.project.collection.useMutation({
+    onSuccess: () => {
+      alert("Collection project successfully");
+    },
+    onError: (err) => {
+      alert(err.message);
+    },
+  });
 
   useEffect(() => {
     if (userFavorites) {
@@ -71,6 +79,13 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
     );
   }, [checkedKeys, onCheck, userFavorites]);
 
+  const onOk = useCallback(() => {
+    collectionProject.mutate({
+      favoriteIds: Array.from(checkedKeys),
+      projectId: project!.id,
+    });
+  }, [checkedKeys, collectionProject, project]);
+
   return (
     <div>
       <Button isIconOnly size="md" onClick={onOpen}>
@@ -81,7 +96,7 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Create Favorites
+                Collection
               </ModalHeader>
               <ModalBody>
                 <Input placeholder="Search" fullWidth />
@@ -94,7 +109,9 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({ project }) => {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color="primary">Done</Button>
+                <Button color="primary" onClick={onOk}>
+                  Done
+                </Button>
               </ModalFooter>
             </>
           )}

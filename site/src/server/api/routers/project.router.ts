@@ -1,7 +1,14 @@
 import { z } from "zod";
 
-import { QueryProjectListSchema } from "~/schema/project.schema";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  CollectionProjectSchema,
+  QueryProjectListSchema,
+} from "~/schema/project.schema";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 /**
  * TRPC router for project-related API endpoints.
@@ -87,4 +94,17 @@ export const projectRouter = createTRPCRouter({
 
     return project;
   }),
+  collection: protectedProcedure
+    .input(CollectionProjectSchema)
+    .mutation(async ({ ctx, input }) => {
+      const data = input.favoriteIds.map((id) => ({
+        favoritesId: id,
+        projectId: input.projectId,
+      }));
+
+      await ctx.db.projectInFavorites.createMany({
+        data,
+        skipDuplicates: true,
+      });
+    }),
 });

@@ -63,7 +63,7 @@ export default function ProjectBaseInfo(props: ProjectBaseInfoProps) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <CollectionButton />
+        <CollectionButton project={project} />
         <Button
           startContent={<Icon icon="mdi:github" fontSize={22} />}
           radius="sm"
