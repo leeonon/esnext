@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 
 import Footer from "~/components/Footer";
 import Navbar from "~/components/Navbar";
+import GlobalStyles from "~/styles/GlobalStyles";
 
 import { ESNextProviders } from "./providers";
 
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${inter.variable}`}>
+        <GlobalStyles />
         <TRPCReactProvider headers={headers()}>
           <ESNextProviders>
             <Navbar />
