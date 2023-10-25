@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import { api } from "~/trpc/react";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 import { useProjectInfoContext } from "~/app/info/[name]/context";
@@ -24,13 +25,21 @@ const FavoritesButton = () => {
   const { project, onRefresh } = useProjectInfoContext();
   const [checkedKeys, setCheckedKeys] = useState<Set<number>>(new Set([]));
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { data: userFavorites, refetch } = api.user.userFavorites.useQuery(
-    undefined,
-    {
-      refetchOnWindowFocus: false,
-      enabled: isOpen,
-    },
-  );
+  const {
+    data: userFavorites,
+    refetch,
+    isError,
+    error,
+  } = api.user.userFavorites.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+    enabled: isOpen,
+    retry: false,
+  });
+
+  if (isError && error?.data?.httpStatus === 401) {
+    redirect("/login");
+  }
+
   const collectionProject = api.project.collection.useMutation({
     onSuccess: () => {
       onClose();

@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { Tab, Tabs } from "@nextui-org/react";
 import { api } from "~/trpc/react";
 import { useMemo } from "react";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 
 import { ProjectInfoContext } from "~/app/info/[name]/context";
 import ProjectBaseInfo from "~/components/Info/Base";
@@ -28,12 +28,11 @@ const Title = ({
 
 export default function ProjectInfo() {
   const name = useParams().name as string;
-  const { error, data, isLoading, refetch } = api.project.detail.useQuery(
-    name,
-    {
+  const { error, data, isLoading, refetch, isError } =
+    api.project.detail.useQuery(name, {
       refetchOnWindowFocus: false,
-    },
-  );
+      retry: false,
+    });
 
   const contextValue = useMemo(() => {
     return {
@@ -42,8 +41,8 @@ export default function ProjectInfo() {
     };
   }, [data, refetch]);
 
-  if (error) {
-    return <div>Error</div>;
+  if (isError && error?.data?.httpStatus === 404) {
+    notFound();
   }
 
   if (isLoading) {
