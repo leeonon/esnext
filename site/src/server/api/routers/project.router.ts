@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import {
@@ -108,7 +109,10 @@ export const projectRouter = createTRPCRouter({
       };
       return project;
     } else {
-      throw new Error("Project not found");
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Project not found",
+      });
     }
   }),
   collection: protectedProcedure

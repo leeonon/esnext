@@ -2,11 +2,26 @@
 
 import { Icon } from "@iconify/react";
 import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
+  const router = useRouter();
+
+  const onAction = useCallback(
+    (key: React.Key) => {
+      router.push(`/user/${key}`);
+    },
+    [router],
+  );
+
   return (
     <div className="sticky top-[calc(4rem+1px)] h-screen w-[200px] self-start border-r-1 border-default-50 px-4 pt-4">
-      <Listbox aria-label="Listbox menu with sections" variant="shadow">
+      <Listbox
+        aria-label="Listbox menu with sections"
+        variant="shadow"
+        onAction={onAction}
+      >
         <ListboxSection showDivider>
           <ListboxItem key="info" startContent={<Icon icon="ph:user-circle" />}>
             User Info
