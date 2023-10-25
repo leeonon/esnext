@@ -1,7 +1,7 @@
 "use client";
 
 import { Global } from "@emotion/react";
-import tw, { GlobalStyles as BaseStyles, css, theme } from "twin.macro";
+import tw, { css, theme } from "twin.macro";
 
 const customStyles = css({
   body: {
@@ -12,7 +12,9 @@ const customStyles = css({
 
 const GlobalStyles = () => (
   <>
-    <BaseStyles />
+    {/* https://github.com/ben-rogerson/twin.macro/discussions/719
+    https://github.com/ben-rogerson/twin.macro/issues/277 */}
+    {/* <BaseStyles /> */}
     <Global styles={customStyles} />
   </>
 );
