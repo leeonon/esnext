@@ -1,13 +1,13 @@
 import { TRPCReactProvider } from "~/trpc/react";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
+import { Toaster } from "sonner";
 
 import Footer from "~/components/Footer";
 import Navbar from "~/components/Navbar";
+import GlobalStyles from "~/styles/GlobalStyles";
 
 import { ESNextProviders } from "./providers";
-
-import "~/styles/globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,8 +33,10 @@ export default function RootLayout({
             <Navbar />
             <div className="mx-auto w-full">{children}</div>
             <Footer />
+            <Toaster />
           </ESNextProviders>
         </TRPCReactProvider>
+        <GlobalStyles />
       </body>
     </html>
   );

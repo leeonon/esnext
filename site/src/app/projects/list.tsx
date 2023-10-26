@@ -1,12 +1,10 @@
 "use client";
 
-import { Spinner } from "@nextui-org/react";
+import { cn, Spinner } from "@nextui-org/react";
 import { api } from "~/trpc/react";
 import { useEffect, useMemo, useRef } from "react";
 
 import ProjectBox from "~/components/ProjectBox";
-
-// import { api } from "~/trpc/server";
 
 export default function Project() {
   const loadingRef = useRef<HTMLDivElement>(null);
@@ -33,7 +31,6 @@ export default function Project() {
       if (isLoading) {
         return;
       }
-      console.log("Loading more projects...");
       fetchNextPage().catch((err) => console.error(err));
     });
     ob.observe(loadingRef.current);
@@ -43,21 +40,29 @@ export default function Project() {
     return pages.flatMap((page) => page.list);
   }, [pages]);
 
+  const listElement = useMemo(() => {
+    return currentList.map((project, index) => (
+      <ProjectBox
+        key={project.id}
+        item={project}
+        cover={
+          index % 4 === 0
+            ? "https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202309252111915.png"
+            : undefined
+        }
+        className={cn(index % 4 === 0 ? "row-span-2" : "h-[160px]")}
+      />
+    ));
+  }, [currentList]);
+
   return (
     <div>
-      <div className="flex h-fit flex-grow flex-wrap gap-4">
-        {!isLoading &&
-          currentList.map((project) => (
-            <ProjectBox
-              className="w-full flex-auto sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4"
-              key={project.id}
-              item={project}
-            />
-          ))}
+      <div className="grid h-fit grid-cols-3 grid-rows-[160px] gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1">
+        {listElement}
       </div>
-      {hasNextPage && (
+      {hasNextPage ? (
         <Spinner ref={loadingRef} className="mx-auto my-8 flex w-fit" />
-      )}
+      ) : null}
     </div>
   );
 }

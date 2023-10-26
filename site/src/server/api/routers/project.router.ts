@@ -1,7 +1,15 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { QueryProjectListSchema } from "~/schema/project.schema";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  CollectionProjectSchema,
+  QueryProjectListSchema,
+} from "~/schema/project.schema";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 /**
  * TRPC router for project-related API endpoints.
@@ -72,19 +80,87 @@ export const projectRouter = createTRPCRouter({
             },
           },
         },
+        ...(ctx.session?.user && {
+          projectInFavorites: {
+            where: {
+              favorites: {
+                userId: ctx.session!.user.id,
+              },
+            },
+            select: {
+              favoritesId: true,
+            },
+          },
+        }),
       },
     });
 
     let project;
+
     if (projectData) {
+      // 检查项目是否已经在用户的收藏夹中
+      const isCollection = projectData.projectInFavorites?.length > 0;
       project = {
         ...projectData,
         tags: projectData.tags
           ? projectData.tags.map((tagRelation) => tagRelation.tag.name)
           : undefined,
+        isCollection,
       };
+      return project;
+    } else {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Project not found",
+      });
     }
-
-    return project;
   }),
+  collection: protectedProcedure
+    .input(CollectionProjectSchema)
+    .mutation(async ({ ctx, input }) => {
+      const favorites = await ctx.db.favorites.findMany({
+        where: {
+          userId: ctx.session.user.id,
+          id: { in: input.favoriteIds },
+        },
+      });
+
+      if (favorites.length !== input.favoriteIds.length) {
+        throw new Error("Invalid favorites");
+      }
+
+      const projectId = input.projectId;
+      const submittedFavorites = input.favoriteIds.map((id) => ({
+        favoritesId: id,
+        projectId,
+      }));
+
+      await ctx.db.$transaction(async () => {
+        // 删除所有不在提交列表中的记录
+        await ctx.db.projectInFavorites.deleteMany({
+          where: {
+            projectId,
+            favoritesId: {
+              notIn: submittedFavorites.map((f) => f.favoritesId),
+            },
+          },
+        });
+      });
+
+      // 更新现有记录或插入新记录
+      await Promise.all(
+        submittedFavorites.map(async (f) => {
+          await ctx.db.projectInFavorites.upsert({
+            where: {
+              projectId_favoritesId: {
+                projectId: f.projectId,
+                favoritesId: f.favoritesId,
+              },
+            },
+            update: {},
+            create: f,
+          });
+        }),
+      );
+    }),
 });

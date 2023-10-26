@@ -1,29 +1,42 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import Categories from "~/app/projects/categories";
 import ProjectList from "~/app/projects/list";
+import Sidebar from "~/app/projects/sidebar";
+import SortFilter from "~/app/projects/sort";
 import Tags from "~/app/projects/tags";
 import Top from "~/components/Top";
 
 export default function ProjectPage() {
-  const [filterVisible, setFilterVisible] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const onChangeFilterVisible = useCallback(() => {
-    setFilterVisible((prev) => !prev);
-  }, []);
+  const onChangeParams = useCallback(
+    (name: string, value: string, isDelete?: boolean) => {
+      const params = new URLSearchParams(searchParams);
+      if (isDelete) {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
+      router.push(pathname + "?" + params.toString());
+    },
+    [pathname, router, searchParams],
+  );
 
   return (
     <>
-      <div className="flex w-full flex-col ">
-        <Tags
-          onChangeFilter={onChangeFilterVisible}
-          categoryVisible={filterVisible}
-        />
-        <div className="flex">
-          <Categories visible={filterVisible} />
-          <ProjectList />
+      <div>
+        <div className="relative flex">
+          <Sidebar onChangeParams={onChangeParams} />
+          <div className="m-auto flex flex-1 flex-col overflow-hidden px-8">
+            <Tags onChangeParams={onChangeParams} />
+            <SortFilter onChangeParams={onChangeParams} />
+            <ProjectList />
+          </div>
         </div>
       </div>
       <Top />

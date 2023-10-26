@@ -3,10 +3,5 @@ export default function InfoLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <section>
-      <h1>嗷嗷嗷</h1>
-      {children}
-    </section>
-  );
+  return <section className="m-auto max-w-screen-2xl px-8">{children}</section>;
 }

@@ -7,11 +7,7 @@ type Props = {
   searchParams: Record<string, string | string[] | undefined>;
 };
 
-export async function generateMetadata({
-  params,
-  searchParams,
-}: Props): Promise<Metadata> {
-  console.log("🚀 ~ file: page.tsx:20 ~ params:", params, searchParams);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return Promise.resolve({
     title: `ESNext - ${params.name}`,
   });

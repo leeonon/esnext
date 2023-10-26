@@ -7,3 +7,10 @@ export const QueryProjectListSchema = z.object({
   category: z.string().optional(),
   tags: z.string().optional(),
 });
+
+export const CollectionProjectSchema = z.object({
+  projectId: z.number(),
+  favoriteIds: z.array(z.number()).default([]),
+});
+
+export type CollectionProjectSType = z.infer<typeof CollectionProjectSchema>;
