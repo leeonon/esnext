@@ -9,8 +9,6 @@ import GlobalStyles from "~/styles/GlobalStyles";
 
 import { ESNextProviders } from "./providers";
 
-import "~/styles/globals.css";
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -30,7 +28,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${inter.variable}`}>
-        <GlobalStyles />
         <TRPCReactProvider headers={headers()}>
           <ESNextProviders>
             <Navbar />
@@ -39,6 +36,7 @@ export default function RootLayout({
             <Toaster />
           </ESNextProviders>
         </TRPCReactProvider>
+        <GlobalStyles />
       </body>
     </html>
   );
