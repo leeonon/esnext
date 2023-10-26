@@ -45,12 +45,6 @@ module.exports = function withTwin(
             loader: "babel-loader",
             options: {
               sourceMaps: dev,
-              // presets: [
-              //   [
-              //     "@babel/preset-react",
-              //     { runtime: "automatic", importSource: "@emotion/react" },
-              //   ],
-              // ],
               plugins: [
                 require.resolve("babel-plugin-macros"),
                 require.resolve("@emotion/babel-plugin"),
