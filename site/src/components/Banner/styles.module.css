@@ -8,10 +8,12 @@
 }
 
 .banner::before {
-  content: '';
   position: absolute;
+  top: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
+  content: '';
   background:
     linear-gradient(90deg, var(--line) 1px, transparent 1px 5vmin) 0 -5vmin / 5vmin
       5vmin,
@@ -23,21 +25,19 @@
     black 30%,
     transparent 100%
   );
-  top: 0;
-  z-index: -1;
 }
 
 .iconTransition {
-  transition-property: transform;
-  transition-duration: 800ms;
-  transform-origin: center center;
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  transition-duration: 800ms;
+  transition-property: transform;
+  transform-origin: center center;
 }
 
 .svelteIcon {
   position: absolute;
-  left: 8rem;
   top: -2rem;
+  left: 8rem;
 }
 
 .bunIcon {

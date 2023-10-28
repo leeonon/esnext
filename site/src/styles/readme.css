@@ -4,8 +4,8 @@
   box-sizing: border-box;
   min-width: 200px;
   max-width: 980px;
-  margin: 0 auto;
   padding: 25px;
+  margin: 0 auto;
   background-color: var(--esnext-background);
 }
 
@@ -21,8 +21,8 @@
 
 .markdown-body h1 {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .markdown-body ul,
@@ -32,6 +32,6 @@
 
 .markdown-body pre,
 .markdown-body .highlight pre {
-  background-color: unset;
   padding: 0;
+  background-color: unset;
 }
