@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import type { Draft, nothing } from "immer";
-import type { Dispatch } from "react";
+import type { Draft, nothing } from 'immer';
+import type { Dispatch } from 'react';
 
-import { useCallback, useMemo, useReducer, useState } from "react";
-import { freeze, produce } from "immer";
+import { useCallback, useMemo, useReducer, useState } from 'react';
+import { freeze, produce } from 'immer';
 
 export type DraftFunction<S> = (draft: Draft<S>) => void;
 export type Updater<S> = (arg: S | DraftFunction<S>) => void;
@@ -17,14 +17,14 @@ export function useImmer<S = any>(initialValue: S | (() => S)): ImmerHook<S>;
 export function useImmer(initialValue: any) {
   const [val, updateValue] = useState(() =>
     freeze(
-      typeof initialValue === "function" ? initialValue() : initialValue,
+      typeof initialValue === 'function' ? initialValue() : initialValue,
       true,
     ),
   );
   return [
     val,
     useCallback((updater: any) => {
-      if (typeof updater === "function") updateValue(produce(updater));
+      if (typeof updater === 'function') updateValue(produce(updater));
       else updateValue(freeze(updater));
     }, []),
   ];

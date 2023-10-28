@@ -5,12 +5,12 @@
  * discussions - https://github.com/ben-rogerson/twin.macro/discussions/826
  * emotion app dir - https://github.com/emotion-js/emotion/issues/2928
  */
-const path = require("path");
+const path = require('path');
 
 // 包含导入twin.macro的文件的文件夹
 const includedDirs = [
-  path.resolve(__dirname, "app"),
-  path.resolve(__dirname, "src"),
+  path.resolve(__dirname, 'app'),
+  path.resolve(__dirname, 'src'),
 ];
 
 module.exports = function withTwin(
@@ -42,14 +42,14 @@ module.exports = function withTwin(
         use: [
           patchedDefaultLoaders,
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
               sourceMaps: dev,
               plugins: [
-                require.resolve("babel-plugin-macros"),
-                require.resolve("@emotion/babel-plugin"),
+                require.resolve('babel-plugin-macros'),
+                require.resolve('@emotion/babel-plugin'),
                 [
-                  require.resolve("@babel/plugin-syntax-typescript"),
+                  require.resolve('@babel/plugin-syntax-typescript'),
                   { isTSX: true },
                 ],
               ],
@@ -77,7 +77,7 @@ module.exports = function withTwin(
        * 调用用户自定义的 Webpack 配置
        * 如果用户在 nextConfig 中提供了自己的 webpack 配置函数，那么调用它，并传递当前的 config 和 options。
        */
-      if (typeof nextConfig.webpack === "function") {
+      if (typeof nextConfig.webpack === 'function') {
         return nextConfig.webpack(config, options);
       } else {
         return config;

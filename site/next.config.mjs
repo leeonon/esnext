@@ -1,10 +1,10 @@
-import withTwin from "./withTwin.cjs";
+import withTwin from './withTwin.cjs';
 
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-await import("./src/env.mjs");
+await import('./src/env.mjs');
 
 /** @type {import("next").NextConfig} */
 const config = withTwin({
@@ -16,16 +16,16 @@ const config = withTwin({
    * @see https://github.com/vercel/next.js/issues/41980
    */
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "lee-oss-1300118632.cos.ap-nanjing.myqcloud.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'lee-oss-1300118632.cos.ap-nanjing.myqcloud.com',
+        port: '',
+        pathname: '/**',
       },
     ],
   },

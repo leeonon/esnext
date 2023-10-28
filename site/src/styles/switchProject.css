@@ -1,17 +1,26 @@
 /* https://github.com/vercel/next.js/discussions/46300 */
 @keyframes fade-in {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 
 @keyframes fade-out {
-  to { opacity: 0; }
+  to {
+    opacity: 0;
+  }
 }
+
 @keyframes zoom-in {
-  from { transform: scale(0); }
+  from {
+    transform: scale(0);
+  }
 }
 
 @keyframes zoom-out {
-  to { transform: scale(0); }
+  to {
+    transform: scale(0);
+  }
 }
 
 ::view-transition-old(root) {
@@ -23,12 +32,15 @@
 }
 
 .projectBoxImage {
-  view-transition-name: projectBoxImage;
-}
-::view-transition-old(projectBoxImage) {
-  animation: 1150ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
-}
-::view-transition-new(projectBoxImage) {
-  animation: 3300ms cubic-bezier(0.4, 0, 0.2, 1) both zoom-in, 200ms cubic-bezier(0.4, 0, 1, 1) both fade-in;
+  view-transition-name: projectboximage;
 }
 
+::view-transition-old(projectboximage) {
+  animation: 1150ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+}
+
+::view-transition-new(projectboximage) {
+  animation:
+    3300ms cubic-bezier(0.4, 0, 0.2, 1) both zoom-in,
+    200ms cubic-bezier(0.4, 0, 1, 1) both fade-in;
+}

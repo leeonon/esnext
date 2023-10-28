@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import tw from "twin.macro";
+import { api } from '~/trpc/react';
+import tw from 'twin.macro';
 
-import FavoritesItem from "./favoritesItem";
+import FavoritesItem from './favoritesItem';
 
 const Container = tw.div`
   grid grid-flow-row grid-cols-5 gap-4 py-4

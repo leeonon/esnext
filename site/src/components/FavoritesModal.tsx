@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
 import {
   Button,
@@ -13,29 +13,29 @@ import {
   ModalHeader,
   Textarea,
   useDisclosure,
-} from "@nextui-org/react";
-import { api } from "~/trpc/react";
-import { memo, useState } from "react";
-import { toast } from "sonner";
+} from '@nextui-org/react';
+import { api } from '~/trpc/react';
+import { memo, useState } from 'react';
+import { toast } from 'sonner';
 
 const FavoritesModal: FC<{
   onSuccess: () => void;
 }> = ({ onSuccess }) => {
   const { onClose, isOpen, onOpenChange, onOpen } = useDisclosure();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(true);
 
   const createFavorites = api.favorites.create.useMutation({
     onSuccess: () => {
       onClose();
       onSuccess();
-      toast.success("Create favorites successfully", {
-        position: "top-center",
+      toast.success('Create favorites successfully', {
+        position: 'top-center',
       });
     },
     onError: (err) => {
-      toast.error(err.message, { position: "top-center" });
+      toast.error(err.message, { position: 'top-center' });
     },
   });
   const onCreate = async () => {
@@ -49,15 +49,15 @@ const FavoritesModal: FC<{
   };
 
   return (
-    <div className="mr-auto">
-      <Button color="default" variant="flat" onPress={onOpen}>
+    <div className='mr-auto'>
+      <Button color='default' variant='flat' onPress={onOpen}>
         Create
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='top-center'>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className='flex flex-col gap-1'>
                 Collections
               </ModalHeader>
               <ModalBody>
@@ -65,27 +65,27 @@ const FavoritesModal: FC<{
                   autoFocus
                   value={name}
                   isInvalid={name.length > 30}
-                  errorMessage={name.length > 30 && "Name up to 30 characters"}
+                  errorMessage={name.length > 30 && 'Name up to 30 characters'}
                   onValueChange={setName}
                   isRequired
-                  label="Name"
-                  placeholder="Enter your favorites name"
-                  variant="bordered"
+                  label='Name'
+                  placeholder='Enter your favorites name'
+                  variant='bordered'
                 />
                 <Textarea
                   max={100}
                   maxLength={100}
-                  variant="bordered"
+                  variant='bordered'
                   onValueChange={setDescription}
-                  placeholder="Please enter a description."
+                  placeholder='Please enter a description.'
                   value={description}
                 />
-                <div className="flex justify-between px-1 py-2">
+                <div className='flex justify-between px-1 py-2'>
                   <Checkbox
                     isSelected={isPublic}
                     onValueChange={setIsPublic}
                     classNames={{
-                      label: "text-small",
+                      label: 'text-small',
                     }}
                   >
                     Public
@@ -93,10 +93,10 @@ const FavoritesModal: FC<{
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color='danger' variant='flat' onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color="primary" onClick={() => void onCreate()}>
+                <Button color='primary' onClick={() => void onCreate()}>
                   Create
                 </Button>
               </ModalFooter>

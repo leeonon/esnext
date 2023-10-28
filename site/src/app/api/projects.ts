@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { db } from "~/server/db";
+import { db } from '~/server/db';
 
 interface Project {
   id: number;
@@ -27,10 +27,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ApiResponse>,
 ): Promise<void> {
-  if (req.method !== "GET") {
+  if (req.method !== 'GET') {
     res
       .status(405)
-      .json({ success: false, data: null, message: "Method Not Allowed" });
+      .json({ success: false, data: null, message: 'Method Not Allowed' });
     return;
   }
 

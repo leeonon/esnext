@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
-import { cn } from "@nextui-org/react";
+import { cn } from '@nextui-org/react';
 
-import PopularCard from "./PopularCard";
-import styles from "./styles.module.css";
+import PopularCard from './PopularCard';
+import styles from './styles.module.css';
 
 type PopularListProps = {
   className?: string;
@@ -19,8 +19,8 @@ const PopularList = ({
   warpStyle?: React.CSSProperties;
 }) => {
   return (
-    <div className="flex w-full overflow-hidden" style={warpStyle}>
-      <div className={cn("flex gap-[15px]", className)}>
+    <div className='flex w-full overflow-hidden' style={warpStyle}>
+      <div className={cn('flex gap-[15px]', className)}>
         {Array.from({ length: 20 }).map((_, index) => (
           <PopularCard key={index} />
         ))}
@@ -33,11 +33,11 @@ const Popular: FC<PopularListProps> = ({ className }) => {
   return (
     <div className={cn(className, styles.popularContainer)}>
       <PopularList
-        warpStyle={{ justifyContent: "flex-star" }}
+        warpStyle={{ justifyContent: 'flex-star' }}
         className={cn(styles.popularList, styles.popularListLeft)}
       />
       <PopularList
-        warpStyle={{ justifyContent: "flex-end" }}
+        warpStyle={{ justifyContent: 'flex-end' }}
         className={cn(styles.popularList, styles.popularListRight)}
       />
       <PopularList className={cn(styles.popularList, styles.popularListLeft)} />

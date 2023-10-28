@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Global } from "@emotion/react";
-import tw, { css, globalStyles, theme } from "twin.macro";
+import { Global } from '@emotion/react';
+import tw, { css, globalStyles, theme } from 'twin.macro';
 
-import "~/styles/globals.css";
+import '~/styles/globals.css';
 
 const filteredGlobalStyles = Object.fromEntries(
   Object.entries(globalStyles).filter(

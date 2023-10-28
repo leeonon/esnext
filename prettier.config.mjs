@@ -2,12 +2,12 @@
  * @type {import('prettier').Config & import("@ianvs/prettier-plugin-sort-imports").PluginConfig}
  */
 const config = {
-  arrowParens: "always",
+  arrowParens: 'always',
   printWidth: 80,
-  singleQuote: false,
-  jsxSingleQuote: false,
+  singleQuote: true,
+  jsxSingleQuote: true,
   semi: true,
-  trailingComma: "all",
+  trailingComma: 'all',
   tabWidth: 2,
 };
 

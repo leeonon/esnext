@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-"use client";
+'use client';
 
-import tw, { css } from "twin.macro";
+import tw, { css } from 'twin.macro';
 
-import Button from "~/components/TwinButton";
+import Button from '~/components/TwinButton';
 
 const hoverStyles = css`
   &:hover {
@@ -26,11 +26,11 @@ const styles = {
 export default function Page() {
   return (
     <div css={styles.container({ hasBackground: true })}>
-      <div tw="flex flex-col justify-center h-full gap-y-5">
-        <h1 css={{ color: "blue" }}>Blue</h1>
+      <div tw='flex flex-col justify-center h-full gap-y-5'>
+        <h1 css={{ color: 'blue' }}>Blue</h1>
         <Input hasHover />
-        <Button variant="primary">Submit</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Button variant='primary'>Submit</Button>
+        <Button variant='secondary'>Cancel</Button>
         <Button isSmall>Close</Button>
       </div>
     </div>

@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import ProjectInfo from "./client";
+import ProjectInfo from './client';
 
 type Props = {
   params: { name: string };

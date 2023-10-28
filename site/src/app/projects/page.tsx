@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import ProjectPage from "./client";
+import ProjectPage from './client';
 
 export const metadata: Metadata = {
-  title: "ESNext - Projects",
+  title: 'ESNext - Projects',
 };
 
 export default function Page() {

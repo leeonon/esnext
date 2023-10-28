@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react';
 import {
   Button,
   Input,
@@ -10,16 +10,16 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/react";
-import { api } from "~/trpc/react";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { redirect } from "next/navigation";
-import { toast } from "sonner";
+} from '@nextui-org/react';
+import { api } from '~/trpc/react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { redirect } from 'next/navigation';
+import { toast } from 'sonner';
 
-import { useProjectInfoContext } from "~/app/info/[name]/context";
-import FavoritesModal from "~/components/FavoritesModal";
+import { useProjectInfoContext } from '~/app/info/[name]/context';
+import FavoritesModal from '~/components/FavoritesModal';
 
-import FavoritesItem from "./FavoritesItem";
+import FavoritesItem from './FavoritesItem';
 
 const FavoritesButton = () => {
   const { project, onRefresh } = useProjectInfoContext();
@@ -37,20 +37,20 @@ const FavoritesButton = () => {
   });
 
   if (isError && error?.data?.httpStatus === 401) {
-    redirect("/login");
+    redirect('/login');
   }
 
   const collectionProject = api.project.collection.useMutation({
     onSuccess: () => {
       onClose();
-      toast.success("Collection project successfully", {
-        position: "top-center",
+      toast.success('Collection project successfully', {
+        position: 'top-center',
       });
       // This will refetch this project info
       onRefresh && onRefresh();
     },
     onError: (err) => {
-      toast.error(err.message, { position: "top-center" });
+      toast.error(err.message, { position: 'top-center' });
     },
   });
 
@@ -86,7 +86,7 @@ const FavoritesButton = () => {
       ));
     }
     return (
-      <div className="h-30 flex items-center justify-center">
+      <div className='h-30 flex items-center justify-center'>
         Haven created favorites yet
       </div>
     );
@@ -104,35 +104,35 @@ const FavoritesButton = () => {
     <div>
       <Button
         isIconOnly
-        size="md"
+        size='md'
         onClick={onOpen}
-        color={project?.isCollection ? "secondary" : "default"}
+        color={project?.isCollection ? 'secondary' : 'default'}
       >
-        <Icon icon="material-symbols:bookmark-add-outline" fontSize={22} />
+        <Icon icon='material-symbols:bookmark-add-outline' fontSize={22} />
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='top-center'>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className='flex flex-col gap-1'>
                 Collection
               </ModalHeader>
               <ModalBody>
-                <Input placeholder="Search" fullWidth />
-                <div className="scrollbar-none flex max-h-[400px] flex-col gap-2 overflow-y-scroll">
+                <Input placeholder='Search' fullWidth />
+                <div className='scrollbar-none flex max-h-[400px] flex-col gap-2 overflow-y-scroll'>
                   {itemList}
                 </div>
               </ModalBody>
-              <ModalFooter className="border-t-1 border-default-100">
+              <ModalFooter className='border-t-1 border-default-100'>
                 <FavoritesModal
                   onSuccess={() => {
                     void refetch();
                   }}
                 />
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color='danger' variant='flat' onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color="primary" onClick={onOk}>
+                <Button color='primary' onClick={onOk}>
                   Done
                 </Button>
               </ModalFooter>

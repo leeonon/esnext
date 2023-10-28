@@ -1,15 +1,15 @@
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
 import {
   CollectionProjectSchema,
   QueryProjectListSchema,
-} from "~/schema/project.schema";
+} from '~/schema/project.schema';
 import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-} from "~/server/api/trpc";
+} from '~/server/api/trpc';
 
 /**
  * TRPC router for project-related API endpoints.
@@ -18,7 +18,7 @@ export const projectRouter = createTRPCRouter({
   popular: publicProcedure.query(async ({ ctx }) => {
     const result = await ctx.db.project.findMany({
       orderBy: {
-        stars: "desc",
+        stars: 'desc',
       },
       take: 10,
     });
@@ -110,8 +110,8 @@ export const projectRouter = createTRPCRouter({
       return project;
     } else {
       throw new TRPCError({
-        code: "NOT_FOUND",
-        message: "Project not found",
+        code: 'NOT_FOUND',
+        message: 'Project not found',
       });
     }
   }),
@@ -126,7 +126,7 @@ export const projectRouter = createTRPCRouter({
       });
 
       if (favorites.length !== input.favoriteIds.length) {
-        throw new Error("Invalid favorites");
+        throw new Error('Invalid favorites');
       }
 
       const projectId = input.projectId;

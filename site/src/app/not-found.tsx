@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /**
  * Renders a 404 error page component.
@@ -18,9 +18,9 @@ import React from "react";
  */
 const Error404Page = (): JSX.Element => {
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <h1 className="mb-4 animate-bounce text-4xl font-bold">404 Error</h1>
-      <p className="text-lg">
+    <div className='flex h-screen flex-col items-center justify-center'>
+      <h1 className='mb-4 animate-bounce text-4xl font-bold'>404 Error</h1>
+      <p className='text-lg'>
         Sorry, the page you are looking for could not be found.
       </p>
     </div>

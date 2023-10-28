@@ -1,5 +1,5 @@
-import { createFavoritesSchema } from "~/schema/collection.schema";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { createFavoritesSchema } from '~/schema/collection.schema';
+import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 
 export const favoritesRouter = createTRPCRouter({
   create: protectedProcedure
