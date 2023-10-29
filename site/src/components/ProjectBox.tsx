@@ -1,6 +1,6 @@
 'use client';
 
-import type { ProjectItemType } from '~/types';
+import type { ProjectItemType } from '~/types/api';
 
 import { Icon } from '@iconify/react';
 import { Card, CardBody, CardHeader, Image, Skeleton } from '@nextui-org/react';

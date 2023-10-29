@@ -20,8 +20,15 @@ import { toast } from 'sonner';
 
 const FavoritesModal: FC<{
   onSuccess: () => void;
-}> = ({ onSuccess }) => {
-  const { onClose, isOpen, onOpenChange, onOpen } = useDisclosure();
+  title?: React.ReactNode;
+}> = ({ onSuccess, title }) => {
+  const { onClose, isOpen, onOpenChange, onOpen } = useDisclosure({
+    onClose: () => {
+      setName('');
+      setDescription('');
+      setIsPublic(true);
+    },
+  });
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(true);
@@ -51,7 +58,7 @@ const FavoritesModal: FC<{
   return (
     <div className='mr-auto'>
       <Button color='default' variant='flat' onPress={onOpen}>
-        Create
+        {title ?? 'Create'}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='top-center'>
         <ModalContent>

@@ -1,6 +1,6 @@
 'use client';
 
-import type { UserFavoritesItemType } from '~/types';
+import type { UserFavoritesItemType } from '~/types/api';
 import type { FC } from 'react';
 
 import { Avatar, AvatarGroup, Checkbox } from '@nextui-org/react';

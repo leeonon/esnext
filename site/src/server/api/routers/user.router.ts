@@ -45,10 +45,11 @@ export const userRouter = createTRPCRouter({
     .input(queryUserFavoritesPageInputSchema)
     .query(async ({ ctx, input }) => {
       const { page, pageSize } = input;
+      const where = {
+        userId: ctx.session.user.id,
+      };
       const favorites = await ctx.db.favorites.findMany({
-        where: {
-          userId: ctx.session.user.id,
-        },
+        where,
         select: {
           name: true,
           description: true,
@@ -69,12 +70,22 @@ export const userRouter = createTRPCRouter({
         skip: (page - 1) * pageSize,
         take: pageSize,
       });
+
+      const total = await ctx.db.favorites.count();
+      const hasMore = total > page * pageSize;
+      const totalPage = Math.ceil(total / pageSize);
+
       const transformedFavorites = favorites.map((favorite) => ({
         ...favorite,
         projects: favorite.projects.map(
           (projectInFavorite) => projectInFavorite.project,
         ),
       }));
-      return transformedFavorites;
+      return {
+        list: transformedFavorites,
+        total,
+        totalPage,
+        hasMore,
+      };
     }),
 });

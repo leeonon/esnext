@@ -1,4 +1,4 @@
-import type { ProjectDetailType } from '~/types';
+import type { ProjectDetailType } from '~/types/api';
 import type { FC } from 'react';
 
 import { Icon } from '@iconify/react';

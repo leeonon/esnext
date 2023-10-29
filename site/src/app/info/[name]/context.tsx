@@ -1,6 +1,6 @@
 'use client';
 
-import type { ProjectDetailType } from '~/types';
+import type { ProjectDetailType } from '~/types/api';
 
 import { createContext, useContext } from 'react';
 
