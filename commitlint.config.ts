@@ -106,7 +106,7 @@ const Configuration: UserConfig = {
         emoji: ':rewind:',
       },
     ],
-    useEmoji: false,
+    useEmoji: true,
     emojiAlign: 'center',
     useAI: false,
     aiNumber: 1,

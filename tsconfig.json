@@ -1,0 +1,13 @@
+{
+  "extends": "@esnext/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+  ],
+  "exclude": ["node_modules"]
+}
