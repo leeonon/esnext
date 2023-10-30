@@ -1,5 +1,5 @@
-import FavoritesList from "../components/favoritesList";
-import UserLayoutTitle from "../components/title";
+import FavoritesList from "../components/FavoritesList";
+import UserLayoutTitle from "../components/Title";
 
 export default function Page() {
   return (

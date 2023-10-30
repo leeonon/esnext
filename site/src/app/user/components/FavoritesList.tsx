@@ -2,7 +2,7 @@
 
 import tw from "twin.macro";
 
-import FavoritesItem from "./favoritesItem";
+import FavoritesItem from "./FavoritesItem";
 
 const Container = tw.div`
   grid grid-flow-row grid-cols-5 gap-4 py-4
