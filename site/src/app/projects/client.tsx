@@ -3,10 +3,10 @@
 import { useCallback } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import ProjectList from '~/app/projects/list';
-import Sidebar from '~/app/projects/sidebar';
-import SortFilter from '~/app/projects/sort';
-import Tags from '~/app/projects/tags';
+import ProjectList from '~/app/projects/components/List';
+import Sidebar from '~/app/projects/components/Sidebar';
+import SortFilter from '~/app/projects/components/Sort';
+import Tags from '~/app/projects/components/Tags';
 import Top from '~/components/Top';
 
 export default function ProjectPage() {
