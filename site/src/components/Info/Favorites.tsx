@@ -25,6 +25,7 @@ const FavoritesButton = () => {
   const { project, onRefresh } = useProjectInfoContext();
   const [checkedKeys, setCheckedKeys] = useState<Set<number>>(new Set([]));
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const disclosure = useDisclosure();
   const {
     data: userFavorites,
     refetch,
@@ -125,6 +126,7 @@ const FavoritesButton = () => {
               </ModalBody>
               <ModalFooter className='border-t-1 border-default-100'>
                 <FavoritesModal
+                  disclosure={disclosure}
                   onSuccess={() => {
                     void refetch();
                   }}

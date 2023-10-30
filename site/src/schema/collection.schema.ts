@@ -6,3 +6,9 @@ export const createFavoritesSchema = z.object({
 });
 
 export type CreateCollectionSchemaInput = z.infer<typeof createFavoritesSchema>;
+
+export const updateFavoritesSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  description: z.string().optional(),
+});

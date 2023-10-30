@@ -15,36 +15,21 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from '@nextui-org/react';
-import { useMemo } from 'react';
 
 type FavoritesItemProps = {
   item: UserFavoritesItemType;
+  onEdit: (item: UserFavoritesItemType) => void;
 };
 
-export default function FavoritesItem({ item }: FavoritesItemProps) {
-  const avatarGroup = useMemo(() => {
-    if (!item.projects.length) {
-      return null;
+export default function FavoritesItem({ item, onEdit }: FavoritesItemProps) {
+  const onAction = (key: React.Key) => {
+    if (key === 'edit') {
+      onEdit(item);
     }
-
-    return (
-      <AvatarGroup
-        size='sm'
-        isBordered
-        max={6}
-        total={item.projects.length}
-        className='justify-start'
-      >
-        {item.projects.map((project) => (
-          <Avatar key={project.id} src={project.logo ?? ''} />
-        ))}
-      </AvatarGroup>
-    );
-  }, [item.projects]);
-
+  };
   return (
     <Card
-      className='max-w-[560px] cursor-pointer rounded-md'
+      className='h-[160px] max-w-[560px] cursor-pointer rounded-md'
       isFooterBlurred
       isHoverable
     >
@@ -57,18 +42,25 @@ export default function FavoritesItem({ item }: FavoritesItemProps) {
                 <Icon icon='iconamoon:options' />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu
-              aria-label='Edit Favorites Item'
-              onAction={(key) => alert(key)}
-            >
+            <DropdownMenu aria-label='Edit Favorites Item' onAction={onAction}>
               <DropdownItem key='edit'>Edit</DropdownItem>
               <DropdownItem key='delete' className='text-danger' color='danger'>
-                Delete file
+                Delete
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </div>
-        {avatarGroup}
+        <AvatarGroup
+          size='sm'
+          isBordered
+          max={6}
+          total={item.projects.length}
+          className='justify-start'
+        >
+          {item.projects.map((project) => (
+            <Avatar key={project.id} src={project.logo ?? ''} />
+          ))}
+        </AvatarGroup>
       </CardBody>
       <CardFooter className='p-2'>
         <p className='line-clamp-2 text-left font-sans text-small leading-4 text-default-400'>

@@ -1,5 +1,7 @@
 'use client';
 
+import type { useDisclosure } from '@nextui-org/react';
+import type { UserFavoritesItemType } from '~/types/api';
 import type { FC } from 'react';
 
 import {
@@ -12,26 +14,61 @@ import {
   ModalFooter,
   ModalHeader,
   Textarea,
-  useDisclosure,
 } from '@nextui-org/react';
 import { api } from '~/trpc/react';
-import { memo, useState } from 'react';
+import { isValidElement, memo, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const FavoritesModal: FC<{
+import { useImmer } from '~/hooks/useImmer';
+
+type UseDisclosureReturn = ReturnType<typeof useDisclosure>;
+
+interface FavoritesModalProps {
   onSuccess: () => void;
+  disclosure: UseDisclosureReturn;
   title?: React.ReactNode;
-}> = ({ onSuccess, title }) => {
-  const { onClose, isOpen, onOpenChange, onOpen } = useDisclosure({
-    onClose: () => {
-      setName('');
-      setDescription('');
-      setIsPublic(true);
+  item?: UserFavoritesItemType;
+}
+const FavoritesModal: FC<FavoritesModalProps> = ({
+  onSuccess,
+  title,
+  disclosure,
+  item,
+}) => {
+  const { onClose, isOpen, onOpenChange, onOpen } = disclosure;
+  const [params, setParams] = useImmer<{
+    name?: string;
+    description?: string | null;
+  }>({
+    name: item?.name,
+    description: item?.description,
+  });
+  const [isPublic, setIsPublic] = useState(true);
+  const mutation = api.favorites.update.useMutation({
+    onSuccess: () => {
+      onClose();
+      onSuccess();
+      toast.success('Update favorites successfully', {
+        position: 'top-center',
+      });
     },
   });
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [isPublic, setIsPublic] = useState(true);
+
+  const onCheck = () => {
+    if (!params.name || params.name.length > 30) {
+      return false;
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    if (item) {
+      setParams((draft) => {
+        draft.name = item.name ?? '';
+        draft.description = item.description ?? '';
+      });
+    }
+  }, [item, setParams]);
 
   const createFavorites = api.favorites.create.useMutation({
     onSuccess: () => {
@@ -45,35 +82,83 @@ const FavoritesModal: FC<{
       toast.error(err.message, { position: 'top-center' });
     },
   });
+
+  const onUpdateFavorites = async () => {
+    if (!onCheck()) {
+      return;
+    }
+    await mutation.mutateAsync({
+      id: item?.id ?? 0,
+      name: params.name!,
+      description: params.description!,
+    });
+  };
+
   const onCreate = async () => {
-    if (!name || name.length > 30) {
+    if (!onCheck()) {
       return;
     }
     await createFavorites.mutateAsync({
-      name,
-      description,
+      name: params.name!,
+      description: params.description!,
     });
+  };
+
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name as keyof typeof params;
+    setParams((draft) => {
+      draft[name] = e.target.value;
+    });
+  };
+
+  const handleClose = () => {
+    setParams((draft) => {
+      draft.name = '';
+      draft.description = '';
+    });
+  };
+
+  const handleOk = () => {
+    if (item) {
+      void onUpdateFavorites();
+    } else {
+      void onCreate();
+    }
   };
 
   return (
     <div className='mr-auto'>
-      <Button color='default' variant='flat' onPress={onOpen}>
-        {title ?? 'Create'}
-      </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='top-center'>
+      {isValidElement(title) ? (
+        <div onClick={onOpen}>{title}</div>
+      ) : (
+        <Button color='default' variant='flat' onPress={onOpen}>
+          {title ?? 'Create'}
+        </Button>
+      )}
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        onClose={handleClose}
+        placement='top-center'
+      >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
-                Collections
+                {item ? 'Edit Favorites' : 'Add Favorites'}
               </ModalHeader>
               <ModalBody>
                 <Input
                   autoFocus
-                  value={name}
-                  isInvalid={name.length > 30}
-                  errorMessage={name.length > 30 && 'Name up to 30 characters'}
-                  onValueChange={setName}
+                  name='name'
+                  value={params.name}
+                  isInvalid={!!params.name && params.name?.length > 30}
+                  errorMessage={
+                    params?.name &&
+                    params.name.length > 30 &&
+                    'Name up to 30 characters'
+                  }
+                  onChange={onValueChange}
                   isRequired
                   label='Name'
                   placeholder='Enter your favorites name'
@@ -83,9 +168,10 @@ const FavoritesModal: FC<{
                   max={100}
                   maxLength={100}
                   variant='bordered'
-                  onValueChange={setDescription}
+                  name='description'
+                  onChange={onValueChange}
                   placeholder='Please enter a description.'
-                  value={description}
+                  value={params?.description ?? ''}
                 />
                 <div className='flex justify-between px-1 py-2'>
                   <Checkbox
@@ -103,8 +189,8 @@ const FavoritesModal: FC<{
                 <Button color='danger' variant='flat' onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color='primary' onClick={() => void onCreate()}>
-                  Create
+                <Button color='primary' onClick={handleOk}>
+                  {item ? 'Update' : 'Create'}
                 </Button>
               </ModalFooter>
             </>

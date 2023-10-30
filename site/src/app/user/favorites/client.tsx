@@ -1,6 +1,8 @@
 'use client';
 
-import { Pagination } from '@nextui-org/react';
+import type { UserFavoritesItemType } from '~/types/api';
+
+import { Pagination, useDisclosure } from '@nextui-org/react';
 import { api } from '~/trpc/react';
 import { useCallback, useState } from 'react';
 import tw from 'twin.macro';
@@ -17,13 +19,30 @@ const Container = tw.div`
   max-md:grid-cols-1
 `;
 
+const FavoritesList = ({
+  list,
+  onEdit,
+}: {
+  list: UserFavoritesItemType[];
+  onEdit: (item: UserFavoritesItemType) => void;
+}) => {
+  return (
+    <>
+      {list.map((_, index) => (
+        <FavoritesItem key={index} item={_} onEdit={onEdit} />
+      ))}
+    </>
+  );
+};
+
 export default function Client() {
   const [page, setPage] = useState(1);
+  const [currentItem, setCurrentItem] = useState<UserFavoritesItemType>();
+
+  const { onClose, isOpen, onOpenChange, onOpen, ...rest } = useDisclosure();
 
   const {
     data: { list = [], hasMore, total, totalPage } = {},
-    isFetching,
-    isPreviousData,
     isLoading,
     refetch,
   } = api.user.userFavoritesPage.useQuery(
@@ -36,14 +55,22 @@ export default function Client() {
     },
   );
 
-  const onNextPage = useCallback(() => {
-    if (hasMore) {
+  const onSuccess = useCallback(() => {
+    if (hasMore && !currentItem) {
       const lastPage = Math.ceil(total ? total / 20 : 1);
       setPage(lastPage);
     } else {
       void refetch();
     }
-  }, [hasMore, refetch, total]);
+  }, [hasMore, refetch, total, currentItem]);
+
+  const onEdit = useCallback(
+    (item: UserFavoritesItemType) => {
+      setCurrentItem(item);
+      onOpen();
+    },
+    [onOpen],
+  );
 
   if (isLoading) {
     return (
@@ -65,13 +92,17 @@ export default function Client() {
     <>
       <UserLayoutTitle title='My Favorites'>
         <div>
-          <FavoritesModal onSuccess={onNextPage} title='New Favorites' />
+          <FavoritesModal
+            item={currentItem}
+            disclosure={{ isOpen, onClose, onOpenChange, onOpen, ...rest }}
+            onSuccess={onSuccess}
+            title='New Favorites'
+          />
         </div>
       </UserLayoutTitle>
       <Container>
-        {list.map((_, index) => (
-          <FavoritesItem key={index} item={_} />
-        ))}
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+        <FavoritesList list={list} onEdit={onEdit} />
       </Container>
       <div className='mt-11 flex justify-center'>
         <Pagination
