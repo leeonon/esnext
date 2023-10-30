@@ -7,9 +7,9 @@ import tw from 'twin.macro';
 
 import FavoritesModal from '~/components/FavoritesModal';
 
-import UserLayoutTitle from '../components/title';
-import FavoritesItem from './components/item';
-import SkeletonItem from './components/skeleton';
+import UserLayoutTitle from '../components/Title';
+import FavoritesItem from './components/Item';
+import SkeletonItem from './components/Skeleton';
 
 const Container = tw.div`
   grid grid-flow-row grid-cols-5 gap-4 py-4
