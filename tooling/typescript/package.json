@@ -1,0 +1,9 @@
+{
+  "name": "@esnext/tsconfig",
+  "version": "1.0.0",
+  "files": [
+    "base.json"
+  ],
+  "author": "leeOnOn",
+  "license": "ISC"
+}

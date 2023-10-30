@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "module": "esnext",
+    "noEmit": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUncheckedIndexedAccess": true,
+    "incremental": true
+  },
+  "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo"]
+}

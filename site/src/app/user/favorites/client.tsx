@@ -62,7 +62,7 @@ export default function Client() {
     } else {
       void refetch();
     }
-  }, [hasMore, refetch, total, currentItem]);
+  }, [currentItem, hasMore, refetch, total]);
 
   const onEdit = useCallback(
     (item: UserFavoritesItemType) => {

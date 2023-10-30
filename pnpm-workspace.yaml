@@ -1,4 +1,5 @@
 packages:
-  - 'site'
-  - 'tasks'
-  - 'sender'
+  - apps/*
+  - packages/*
+  - tooling/*
+  - site

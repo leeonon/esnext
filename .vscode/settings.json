@@ -1,4 +1,7 @@
 {
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true,
@@ -37,6 +40,5 @@
     "stylelint",
     "trpc"
   ],
-  "typescript.tsdk": "node_modules/typescript/lib",
   "testing.automaticallyOpenPeekView": "never",
 }
