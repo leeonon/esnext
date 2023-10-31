@@ -1,7 +1,7 @@
-import { Icon } from '@iconify/react';
-import { Select, SelectItem } from '@nextui-org/react';
 import { memo, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Icon } from '@iconify/react';
+import { Select, SelectItem } from '@nextui-org/react';
 
 const SortFilter = ({
   onChangeParams,

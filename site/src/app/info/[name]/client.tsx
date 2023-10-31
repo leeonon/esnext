@@ -1,10 +1,9 @@
 'use client';
 
-import { Icon } from '@iconify/react';
-import { Tab, Tabs } from '@nextui-org/react';
-import { api } from '~/trpc/react';
 import { useMemo } from 'react';
 import { notFound, useParams } from 'next/navigation';
+import { Icon } from '@iconify/react';
+import { Tab, Tabs } from '@nextui-org/react';
 
 import { ProjectInfoContext } from '~/app/info/[name]/context';
 import ProjectBaseInfo from '~/components/Info/Base';
@@ -12,6 +11,7 @@ import NpmInfo from '~/components/Info/NpmInfo';
 import ProjectOverview from '~/components/Info/Overview';
 import Recommend from '~/components/Info/Recommend';
 import ProjectTags from '~/components/Info/TagsCard';
+import { api } from '~/trpc/react';
 
 const Title = ({
   children,

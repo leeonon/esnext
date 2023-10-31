@@ -2,15 +2,15 @@
 
 import type { UserFavoritesItemType } from '~/types/api';
 
-import { Pagination, useDisclosure } from '@nextui-org/react';
-import { api } from '~/trpc/react';
 import { useCallback, useState } from 'react';
+import { Pagination, useDisclosure } from '@nextui-org/react';
 import { toast } from 'sonner';
 import tw from 'twin.macro';
 
 import UserLayoutTitle from '~/app/user/components/Title';
 import Confirm from '~/components/Confirm';
 import FavoritesModal from '~/components/FavoritesModal';
+import { api } from '~/trpc/react';
 
 import FavoritesItem from './components/Item';
 import SkeletonItem from './components/Skeleton';

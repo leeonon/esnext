@@ -1,5 +1,5 @@
-import startCase from 'lodash/startCase';
 import Link from 'next/link';
+import startCase from 'lodash/startCase';
 
 import UserLayoutTitle from '~/app/user/components/Title';
 import ProjectList from '~/app/user/favorites/[name]/components/List';
@@ -23,13 +23,13 @@ export default async function Page({ params: { name } }: PageProps) {
               </Link>
               <span className='text-default-900'>{startCase(detail.name)}</span>
             </span>
-            <span className='ml-2 text-xs text-default-400'>
+            <span className='text-default-400 ml-2 text-xs'>
               共{detail.projects.length}个项目
             </span>
           </div>
         }
       />
-      <p className='mt-2 text-xs text-default-400'>{detail.description}</p>
+      <p className='text-default-400 mt-2 text-xs'>{detail.description}</p>
       <ProjectList list={detail.projects} />
     </div>
   );

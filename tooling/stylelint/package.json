@@ -1,0 +1,23 @@
+{
+  "name": "@esnext/stylelint-config",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "devDependencies": {
+    "@esnext/tsconfig": "^1.0.0",
+    "@esnext/eslint-config": "^1.0.0",
+    "@esnext/prettier-config": "^1.0.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-order": "^6.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@esnext/eslint-config/base"
+    ]
+  },
+  "prettier": "@esnext/prettier-config",
+  "author": "LeeOnOn",
+  "license": "ISC"
+}

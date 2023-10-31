@@ -1,4 +1,3 @@
-import { TRPCReactProvider } from '~/trpc/react';
 import { Roboto } from 'next/font/google';
 import { headers } from 'next/headers';
 import { Toaster } from 'sonner';
@@ -6,6 +5,7 @@ import { Toaster } from 'sonner';
 import Footer from '~/components/Footer';
 import Navbar from '~/components/Navbar';
 import GlobalStyles from '~/styles/GlobalStyles';
+import { TRPCReactProvider } from '~/trpc/react';
 
 import { ESNextProviders } from './providers';
 

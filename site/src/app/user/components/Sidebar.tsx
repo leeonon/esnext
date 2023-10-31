@@ -1,9 +1,9 @@
 'use client';
 
-import { Icon } from '@iconify/react';
-import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react';
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { Icon } from '@iconify/react';
+import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function Sidebar() {
   );
 
   return (
-    <div className='sticky top-[calc(4rem+1px)] h-screen w-[200px] self-start border-r-1 border-default-50 px-4 pt-4'>
+    <div className='border-r-1 border-default-50 sticky top-[calc(4rem+1px)] h-screen w-[200px] self-start px-4 pt-4'>
       <Listbox
         aria-label='Listbox menu with sections'
         variant='shadow'

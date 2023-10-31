@@ -221,6 +221,15 @@ importers:
       '@esnext/eslint-config':
         specifier: ^1.0.0
         version: link:../tooling/eslint
+      '@esnext/prettier-config':
+        specifier: ^1.0.0
+        version: link:../tooling/prettier
+      '@esnext/stylelint-config':
+        specifier: ^1.0.0
+        version: link:../tooling/stylelint
+      '@esnext/tailwind-config':
+        specifier: ^1.0.0
+        version: link:../tooling/tailwind
       '@esnext/tsconfig':
         specifier: ^1.0.0
         version: link:../tooling/typescript
@@ -288,12 +297,94 @@ importers:
         specifier: ^4.6.0
         version: 4.6.0(eslint@8.52.0)
     devDependencies:
+      '@esnext/prettier-config':
+        specifier: ^1.0.0
+        version: link:../prettier
       '@esnext/tsconfig':
         specifier: ^1.0.0
         version: link:../typescript
       eslint:
         specifier: ^8.52.0
         version: 8.52.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  tooling/prettier:
+    devDependencies:
+      '@esnext/eslint-config':
+        specifier: ^1.0.0
+        version: link:../eslint
+      '@esnext/tsconfig':
+        specifier: ^1.0.0
+        version: link:../typescript
+      '@ianvs/prettier-plugin-sort-imports':
+        specifier: ^4.1.0
+        version: 4.1.1(prettier@3.0.3)
+      eslint:
+        specifier: ^8.52.0
+        version: 8.52.0
+      prettier:
+        specifier: ^3.0.3
+        version: 3.0.3
+      prettier-plugin-tailwindcss:
+        specifier: ^0.5.1
+        version: 0.5.6(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@3.0.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  tooling/stylelint:
+    devDependencies:
+      '@esnext/eslint-config':
+        specifier: ^1.0.0
+        version: link:../eslint
+      '@esnext/prettier-config':
+        specifier: ^1.0.0
+        version: link:../prettier
+      '@esnext/tsconfig':
+        specifier: ^1.0.0
+        version: link:../typescript
+      stylelint:
+        specifier: ^15.11.0
+        version: 15.11.0(typescript@5.2.2)
+      stylelint-config-recess-order:
+        specifier: ^4.3.0
+        version: 4.3.0(stylelint@15.11.0)
+      stylelint-config-standard:
+        specifier: ^34.0.0
+        version: 34.0.0(stylelint@15.11.0)
+      stylelint-order:
+        specifier: ^6.0.3
+        version: 6.0.3(stylelint@15.11.0)
+
+  tooling/tailwind:
+    dependencies:
+      autoprefixer:
+        specifier: ^10.4.14
+        version: 10.4.16(postcss@8.4.31)
+      postcss:
+        specifier: ^8.4.27
+        version: 8.4.31
+      tailwindcss:
+        specifier: 3.3.5
+        version: 3.3.5(ts-node@10.9.1)
+    devDependencies:
+      '@esnext/eslint-config':
+        specifier: ^1.0.0
+        version: link:../eslint
+      '@esnext/prettier-config':
+        specifier: ^1.0.0
+        version: link:../prettier
+      '@esnext/tsconfig':
+        specifier: ^1.0.0
+        version: link:../typescript
+      eslint:
+        specifier: ^8.52.0
+        version: 8.52.0
+      prettier:
+        specifier: ^3.0.3
+        version: 3.0.3
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -4350,7 +4441,6 @@ packages:
       picocolors: 1.0.0
       postcss: 8.4.31
       postcss-value-parser: 4.2.0
-    dev: true
 
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
@@ -5894,7 +5984,6 @@ packages:
 
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
-    dev: true
 
   /framer-motion@10.16.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-p9V9nGomS3m6/CALXqv6nFGMuFOxbWsmaOrdmhyQimMIlLl3LC7h7l86wge/Js/8cRu5ktutS/zlzgR7eBOtFA==}
@@ -7806,7 +7895,6 @@ packages:
   /normalize-range@0.1.2:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}

@@ -1,3 +1,4 @@
+import baseConfig from '@esnext/tailwind-config';
 import { nextui } from '@nextui-org/react';
 import { type Config } from 'tailwindcss';
 
@@ -9,6 +10,7 @@ export default {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     '../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
+  presets: [baseConfig],
   theme: {
     extend: {
       keyframes: {

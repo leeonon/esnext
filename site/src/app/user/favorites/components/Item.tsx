@@ -1,5 +1,6 @@
 import type { UserFavoritesItemType } from '~/types/api';
 
+import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import {
   Avatar,
@@ -13,7 +14,6 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 
 type FavoritesItemProps = {
   item: UserFavoritesItemType;
@@ -79,7 +79,7 @@ export default function FavoritesItem({
         </AvatarGroup>
       </CardBody>
       <CardFooter className='p-2'>
-        <p className='line-clamp-2 text-left font-sans text-small leading-4 text-default-400'>
+        <p className='text-small text-default-400 line-clamp-2 text-left font-sans leading-4'>
           {item.description ?? '-'}
         </p>
       </CardFooter>
