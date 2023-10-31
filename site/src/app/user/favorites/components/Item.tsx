@@ -1,5 +1,3 @@
-'use client';
-
 import type { UserFavoritesItemType } from '~/types/api';
 
 import { Icon } from '@iconify/react';
@@ -19,12 +17,20 @@ import {
 type FavoritesItemProps = {
   item: UserFavoritesItemType;
   onEdit: (item: UserFavoritesItemType) => void;
+  onRemove: (item: UserFavoritesItemType) => void;
 };
 
-export default function FavoritesItem({ item, onEdit }: FavoritesItemProps) {
+export default function FavoritesItem({
+  item,
+  onEdit,
+  onRemove,
+}: FavoritesItemProps) {
   const onAction = (key: React.Key) => {
     if (key === 'edit') {
       onEdit(item);
+    }
+    if (key === 'delete') {
+      onRemove(item);
     }
   };
   return (

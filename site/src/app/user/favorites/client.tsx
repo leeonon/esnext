@@ -5,8 +5,10 @@ import type { UserFavoritesItemType } from '~/types/api';
 import { Pagination, useDisclosure } from '@nextui-org/react';
 import { api } from '~/trpc/react';
 import { useCallback, useState } from 'react';
+import { toast } from 'sonner';
 import tw from 'twin.macro';
 
+import Confirm from '~/components/Confirm';
 import FavoritesModal from '~/components/FavoritesModal';
 
 import UserLayoutTitle from '../components/Title';
@@ -22,14 +24,21 @@ const Container = tw.div`
 const FavoritesList = ({
   list,
   onEdit,
+  onRemove,
 }: {
   list: UserFavoritesItemType[];
   onEdit: (item: UserFavoritesItemType) => void;
+  onRemove: (item: UserFavoritesItemType) => void;
 }) => {
   return (
     <>
       {list.map((_, index) => (
-        <FavoritesItem key={index} item={_} onEdit={onEdit} />
+        <FavoritesItem
+          key={index}
+          item={_}
+          onEdit={onEdit}
+          onRemove={onRemove}
+        />
       ))}
     </>
   );
@@ -54,6 +63,15 @@ export default function Client() {
       refetchOnWindowFocus: false,
     },
   );
+  const removeMutation = api.favorites.remove.useMutation({
+    onSuccess: () => {
+      toast.success('Delete successfully', { position: 'top-center' });
+      void refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message, { position: 'top-center' });
+    },
+  });
 
   const onSuccess = useCallback(() => {
     if (hasMore && !currentItem) {
@@ -70,6 +88,17 @@ export default function Client() {
       onOpen();
     },
     [onOpen],
+  );
+
+  const onRemove = useCallback(
+    (item: UserFavoritesItemType) => {
+      Confirm.open({
+        onOk: () => {
+          removeMutation.mutateAsync(item.id);
+        },
+      });
+    },
+    [removeMutation],
   );
 
   if (isLoading) {
@@ -102,7 +131,7 @@ export default function Client() {
       </UserLayoutTitle>
       <Container>
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-        <FavoritesList list={list} onEdit={onEdit} />
+        <FavoritesList list={list} onEdit={onEdit} onRemove={onRemove} />
       </Container>
       <div className='mt-11 flex justify-center'>
         <Pagination

@@ -1,4 +1,5 @@
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
 import {
   createFavoritesSchema,
@@ -46,5 +47,22 @@ export const favoritesRouter = createTRPCRouter({
           ...(input.description ? { description: input.description } : {}),
         },
       });
+    }),
+  remove: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      const result = await ctx.db.favorites.delete({
+        where: {
+          id: input,
+          userId,
+        },
+      });
+      if (!result) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Favorites not found',
+        });
+      }
     }),
 });

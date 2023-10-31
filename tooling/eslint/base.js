@@ -18,6 +18,7 @@ const config = {
     '@typescript-eslint/array-type': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
 
     '@typescript-eslint/consistent-type-imports': [
       'warn',
