@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
 
 type FavoritesItemProps = {
   item: UserFavoritesItemType;
@@ -25,6 +26,8 @@ export default function FavoritesItem({
   onEdit,
   onRemove,
 }: FavoritesItemProps) {
+  const router = useRouter();
+
   const onAction = (key: React.Key) => {
     if (key === 'edit') {
       onEdit(item);
@@ -33,14 +36,21 @@ export default function FavoritesItem({
       onRemove(item);
     }
   };
+
+  const onClick = () => {
+    alert('TODO: Navigate to favorites page');
+    router.push(`/user/favorites/${encodeURIComponent(item.name)}`);
+  };
+
   return (
     <Card
       className='h-[160px] max-w-[560px] cursor-pointer rounded-md'
-      isFooterBlurred
       isHoverable
+      isPressable
+      onPress={onClick}
     >
       <CardBody>
-        <div className='mb-4 flex items-center justify-between'>
+        <div className='mb-4 flex items-center justify-between overflow-hidden'>
           <div className='font-mono font-semibold'>{item.name}</div>
           <Dropdown>
             <DropdownTrigger>

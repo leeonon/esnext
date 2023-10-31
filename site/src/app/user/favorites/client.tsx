@@ -8,10 +8,10 @@ import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 import tw from 'twin.macro';
 
+import UserLayoutTitle from '~/app/user/components/Title';
 import Confirm from '~/components/Confirm';
 import FavoritesModal from '~/components/FavoritesModal';
 
-import UserLayoutTitle from '../components/Title';
 import FavoritesItem from './components/Item';
 import SkeletonItem from './components/Skeleton';
 

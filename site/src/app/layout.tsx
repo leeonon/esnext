@@ -1,5 +1,5 @@
 import { TRPCReactProvider } from '~/trpc/react';
-import { Inter } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import { headers } from 'next/headers';
 import { Toaster } from 'sonner';
 
@@ -9,9 +9,10 @@ import GlobalStyles from '~/styles/GlobalStyles';
 
 import { ESNextProviders } from './providers';
 
-const inter = Inter({
+const roboto = Roboto({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-sans',
+  variable: '--font-roboto',
 });
 
 export const metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-roboto ${roboto.variable}`}>
         <TRPCReactProvider headers={headers()}>
           <ESNextProviders>
             <Navbar />

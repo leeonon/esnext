@@ -65,4 +65,35 @@ export const favoritesRouter = createTRPCRouter({
         });
       }
     }),
+  detail: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    const userId = ctx.session.user.id;
+    const favorites = await ctx.db.favorites.findFirst({
+      where: {
+        name: input,
+        userId,
+      },
+      select: {
+        name: true,
+        description: true,
+        id: true,
+        projects: {
+          select: {
+            project: true,
+          },
+        },
+      },
+    });
+    if (!favorites) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Favorites not found',
+      });
+    }
+    return {
+      ...favorites,
+      projects: favorites.projects.map(
+        (projectInFavorite) => projectInFavorite.project,
+      ),
+    };
+  }),
 });

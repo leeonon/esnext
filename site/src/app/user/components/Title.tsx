@@ -2,7 +2,7 @@ export default function UserLayoutTitle({
   children,
   title,
 }: {
-  title: string;
+  title: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (

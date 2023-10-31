@@ -21,6 +21,10 @@ export default {
       animation: {
         fall: 'fall 3s ease infinite',
       },
+      fontFamily: {
+        roboto: ['var(--font-roboto)', 'sans-serif'],
+        mono: ['var(--font-roboto-mono)'],
+      },
     },
   },
   darkMode: 'class',
