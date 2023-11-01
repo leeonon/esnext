@@ -81,6 +81,9 @@ importers:
       cz-git:
         specifier: ^1.7.1
         version: 1.7.1
+      dotenv-cli:
+        specifier: ^7.3.0
+        version: 7.3.0
       eslint:
         specifier: ^8.52.0
         version: 8.52.0
@@ -127,6 +130,31 @@ importers:
         specifier: ^0.34.6
         version: 0.34.6(@vitest/ui@0.34.6)(jsdom@22.1.0)
 
+  packages/env:
+    dependencies:
+      '@t3-oss/env-nextjs':
+        specifier: ^0.6.0
+        version: 0.6.1(typescript@5.2.2)(zod@3.22.4)
+      zod:
+        specifier: ^3.21.4
+        version: 3.22.4
+    devDependencies:
+      '@esnext/eslint-config':
+        specifier: ^1.0.0
+        version: link:../../tooling/eslint
+      '@esnext/prettier-config':
+        specifier: ^1.0.0
+        version: link:../../tooling/prettier
+      '@esnext/tsconfig':
+        specifier: ^1.0.0
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: ^8.52.0
+        version: 8.52.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
   packages/sender: {}
 
   packages/tasks: {}
@@ -148,9 +176,6 @@ importers:
       '@next-auth/prisma-adapter':
         specifier: ^1.0.7
         version: 1.0.7(@prisma/client@5.3.1)(next-auth@4.24.4)
-      '@t3-oss/env-nextjs':
-        specifier: ^0.6.0
-        version: 0.6.1(typescript@5.2.2)(zod@3.22.4)
       '@tanstack/react-query':
         specifier: ^4.32.6
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
@@ -218,6 +243,9 @@ importers:
       '@emotion/babel-plugin':
         specifier: ^11.11.0
         version: 11.11.0
+      '@esnext/env':
+        specifier: workspace:^
+        version: link:../packages/env
       '@esnext/eslint-config':
         specifier: ^1.0.0
         version: link:../tooling/eslint
@@ -5262,6 +5290,26 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       is-obj: 2.0.0
+    dev: true
+
+  /dotenv-cli@7.3.0:
+    resolution: {integrity: sha512-314CA4TyK34YEJ6ntBf80eUY+t1XaFLyem1k9P0sX1gn30qThZ5qZr/ZwE318gEnzyYP9yj9HJk6SqwE0upkfw==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      dotenv: 16.3.1
+      dotenv-expand: 10.0.0
+      minimist: 1.2.8
+    dev: true
+
+  /dotenv-expand@10.0.0:
+    resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
+    engines: {node: '>=12'}
+    dev: true
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /eastasianwidth@0.2.0:

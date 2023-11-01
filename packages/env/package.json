@@ -1,0 +1,27 @@
+{
+  "name": "@esnext/env",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "types": "index.d.ts",
+  "author": "LeeOnOn",
+  "license": "ISC",
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.6.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@esnext/tsconfig": "^1.0.0",
+    "@esnext/prettier-config": "^1.0.0",
+    "@esnext/eslint-config": "^1.0.0",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@esnext/eslint-config/base"
+    ]
+  },
+  "prettier": "@esnext/prettier-config"
+}

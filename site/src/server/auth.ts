@@ -1,10 +1,10 @@
 import type { DefaultSession, NextAuthOptions } from 'next-auth';
 
+import { env } from '@esnext/env';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { getServerSession } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 
-import { env } from '~/env.mjs';
 import { db } from '~/server/db';
 
 /**
