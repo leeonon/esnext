@@ -7,14 +7,14 @@
  * need to use are documented accordingly near the end.
  */
 
+import { type NextRequest } from 'next/server';
+import { db } from '@esnext/db';
 import { initTRPC, TRPCError } from '@trpc/server';
 import { type Session } from 'next-auth';
-import { type NextRequest } from 'next/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 
 import { getServerAuthSession } from '~/server/auth';
-import { db } from '~/server/db';
 
 /**
  * 1. CONTEXT

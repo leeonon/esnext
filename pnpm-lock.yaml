@@ -11,9 +11,6 @@ importers:
       '@nextui-org/react':
         specifier: 0.0.0-dev-v2-20231016135001
         version: 0.0.0-dev-v2-20231016135001(@types/react@18.2.33)(framer-motion@10.16.4)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.5)
-      '@prisma/client':
-        specifier: 5.3.1
-        version: 5.3.1(prisma@5.5.2)
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
@@ -105,9 +102,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.5.1
         version: 0.5.6(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@3.0.3)
-      prisma:
-        specifier: ^5.1.1
-        version: 5.5.2
       stylelint:
         specifier: ^15.11.0
         version: 15.11.0(typescript@5.2.2)
@@ -129,6 +123,34 @@ importers:
       vitest:
         specifier: ^0.34.6
         version: 0.34.6(@vitest/ui@0.34.6)(jsdom@22.1.0)
+
+  packages/db:
+    dependencies:
+      '@prisma/client':
+        specifier: 5.3.1
+        version: 5.3.1(prisma@5.5.2)
+      prisma:
+        specifier: ^5.1.1
+        version: 5.5.2
+    devDependencies:
+      '@esnext/env':
+        specifier: workspace:^
+        version: link:../env
+      '@esnext/eslint-config':
+        specifier: workspace:^
+        version: link:../../tooling/eslint
+      '@esnext/prettier-config':
+        specifier: workspace:^1.0.0
+        version: link:../../tooling/prettier
+      '@esnext/tsconfig':
+        specifier: workspace:^
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: ^8.52.0
+        version: 8.52.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
 
   packages/env:
     dependencies:
@@ -170,6 +192,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.33)(react@18.2.0)
+      '@esnext/db':
+        specifier: workspace:^
+        version: link:../packages/db
       '@iconify/react':
         specifier: ^4.1.1
         version: 4.1.1(react@18.2.0)
@@ -2675,6 +2700,7 @@ packages:
   /@prisma/engines@5.5.2:
     resolution: {integrity: sha512-Be5hoNF8k+lkB3uEMiCHbhbfF6aj1GnrTBnn5iYFT7GEr3TsOEp1soviEcBR0tYCgHbxjcIxJMhdbvxALJhAqg==}
     requiresBuild: true
+    dev: false
 
   /@react-aria/button@3.8.4(react@18.2.0):
     resolution: {integrity: sha512-rTGZk5zu+lQNjfij2fwnw2PAgBgzNLi3zbMw1FL5/XwVx+lEH2toeqKLoqULtd7nSxskYuQz56VhmjUok6Qkmg==}
@@ -8466,6 +8492,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.5.2
+    dev: false
 
   /prismjs@1.27.0:
     resolution: {integrity: sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==}

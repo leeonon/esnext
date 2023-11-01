@@ -1,0 +1,37 @@
+{
+  "name": "@esnext/db",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "push": "pnpm with-env prisma db push",
+    "migrate": "prisma migrate dev --create-only",
+    "migrate:apply": "prisma migrate dev",
+    "generate": "prisma generate",
+    "format": "prisma format"
+  },
+  "author": "LeeOnOn",
+  "license": "ISC",
+  "dependencies": {
+    "prisma": "^5.1.1",
+    "@prisma/client": "5.3.1"
+  },
+  "devDependencies": {
+    "@esnext/env": "workspace:^",
+    "@esnext/eslint-config": "workspace:^",
+    "@esnext/prettier-config": "workspace:^1.0.0",
+    "@esnext/tsconfig": "workspace:^",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@esnext/eslint-config/base"
+    ]
+  },
+  "prettier": "@esnext/prettier-config",
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  }
+}

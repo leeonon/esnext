@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { db } from '~/server/db';
+import { db } from '@esnext/db';
 
 interface Project {
   id: number;
