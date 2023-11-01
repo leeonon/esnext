@@ -1,6 +1,6 @@
 'use client';
 
-import type { ProjectDetailType } from '~/types/api';
+import type { ProjectDetailType } from '@esnext/server';
 
 import { createContext, useContext } from 'react';
 

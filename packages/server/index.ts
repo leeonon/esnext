@@ -1,5 +1,5 @@
-export type { AppRouter } from './src/api/root';
-export { appRouter as appRouter } from './src/api/root';
+export type * from './src/types';
 
-export * from '~/auth';
-export { createTRPCContext } from '~/api/trpc';
+export * from './src/auth';
+export * from './src/api/root';
+export * from './src/api/trpc';

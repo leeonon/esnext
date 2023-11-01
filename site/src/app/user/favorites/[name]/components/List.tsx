@@ -1,6 +1,6 @@
 'use client';
 
-import type { ProjectItemType } from '~/types/api';
+import type { ProjectItemType } from '@esnext/server';
 
 import ProjectBox from '~/components/ProjectBox';
 

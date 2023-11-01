@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 'use client';
 
+import type { UserFavoritesItemType } from '@esnext/server';
 import type { useDisclosure } from '@nextui-org/react';
-import type { UserFavoritesItemType } from '~/types/api';
 import type { FC } from 'react';
 
+import { isValidElement, memo, useEffect, useState } from 'react';
 import {
   Button,
   Checkbox,
@@ -15,11 +17,10 @@ import {
   ModalHeader,
   Textarea,
 } from '@nextui-org/react';
-import { api } from '~/trpc/react';
-import { isValidElement, memo, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { useImmer } from '~/hooks/useImmer';
+import { api } from '~/trpc/react';
 
 type UseDisclosureReturn = ReturnType<typeof useDisclosure>;
 
@@ -149,7 +150,6 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
               </ModalHeader>
               <ModalBody>
                 <Input
-                  autoFocus
                   name='name'
                   value={params.name}
                   isInvalid={!!params.name && params.name?.length > 30}

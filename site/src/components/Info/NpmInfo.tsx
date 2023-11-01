@@ -1,4 +1,4 @@
-import type { ProjectDetailType } from '~/types/api';
+import type { ProjectDetailType } from '@esnext/server';
 import type { FC } from 'react';
 
 import { Icon } from '@iconify/react';

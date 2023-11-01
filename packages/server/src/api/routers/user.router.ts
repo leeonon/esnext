@@ -1,5 +1,5 @@
-import { createTRPCRouter, protectedProcedure } from '~/api/trpc';
-import { queryUserFavoritesPageInputSchema } from '~/schema/user.schema';
+import { queryUserFavoritesPageInputSchema } from '../../schema/user.schema';
+import { createTRPCRouter, protectedProcedure } from '../trpc';
 
 export const userRouter = createTRPCRouter({
   userInfo: protectedProcedure.query(async ({ ctx }) => {

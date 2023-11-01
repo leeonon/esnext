@@ -1,6 +1,6 @@
 'use client';
 
-import type { UserFavoritesItemType } from '~/types/api';
+import type { UserFavoritesItemType } from '@esnext/server';
 
 import { useCallback, useState } from 'react';
 import { Pagination, useDisclosure } from '@nextui-org/react';

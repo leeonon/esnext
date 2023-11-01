@@ -1,6 +1,6 @@
+import NextImage from 'next/image';
 import { Icon } from '@iconify/react';
 import { Button, Image } from '@nextui-org/react';
-import NextImage from 'next/image';
 
 import { useProjectInfoContext } from '~/app/info/[name]/context';
 import CollectionButton from '~/components/Info/Favorites';
@@ -13,10 +13,10 @@ export default function ProjectBaseInfo() {
   }
 
   return (
-    <div className='flex items-center justify-between border-b-1 border-default-50 pb-3'>
+    <div className='border-b-1 border-default-50 flex items-center justify-between pb-3'>
       <div className='flex flex-col'>
         <div className='flex items-center gap-4'>
-          <div className='overflow-hidden rounded-sm shadow-[0_1px_4px_0px] shadow-default-100'>
+          <div className='shadow-default-100 overflow-hidden rounded-sm shadow-[0_1px_4px_0px]'>
             <Image
               as={NextImage}
               isBlurred
@@ -33,27 +33,27 @@ export default function ProjectBaseInfo() {
             <div className='text-default-500'>{project.fullName}</div>
             <div className='mt-auto flex gap-2'>
               <div>
-                <span className='mr-1 text-sm font-bold text-default-600'>
+                <span className='text-default-600 mr-1 text-sm font-bold'>
                   {project.stars}K
                 </span>
-                <span className='text-xs text-default-400'>Star</span>
+                <span className='text-default-400 text-xs'>Star</span>
               </div>
               <div>
-                <span className='mr-1 text-sm font-bold text-default-600'>
+                <span className='text-default-600 mr-1 text-sm font-bold'>
                   124k
                 </span>
-                <span className='text-xs text-default-400'>Download/week</span>
+                <span className='text-default-400 text-xs'>Download/week</span>
               </div>
               <div>
-                <span className='mr-1 text-sm font-bold text-default-600'>
+                <span className='text-default-600 mr-1 text-sm font-bold'>
                   89
                 </span>
-                <span className='text-xs text-default-400'>Contributors</span>
+                <span className='text-default-400 text-xs'>Contributors</span>
               </div>
             </div>
           </div>
         </div>
-        <div className='pt-2 text-sm text-default-500'>
+        <div className='text-default-500 pt-2 text-sm'>
           {project.description}
         </div>
       </div>

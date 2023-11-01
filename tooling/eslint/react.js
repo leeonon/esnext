@@ -7,6 +7,8 @@ const config = {
   ],
   rules: {
     'react/prop-types': 'off',
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md
+    'react/no-unknown-property': ['error', { ignore: ['css', 'tw'] }],
     'jsx-a11y/no-static-element-interactions': 'off',
   },
   globals: {

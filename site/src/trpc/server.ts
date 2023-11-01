@@ -1,11 +1,10 @@
 import { headers } from 'next/headers';
+import { type AppRouter } from '@esnext/server';
 import {
   createTRPCProxyClient,
   loggerLink,
   unstable_httpBatchStreamLink,
 } from '@trpc/client';
-
-import { type AppRouter } from '~/api/root';
 
 import { getUrl, transformer } from './shared';
 

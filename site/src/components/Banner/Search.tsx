@@ -5,7 +5,7 @@ import { Input, Kbd } from '@nextui-org/react';
 
 export default function Search() {
   return (
-    <div className='mt-8 flex w-4/5 items-center overflow-hidden rounded-full border-1 border-solid border-default-100'>
+    <div className='border-1 border-default-100 mt-8 flex w-4/5 items-center overflow-hidden rounded-full border-solid'>
       <Input
         placeholder='Try searching for what you want'
         radius='none'

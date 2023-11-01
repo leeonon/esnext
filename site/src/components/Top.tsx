@@ -1,7 +1,7 @@
 'use client';
 
-import { Icon } from '@iconify/react';
 import { useEffect, useState } from 'react';
+import { Icon } from '@iconify/react';
 
 export type TopProps = {
   target?: HTMLDivElement | null;
@@ -32,9 +32,10 @@ export default function Top(props: TopProps) {
   if (!visible) return null;
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       onClick={onClick}
-      className='fixed bottom-12 right-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-default-100 transition-all hover:bg-default-300'
+      className='bg-default-100 hover:bg-default-300 fixed bottom-12 right-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-all'
     >
       <Icon icon='radix-icons:pin-top' fontSize={20} />
     </div>

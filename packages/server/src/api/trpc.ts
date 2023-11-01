@@ -14,7 +14,7 @@ import { type Session } from 'next-auth';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 
-import { getServerAuthSession } from '~/auth';
+import { getServerAuthSession } from '../auth';
 
 /**
  * 1. CONTEXT

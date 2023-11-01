@@ -1,5 +1,7 @@
 'use client';
 
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { redirect } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import {
   Button,
@@ -11,13 +13,11 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
-import { api } from '~/trpc/react';
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { redirect } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { useProjectInfoContext } from '~/app/info/[name]/context';
 import FavoritesModal from '~/components/FavoritesModal';
+import { api } from '~/trpc/react';
 
 import FavoritesItem from './FavoritesItem';
 

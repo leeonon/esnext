@@ -1,10 +1,10 @@
 'use client';
 
-import type { UserFavoritesItemType } from '~/types/api';
+import type { UserFavoritesItemType } from '@esnext/server';
 import type { FC } from 'react';
 
-import { Avatar, AvatarGroup, Checkbox } from '@nextui-org/react';
 import { memo } from 'react';
+import { Avatar, AvatarGroup, Checkbox } from '@nextui-org/react';
 
 export interface FavoritesItemProps {
   item: UserFavoritesItemType;
@@ -20,14 +20,15 @@ const FavoritesItem: FC<FavoritesItemProps> = ({
   const handleCheck = () => onCheck(item.id);
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      className='flex cursor-pointer items-center justify-between rounded-md border-1 border-default-300 p-3 transition-transform-colors hover:bg-default-200'
+      className='border-1 border-default-300 transition-transform-colors hover:bg-default-200 flex cursor-pointer items-center justify-between rounded-md p-3'
       onClick={handleCheck}
     >
       <div className='flex flex-col gap-1'>
         <div className='font-bold'>{item.name}</div>
         {item.description && (
-          <div className='text-xs text-default-400'>{item.description}</div>
+          <div className='text-default-400 text-xs'>{item.description}</div>
         )}
         <AvatarGroup
           size='sm'

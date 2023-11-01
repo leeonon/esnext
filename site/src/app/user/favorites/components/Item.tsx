@@ -1,4 +1,4 @@
-import type { UserFavoritesItemType } from '~/types/api';
+import type { UserFavoritesItemType } from '@esnext/server';
 
 import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';

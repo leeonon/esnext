@@ -3,6 +3,7 @@
 import type { FC } from 'react';
 import type { Root } from 'react-dom/client';
 
+import { useCallback } from 'react';
 import {
   Button,
   Modal,
@@ -12,7 +13,6 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
-import { useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 
 type ConfirmStatic = {

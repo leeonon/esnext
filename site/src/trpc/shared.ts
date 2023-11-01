@@ -1,7 +1,6 @@
+import { type AppRouter } from '@esnext/server';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
 import superjson from 'superjson';
-
-import { type AppRouter } from '~/api/root';
 
 export const transformer = superjson;
 

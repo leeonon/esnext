@@ -23,12 +23,12 @@ export default function Footer() {
           Request new project
         </Button>
       </div>
-      <div className='flex w-full flex-col items-center bg-default-50 px-8 sm:px-16'>
-        <div className='mb-5 flex w-full max-w-screen-lg flex-1 flex-col-reverse  flex-wrap items-start border-b-1 border-default-200 py-8 sm:flex-row sm:flex-nowrap'>
+      <div className='bg-default-50 flex w-full flex-col items-center px-8 sm:px-16'>
+        <div className='border-b-1 border-default-200 mb-5 flex w-full max-w-screen-lg  flex-1 flex-col-reverse flex-wrap items-start py-8 sm:flex-row sm:flex-nowrap'>
           <div className='flex w-full align-baseline sm:w-2/3'>
             <div className='flex w-1/2 flex-col justify-center'>
-              <p className='font-medium text-default-600'>Navigation</p>
-              <ul className='flex flex-col justify-center gap-2 text-sm text-default-500 '>
+              <p className='text-default-600 font-medium'>Navigation</p>
+              <ul className='text-default-500 flex flex-col justify-center gap-2 text-sm '>
                 <li>Blog</li>
                 <li>Github</li>
                 <li>About</li>
@@ -40,8 +40,8 @@ export default function Footer() {
               </ul>
             </div>
             <div className='flex w-1/2 flex-col justify-center'>
-              <p className='font-medium text-default-600'>Navigation</p>
-              <ul className='flex flex-col justify-center gap-2 text-sm text-default-500'>
+              <p className='text-default-600 font-medium'>Navigation</p>
+              <ul className='text-default-500 flex flex-col justify-center gap-2 text-sm'>
                 <li>Blog</li>
                 <li>Github</li>
                 <li>About</li>
@@ -73,7 +73,7 @@ export default function Footer() {
           </div>
         </div>
         <p className='text-default-600'>Create by Leeonon</p>
-        <p className='pb-5 text-default-600'>©2023 ESNext</p>
+        <p className='text-default-600 pb-5'>©2023 ESNext</p>
       </div>
     </div>
   );

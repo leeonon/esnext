@@ -1,8 +1,8 @@
-import { exampleRouter } from '~/api/routers/example';
-import { favoritesRouter } from '~/api/routers/favorites.router';
-import { projectRouter } from '~/api/routers/project.router';
-import { userRouter } from '~/api/routers/user.router';
-import { createTRPCRouter } from '~/api/trpc';
+import { exampleRouter } from './routers/example';
+import { favoritesRouter } from './routers/favorites.router';
+import { projectRouter } from './routers/project.router';
+import { userRouter } from './routers/user.router';
+import { createTRPCRouter } from './trpc';
 
 /**
  * This is the primary router for your server.

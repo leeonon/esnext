@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 'use client';
 
-import type { ProjectItemType } from '~/types/api';
+import type { ProjectItemType } from '@esnext/server';
 
-import { Icon } from '@iconify/react';
 import { useRouter } from 'next/navigation';
+import { Icon } from '@iconify/react';
 
 import ProjectBox from '~/components/ProjectBox';
 
@@ -27,7 +28,7 @@ export default function Popular(props: PopularProps) {
         ))}
       </div>
       <div
-        className='mt-4 flex cursor-pointer items-center justify-center rounded bg-default-50 py-2 transition-background hover:bg-default-100'
+        className='bg-default-50 transition-background hover:bg-default-100 mt-4 flex cursor-pointer items-center justify-center rounded py-2'
         onClick={() => router.push('/projects')}
       >
         <span>View All</span>
