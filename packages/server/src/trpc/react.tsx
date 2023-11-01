@@ -1,11 +1,11 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createTRPCReact } from '@trpc/react-query';
 import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client';
+import { createTRPCReact } from '@trpc/react-query';
 
-import { type AppRouter } from '~/server/api/root';
+import { type AppRouter } from '~/api/root';
 
 import { getUrl, transformer } from './shared';
 

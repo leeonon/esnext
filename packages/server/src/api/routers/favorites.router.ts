@@ -1,11 +1,11 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
+import { createTRPCRouter, protectedProcedure } from '~/api/trpc';
 import {
   createFavoritesSchema,
   updateFavoritesSchema,
 } from '~/schema/collection.schema';
-import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 
 export const favoritesRouter = createTRPCRouter({
   create: protectedProcedure

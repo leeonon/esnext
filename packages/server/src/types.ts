@@ -1,4 +1,4 @@
-import type { AppRouter } from '@esnext/server/src/api/root';
+import type { AppRouter } from './root';
 import type { inferRouterOutputs } from '@trpc/server';
 
 type RouterOutput = inferRouterOutputs<AppRouter>;

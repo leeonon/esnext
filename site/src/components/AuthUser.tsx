@@ -1,6 +1,8 @@
 'use client';
 
 // https://juejin.cn/post/7155514465591984136#heading-14
+import React, { useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import {
   Avatar,
@@ -11,10 +13,9 @@ import {
   DropdownTrigger,
   NavbarItem,
 } from '@nextui-org/react';
-import { api } from '~/trpc/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import React, { useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+
+import { api } from '~/trpc/react';
 
 export default function AuthUser() {
   const { data: sessionData } = useSession();

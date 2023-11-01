@@ -2,14 +2,14 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import {
-  CollectionProjectSchema,
-  QueryProjectListSchema,
-} from '~/schema/project.schema';
-import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-} from '~/server/api/trpc';
+} from '~/api/trpc';
+import {
+  CollectionProjectSchema,
+  QueryProjectListSchema,
+} from '~/schema/project.schema';
 
 /**
  * TRPC router for project-related API endpoints.

@@ -179,6 +179,58 @@ importers:
 
   packages/sender: {}
 
+  packages/server:
+    dependencies:
+      '@next-auth/prisma-adapter':
+        specifier: ^1.0.7
+        version: 1.0.7(@prisma/client@5.3.1)(next-auth@4.24.4)
+      '@tanstack/react-query':
+        specifier: ^4.32.6
+        version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/client':
+        specifier: ^10.37.1
+        version: 10.43.0(@trpc/server@10.43.0)
+      '@trpc/react-query':
+        specifier: ^10.37.1
+        version: 10.43.0(@tanstack/react-query@4.36.1)(@trpc/client@10.43.0)(@trpc/server@10.43.0)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/server':
+        specifier: ^10.37.1
+        version: 10.43.0
+      next:
+        specifier: ^13.5.6
+        version: 13.5.6(@babel/core@7.23.2)(babel-plugin-macros@3.1.0)(react-dom@18.2.0)(react@18.2.0)
+      next-auth:
+        specifier: ^4.23.0
+        version: 4.24.4(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+      superjson:
+        specifier: ^1.13.1
+        version: 1.13.3
+      zod:
+        specifier: ^3.21.4
+        version: 3.22.4
+    devDependencies:
+      '@esnext/db':
+        specifier: workspace:^
+        version: link:../db
+      '@esnext/env':
+        specifier: workspace:^
+        version: link:../env
+      '@esnext/eslint-config':
+        specifier: workspace:^
+        version: link:../../tooling/eslint
+      '@esnext/prettier-config':
+        specifier: workspace:^1.0.0
+        version: link:../../tooling/prettier
+      '@esnext/tsconfig':
+        specifier: workspace:^
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: ^8.52.0
+        version: 8.52.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
   packages/tasks: {}
 
   site:
@@ -195,6 +247,9 @@ importers:
       '@esnext/db':
         specifier: workspace:^
         version: link:../packages/db
+      '@esnext/server':
+        specifier: workspace:^
+        version: link:../packages/server
       '@iconify/react':
         specifier: ^4.1.1
         version: 4.1.1(react@18.2.0)

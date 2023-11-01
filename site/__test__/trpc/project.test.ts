@@ -1,10 +1,9 @@
-import type { AppRouter } from '~/server/api/root';
+import type { AppRouter } from '@esnext/server/src/api/root';
 
+import { appRouter } from '@esnext/server/src/api/root';
+import { createInnerTRPCContext } from '@esnext/server/src/api/trpc';
 import { type inferProcedureInput } from '@trpc/server';
 import { expect, test } from 'vitest';
-
-import { appRouter } from '~/server/api/root';
-import { createInnerTRPCContext } from '~/server/api/trpc';
 
 test('example router', async () => {
   const ctx = await createInnerTRPCContext({
