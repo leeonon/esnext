@@ -23,7 +23,17 @@ const config = withTwin({
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'lee-oss-1300118632.cos.ap-nanjing.myqcloud.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.website-files.com',
         port: '',
         pathname: '/**',
       },

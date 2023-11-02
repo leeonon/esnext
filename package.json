@@ -1,8 +1,7 @@
 {
   "name": "esnext",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "ESNext.dev of monorepo",
   "engines": {
     "node": ">=18.18.2",
     "pnpm": ">=8.6.0"

@@ -1,0 +1,13 @@
+{
+  "extends": "@esnext/tsconfig/base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+  },
+  "outDir": "./dist",
+  "include": [
+    "./src/**/*",
+    "./**/*.js",
+    "./**/*.mjs",
+  ],
+  "exclude": ["node_modules"]
+}

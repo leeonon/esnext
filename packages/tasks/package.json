@@ -1,12 +1,32 @@
 {
   "name": "@esnext/tasks",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "with-env": "dotenv -e ../.env --",
+    "dev": "pnpm with-env ts-node ./src/index.ts",
+    "build": "tsc",
+    "start": "pnpm with-env pm2 start ecosystem.config.js",
+    "deploy": "pnpm with-env pnpm run build && pnpm run start"
   },
-  "keywords": [],
-  "author": "yang",
+  "dependencies": {},
+  "devDependencies": {
+    "@esnext/env": "workspace:^",
+    "@esnext/eslint-config": "workspace:^",
+    "@esnext/prettier-config": "workspace:^1.0.0",
+    "@esnext/tsconfig": "workspace:^",
+    "@esnext/db": "workspace:^",
+    "ts-node": "^10.9.1",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@esnext/eslint-config/base"
+    ]
+  },
+  "prettier": "@esnext/prettier-config",
+  "author": "LeeOnOn",
   "license": "ISC"
 }
