@@ -1,18 +1,17 @@
-import { Roboto } from 'next/font/google';
+import { Inter as FontSans } from 'next/font/google';
 import { headers } from 'next/headers';
 import { Toaster } from 'sonner';
 
 import Footer from '~/components/Footer';
-import Navbar from '~/components/Navbar';
+import MainNavbar from '~/components/MainNavbar';
 import GlobalStyles from '~/styles/GlobalStyles';
 import { TRPCReactProvider } from '~/trpc/react';
 
 import { ESNextProviders } from './providers';
 
-const roboto = Roboto({
-  weight: '400',
+const fontSans = FontSans({
   subsets: ['latin'],
-  variable: '--font-roboto',
+  variable: '--font-sans',
 });
 
 export const metadata = {
@@ -28,10 +27,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`font-roboto ${roboto.variable}`}>
+      <body className={`font-sans ${fontSans.variable}`}>
         <TRPCReactProvider headers={headers()}>
           <ESNextProviders>
-            <Navbar />
+            <MainNavbar />
             <div className='mx-auto w-full'>{children}</div>
             <Footer />
             <Toaster />
