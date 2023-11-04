@@ -19,6 +19,7 @@ const config = {
     '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/prefer-nullish-coalescing': 'off',
 
     '@typescript-eslint/consistent-type-imports': [
       'warn',
