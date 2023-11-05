@@ -35,7 +35,7 @@ export default function Top(props: TopProps) {
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       onClick={onClick}
-      className='bg-default-100 hover:bg-default-300 fixed bottom-12 right-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-all'
+      className='bg-accent hover:bg-accent fixed bottom-12 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-all'
     >
       <Icon icon='radix-icons:pin-top' fontSize={20} />
     </div>

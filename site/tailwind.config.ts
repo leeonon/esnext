@@ -57,7 +57,6 @@ module.exports = {
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
-          hover: 'hsl(var(--card) / 60%)',
           foreground: 'hsl(var(--card-foreground))',
         },
       },

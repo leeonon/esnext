@@ -29,14 +29,12 @@ export default function ProjectPage() {
 
   return (
     <>
-      <div>
-        <div className='relative flex'>
-          <Sidebar onChangeParams={onChangeParams} />
-          <div className='m-auto flex flex-1 flex-col overflow-hidden px-8'>
-            <Tags onChangeParams={onChangeParams} />
-            <SortFilter onChangeParams={onChangeParams} />
-            <ProjectList />
-          </div>
+      <div className='relative flex'>
+        <Sidebar onChangeParams={onChangeParams} />
+        <div className='m-auto flex flex-1 flex-col overflow-hidden px-8'>
+          <Tags onChangeParams={onChangeParams} />
+          <SortFilter onChangeParams={onChangeParams} />
+          <ProjectList />
         </div>
       </div>
       <Top />

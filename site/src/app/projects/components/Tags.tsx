@@ -1,11 +1,10 @@
-'use client';
-
 import type { FC, PropsWithChildren } from 'react';
 
 import { useMemo, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { cn } from '@nextui-org/react';
 
+import { Card } from '~/components/ui/card';
+import { Toggle } from '~/components/ui/toggle';
 import { tags } from '~/constant/tags';
 
 export type OnChangeParams = (
@@ -39,28 +38,28 @@ const Tag: FC<TagProps> = ({ children, value, onChangeParams }) => {
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
-      className={cn(
-        'min-w-unset transition-transform-colors hover:bg-default/40 relative cursor-pointer rounded-lg px-3 py-2 text-xs',
-        isActive && 'bg-default/40',
-      )}
+    <Toggle
+      variant='outline'
+      size='sm'
+      pressed={isActive}
+      aria-label='Toggle italic'
+      className='min-w-unset text-xs'
       onClick={onClick}
     >
       {children}
-    </div>
+    </Toggle>
   );
 };
 
-export default function Tags({
-  onChangeParams,
-}: {
-  onChangeParams: OnChangeParams;
-}) {
+export interface TagsProps {
+  onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
+}
+
+export default function Tags({ onChangeParams }: TagsProps) {
   const listRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className='bg-default-50 my-4 flex w-full items-center rounded-md py-4'>
+    <Card className='bg-default-50 my-4 flex w-full items-center rounded-md py-4'>
       <div className='relative ml-4 flex w-full items-center justify-between overflow-hidden'>
         <div
           className='scrollbar-none flex w-full flex-1 flex-wrap justify-start gap-2 px-3'
@@ -73,6 +72,6 @@ export default function Tags({
           ))}
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

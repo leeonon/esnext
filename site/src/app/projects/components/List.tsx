@@ -1,10 +1,26 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
-import { cn, Spinner } from '@nextui-org/react';
+import type { ProjectItemType } from '@esnext/server';
 
-import ProjectBox from '~/components/ProjectBox';
+import { useEffect, useMemo, useRef } from 'react';
+import { Icon } from '@iconify/react';
+
+import ProjectBox, { ProjectSkeleton } from '~/components/ProjectBox';
+import { Button } from '~/components/ui/button';
 import { api } from '~/trpc/react';
+
+const listClass =
+  'grid h-fit grid-cols-3 gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1';
+
+export const List = ({ list }: { list: ProjectItemType[] }) => {
+  return list.map((project) => <ProjectBox key={project.id} item={project} />);
+};
+
+export const SkeletonList = () => {
+  return Array.from({ length: 10 }).map((_, index) => (
+    <ProjectSkeleton key={index} />
+  ));
+};
 
 export default function Project() {
   const loadingRef = useRef<HTMLDivElement>(null);
@@ -40,29 +56,26 @@ export default function Project() {
     return pages.flatMap((page) => page.list);
   }, [pages]);
 
-  const listElement = useMemo(() => {
-    return currentList.map((project, index) => (
-      <ProjectBox
-        key={project.id}
-        item={project}
-        cover={
-          index % 4 === 0
-            ? 'https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202309252111915.png'
-            : undefined
-        }
-        className={cn(index % 4 === 0 ? 'row-span-2' : 'h-[160px]')}
-      />
-    ));
-  }, [currentList]);
-
   return (
     <div>
-      <div className='grid h-fit grid-cols-3 grid-rows-[160px] gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1'>
-        {listElement}
+      <div className={listClass}>
+        <List list={currentList} />
       </div>
-      {hasNextPage ? (
-        <Spinner ref={loadingRef} className='mx-auto my-8 flex w-fit' />
+      {hasNextPage || isLoading ? (
+        <div ref={loadingRef} className={listClass}>
+          <SkeletonList />
+        </div>
       ) : null}
+      <div className='mt-16 flex h-60 flex-col items-center'>
+        <Icon
+          icon='material-symbols:auto-awesome-rounded'
+          className='text-4xl text-yellow-300'
+        />
+        <p className='mb-4'>
+          Can&apos;t find the project you&apos;re looking for?
+        </p>
+        <Button>Request new project</Button>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,15 @@
 import { memo, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Icon } from '@iconify/react';
-import { Select, SelectItem } from '@nextui-org/react';
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
 
 const SortFilter = ({
   onChangeParams,
@@ -14,35 +22,27 @@ const SortFilter = ({
     return params.get('sort') ?? 'stars';
   }, [searchParams]);
 
-  const onChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback(
-    (e) => {
-      onChangeParams('sort', e.target.value);
+  const onChange = useCallback(
+    (key: string) => {
+      onChangeParams('sort', key);
     },
     [onChangeParams],
   );
 
   return (
     <div className='mb-4 flex justify-end'>
-      <Select
-        label='Filter'
-        placeholder='Select an item'
-        className='w-60 max-w-none'
-        size='sm'
-        radius='sm'
-        onChange={onChange}
-        defaultSelectedKeys={['stars']}
-        selectedKeys={[selectedKeys]}
-        startContent={<Icon icon='tabler:filter' />}
-      >
-        <SelectItem key='latest' textValue='Latest'>
-          Latest
-        </SelectItem>
-        <SelectItem key='stars' textValue='Stars'>
-          Most stars
-        </SelectItem>
-        <SelectItem key='download' textValue='Download'>
-          Most Downloaded
-        </SelectItem>
+      <Select onValueChange={onChange} value={selectedKeys}>
+        <SelectTrigger className='w-[180px]'>
+          <SelectValue placeholder='Select a fruit' />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Fruits</SelectLabel>
+            <SelectItem value='latest'>Latest</SelectItem>
+            <SelectItem value='stars'>Most stars</SelectItem>
+            <SelectItem value='download'>Most Downloaded</SelectItem>
+          </SelectGroup>
+        </SelectContent>
       </Select>
     </div>
   );

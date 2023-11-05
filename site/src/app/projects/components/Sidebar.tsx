@@ -4,9 +4,9 @@ import type { FC, PropsWithChildren } from 'react';
 
 import { memo } from 'react';
 import { Icon } from '@iconify/react';
-import { cn } from '@nextui-org/react';
 
 import { category } from '~/constant/category';
+import { cn } from '~/lib/utils';
 
 export type onChangeParams = (name: string, value: string) => void;
 
@@ -38,16 +38,16 @@ function SidebarItem({
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       className={cn(
-        'transition-background hover:bg-default/40 flex h-12 cursor-pointer items-center gap-4 rounded-lg px-4',
-        isActive && 'bg-default/40',
+        'hover:bg-accent mt-2 flex h-10 cursor-pointer items-center gap-4 rounded-lg px-4 transition-colors',
+        isActive && 'bg-accent',
       )}
       onClick={onClick}
     >
       <IconWrapper styles={{ backgroundColor: item.color }}>
         <Icon fontSize={16} icon={item.icon} />
       </IconWrapper>
-      <div>{item.name}</div>
-      <div className='text-small text-default-400 ml-auto'>{item.count}</div>
+      <div className='text-sm'>{item.name}</div>
+      <div className='text-muted-foreground ml-auto text-xs'>{item.count}</div>
     </div>
   );
 }
