@@ -1,14 +1,13 @@
 'use client';
 
 import Icons from '~/components/Banner/Icons';
-import Search from '~/components/Banner/Search';
 
 import styles from './styles.module.css';
 
 export default function ESNextBanner() {
   return (
     <section
-      className={`${styles.banner} relative z-10 flex max-w-[100vw] justify-center overflow-hidden pt-[150px]`}
+      className={`${styles.banner} relative z-10 flex h-[420px] max-w-[100vw] items-center justify-center overflow-hidden`}
     >
       <div className='relative flex flex-col items-center'>
         <div
@@ -26,9 +25,6 @@ export default function ESNextBanner() {
         <p className='text-default-400 md:text-base lg:text-2xl'>
           100,0+ Frontend library & node library.
         </p>
-        <div className='flex w-full items-center justify-center'>
-          <Search />
-        </div>
         <Icons />
       </div>
     </section>

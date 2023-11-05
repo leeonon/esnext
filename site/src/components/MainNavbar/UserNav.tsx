@@ -3,7 +3,7 @@
 
 // https://juejin.cn/post/7155514465591984136#heading-14
 import { useRouter } from 'next/navigation';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { PersonIcon } from '@radix-ui/react-icons';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
@@ -32,9 +32,9 @@ export function UserNav() {
     return (
       <div
         onClick={() => void signIn()}
-        className='relative h-8 w-8 cursor-pointer rounded-full'
+        className='bg-card relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full'
       >
-        <GitHubLogoIcon />
+        <PersonIcon className='h-[18px] w-[18px]' />
       </div>
     );
   }
@@ -52,9 +52,9 @@ export function UserNav() {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>userInfo.name</p>
+            <p className='text-sm font-medium leading-none'>{userInfo.name}</p>
             <p className='text-muted-foreground text-xs leading-none'>
-              userInfo.email
+              {userInfo.email}
             </p>
           </div>
         </DropdownMenuLabel>

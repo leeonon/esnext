@@ -2,7 +2,8 @@
 
 import type { FC } from 'react';
 
-import { cn } from '@nextui-org/react';
+import { POPULAR_PROJECTS } from '~/constant/popular';
+import { cn } from '~/lib/utils';
 
 import PopularCard from './PopularCard';
 import styles from './styles.module.css';
@@ -20,9 +21,9 @@ const PopularList = ({
 }) => {
   return (
     <div className='flex w-full overflow-hidden' style={warpStyle}>
-      <div className={cn('flex gap-[15px]', className)}>
-        {Array.from({ length: 20 }).map((_, index) => (
-          <PopularCard key={index} />
+      <div className={cn('flex gap-4', className)}>
+        {POPULAR_PROJECTS.map((_, index) => (
+          <PopularCard key={index} name={_.name} logo={_.logo} />
         ))}
       </div>
     </div>

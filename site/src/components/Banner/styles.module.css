@@ -4,7 +4,7 @@
   touch-action: none;
   transition: transform 0s;
 
-  --line: hsl(var(--esnext-default-200));
+  --line: hsl(var(--muted-foreground) / 30%);
 }
 
 .banner::before {

@@ -3,9 +3,6 @@ import Image from 'next/image';
 import Banner from '~/components/Banner';
 import Popular from '~/components/Banner/Popular';
 
-// https://nextjs.org/docs/messages/app-static-to-dynamic-error
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   return (
     <main>
@@ -37,12 +34,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <Image
-              width={2190}
-              height={1000}
-              src='https://assets.website-files.com/6357722e2a5f19121d37f84d/635b53f37e968a0517a786f7_Mask%20group.png'
-              alt=''
-            />
+            <Image width={2190} height={1000} src='/home.png' alt='' />
           </div>
         </section>
 
@@ -57,9 +49,9 @@ export default function Home() {
               </p>
             </div>
             <ul className='grid gap-5 sm:grid-cols-2 md:gap-4 lg:gap-6'>
-              <li className='rounded-md bg-[#f2f2f7] p-8 md:p-10'>
+              <li className='rounded-md bg-zinc-200 p-8 dark:bg-zinc-900 md:p-10'>
                 <div className='flex flex-row items-center justify-between'>
-                  <p className='mr-4 rounded-md bg-[#c4c4c4] px-4 py-2 font-semibold uppercase'>
+                  <p className='bg-background mr-4 rounded-md px-4 py-2 font-semibold uppercase'>
                     Strategy
                   </p>
                   <svg
@@ -75,7 +67,7 @@ export default function Home() {
                     ></path>
                   </svg>
                 </div>
-                <div className='mb-20 mt-4 h-0.5 w-full bg-[#c4c4c4]'></div>
+                <div className='mb-20 mt-4 h-0.5 w-full bg-zinc-800'></div>
                 <p className='mb-3 text-xl font-semibold'>
                   Intuitive Calendar Interface
                 </p>
@@ -86,9 +78,9 @@ export default function Home() {
                   functionality.
                 </p>
               </li>
-              <li className='rounded-md bg-[#f2f2f7] p-8 md:p-10'>
+              <li className='rounded-md bg-zinc-200 p-8 dark:bg-zinc-900 md:p-10'>
                 <div className='flex flex-row items-center justify-between'>
-                  <p className='mr-4 rounded-md bg-[#c4c4c4] px-4 py-2 font-semibold uppercase'>
+                  <p className='bg-background mr-4 rounded-md px-4 py-2 font-semibold uppercase'>
                     Strategy
                   </p>
                   <svg
@@ -104,7 +96,7 @@ export default function Home() {
                     ></path>
                   </svg>
                 </div>
-                <div className='mb-20 mt-4 h-0.5 w-full bg-[#c4c4c4]'></div>
+                <div className='mb-20 mt-4 h-0.5 w-full bg-zinc-800'></div>
                 <p className='mb-3 text-xl font-semibold'>
                   Intuitive Calendar Interface
                 </p>
@@ -115,9 +107,9 @@ export default function Home() {
                   functionality.
                 </p>
               </li>
-              <li className='rounded-md bg-[#f2f2f7] p-8 md:p-10'>
+              <li className='rounded-md bg-zinc-200 p-8 dark:bg-zinc-900 md:p-10'>
                 <div className='flex flex-row items-center justify-between'>
-                  <p className='mr-4 rounded-md bg-[#c4c4c4] px-4 py-2 font-semibold uppercase'>
+                  <p className='bg-background mr-4 rounded-md px-4 py-2 font-semibold uppercase'>
                     Strategy
                   </p>
                   <svg
@@ -133,7 +125,7 @@ export default function Home() {
                     ></path>
                   </svg>
                 </div>
-                <div className='mb-20 mt-4 h-0.5 w-full bg-[#c4c4c4]'></div>
+                <div className='mb-20 mt-4 h-0.5 w-full bg-zinc-800'></div>
                 <p className='mb-3 text-xl font-semibold'>
                   Intuitive Calendar Interface
                 </p>
@@ -144,9 +136,9 @@ export default function Home() {
                   functionality.
                 </p>
               </li>
-              <li className='rounded-md bg-[#f2f2f7] p-8 md:p-10'>
+              <li className='rounded-md bg-zinc-200 p-8 dark:bg-zinc-900 md:p-10'>
                 <div className='flex flex-row items-center justify-between'>
-                  <p className='mr-4 rounded-md bg-[#c4c4c4] px-4 py-2 font-semibold uppercase'>
+                  <p className='bg-background mr-4 rounded-md px-4 py-2 font-semibold uppercase'>
                     Strategy
                   </p>
                   <svg
@@ -162,7 +154,7 @@ export default function Home() {
                     ></path>
                   </svg>
                 </div>
-                <div className='mb-20 mt-4 h-0.5 w-full bg-[#c4c4c4]'></div>
+                <div className='mb-20 mt-4 h-0.5 w-full bg-zinc-800'></div>
                 <p className='mb-3 text-xl font-semibold'>
                   Intuitive Calendar Interface
                 </p>
@@ -174,218 +166,6 @@ export default function Home() {
                 </p>
               </li>
             </ul>
-          </div>
-        </section>
-
-        <section>
-          <div className='flex w-screen flex-col px-6 py-20 lg:mt-0 lg:px-10 xl:px-24'>
-            <svg
-              className='lg:mb-5'
-              width='140'
-              height='60'
-              viewBox='0 0 140 60'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M15.2084 47C24.5811 47 31.0358 40.4126 31.0358 30.9074C31.0358 21.2695 24.4484 14.6821 14.8989 14.6821H3.58105V47H15.2084ZM14.3684 19.8989C21.0442 19.8989 25.0674 24.0547 25.0674 30.9074C25.0674 37.6274 21.1326 41.7832 14.6779 41.7832H9.24V19.8989H14.3684ZM45.2819 47.5747C50.9851 47.5747 54.964 44.7011 55.8925 39.9263H50.8967C50.2777 42.0042 48.3325 43.1537 45.3704 43.1537C41.7893 43.1537 39.7556 41.2084 39.3577 37.3621L55.804 37.3179V35.6821C55.804 28.8737 51.6483 24.4968 45.1051 24.4968C38.6946 24.4968 34.2293 29.2274 34.2293 36.08C34.2293 42.8442 38.783 47.5747 45.2819 47.5747ZM45.1493 28.9179C48.3767 28.9179 50.4546 30.9074 50.4546 33.9137H39.4904C40.0209 30.6421 41.9662 28.9179 45.1493 28.9179ZM65.3604 47H70.6657L79.7731 25.16H74.2025L70.2236 35.1958C69.2952 37.5832 68.4994 39.8821 68.1899 41.2526C67.9246 40.0589 67.1731 37.8042 66.2446 35.1958L62.4425 25.16H56.6952L65.3604 47ZM85.5705 20.7832C87.3389 20.7832 88.8421 19.3242 88.8421 17.5116C88.8421 15.6989 87.3389 14.2842 85.5705 14.2842C83.7579 14.2842 82.2989 15.6989 82.2989 17.5116C82.2989 19.3242 83.7579 20.7832 85.5705 20.7832ZM77.6568 57.2568C79.0716 57.6547 79.8673 57.7432 80.8842 57.7432C85.6147 57.7432 88.2673 54.7368 88.2673 50.0947V25.16H82.8737V49.4758C82.8737 51.6863 82.2547 52.7474 80.3979 52.7474C79.7347 52.7474 79.2926 52.7032 78.541 52.4821L77.6568 57.2568ZM92.5578 36.0358C92.5578 42.8442 97.4652 47.5305 104.229 47.5305C110.994 47.5305 115.901 42.8442 115.901 36.0358C115.901 29.2274 110.994 24.5411 104.229 24.5411C97.4652 24.5411 92.5578 29.2274 92.5578 36.0358ZM97.9515 36.0358C97.9515 32.0568 100.516 29.36 104.229 29.36C107.943 29.36 110.507 32.0568 110.507 36.0358C110.507 40.0147 107.943 42.7116 104.229 42.7116C100.516 42.7116 97.9515 40.0147 97.9515 36.0358ZM117.455 57.1242C118.649 57.4337 119.975 57.6105 121.478 57.6105C125.059 57.6105 127.358 55.9305 128.994 51.8632L139.693 25.16H134.122L128.198 41.0758L122.583 25.16H116.88L125.678 47.9284L125.059 49.5642C124.131 52.1284 122.804 52.6147 120.682 52.6147H117.455V57.1242Z'
-                fill='black'
-              ></path>
-              <circle
-                cx='84.7373'
-                cy='15.7368'
-                r='5.52632'
-                fill='black'
-              ></circle>
-            </svg>
-            <div className='mt-7 lg:flex lg:flex-row lg:justify-between'>
-              <div className='flex grow flex-row flex-wrap lg:flex-nowrap lg:items-start'>
-                <div className='my-5 mr-8 flex max-w-[200px] grow basis-[100px] flex-col space-y-5 lg:mt-0'>
-                  <h2 className='font-inter font-medium text-black'>
-                    SOLUTION
-                  </h2>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Marketing
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Analytics
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Commerce
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Insights
-                  </a>
-                </div>
-                <div className='my-5 mr-8 flex max-w-[200px] grow basis-[100px] flex-col space-y-5 lg:mt-0'>
-                  <h2 className='font-inter font-medium text-black'>SUPPORT</h2>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Pricing
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Documentation
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Guides
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    API Status
-                  </a>
-                </div>
-                <div className='my-5 mr-8 flex max-w-[200px] grow basis-[100px] flex-col space-y-5 lg:mt-0'>
-                  <h2 className='font-inter font-medium text-black'>COMPANY</h2>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    About
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Blog
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Jobs
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Press
-                  </a>
-                  <a
-                    href='https://google.com'
-                    className='font-inter font-light text-gray-500'
-                  >
-                    Partners
-                  </a>
-                </div>
-              </div>
-              <div className='flex flex-col'>
-                <form action='' className='mt-14 max-w-[421px] lg:mt-0'>
-                  <div className='relative'>
-                    <label
-                      htmlFor='email'
-                      className='font-inter font-medium text-black'
-                    >
-                      SUBSCRIBE TO NEWSLETTER
-                    </label>
-                    <input
-                      type='email'
-                      className='font-inter relative mt-4 w-full rounded-md border border-gray-200 bg-white px-6 py-4 text-base'
-                      placeholder='Enter your email'
-                      name='email'
-                    />
-                    <button
-                      type='submit'
-                      className='font-inter absolute right-[6px] top-11 w-auto rounded-md border border-[black] bg-[black] px-6 py-3 text-base text-white'
-                    >
-                      Notify me
-                    </button>
-                  </div>
-                </form>
-                <div>
-                  <h3 className='font-inter mb-4 mt-8 font-medium text-black'>
-                    EMAIL US
-                  </h3>
-                  <p className='font-inter text-base'>support@devjoy.co</p>
-                </div>
-              </div>
-            </div>
-            <div className='mx-auto my-12 w-full border border-[#E4E4E7] lg:my-20'></div>
-            <div className='lg:flex lg:flex-row-reverse lg:justify-between'>
-              <div className='mb-8 mt-6 flex flex-row lg:mt-0'>
-                <a
-                  href='https://google.com'
-                  className='mr-4 text-black transition hover:text-gray-400'
-                >
-                  <svg
-                    className='fill-current'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M12 2.25C9.4791 2.25005 7.05619 3.22647 5.23968 4.97439C3.42317 6.72231 2.35426 9.10586 2.25723 11.6249C2.1602 14.1439 3.0426 16.6026 4.71928 18.4851C6.39595 20.3676 8.73657 21.5275 11.25 21.7214V14.2501H9C8.80109 14.2501 8.61032 14.1711 8.46967 14.0304C8.32902 13.8898 8.25 13.699 8.25 13.5001C8.25 13.3012 8.32902 13.1104 8.46967 12.9698C8.61032 12.8291 8.80109 12.7501 9 12.7501H11.25V10.5001C11.2509 9.70472 11.5673 8.94218 12.1297 8.37977C12.6921 7.81736 13.4546 7.501 14.25 7.50009H15.75C15.9489 7.50009 16.1397 7.57911 16.2803 7.71976C16.421 7.86041 16.5 8.05118 16.5 8.25009C16.5 8.449 16.421 8.63977 16.2803 8.78042C16.1397 8.92107 15.9489 9.00009 15.75 9.00009H14.25C13.8523 9.00054 13.471 9.15872 13.1898 9.43993C12.9086 9.72114 12.7505 10.1024 12.75 10.5001V12.7501H15C15.1989 12.7501 15.3897 12.8291 15.5303 12.9698C15.671 13.1104 15.75 13.3012 15.75 13.5001C15.75 13.699 15.671 13.8898 15.5303 14.0304C15.3897 14.1711 15.1989 14.2501 15 14.2501H12.75V21.7214C15.2634 21.5275 17.604 20.3676 19.2807 18.4851C20.9574 16.6026 21.8398 14.1439 21.7427 11.6249C21.6457 9.10587 20.5768 6.72232 18.7603 4.9744C16.9438 3.22649 14.5209 2.25006 12 2.25Z'></path>
-                  </svg>
-                </a>
-                <a
-                  href='https://google.com'
-                  className='mx-4 text-black transition hover:text-gray-400'
-                >
-                  <svg
-                    className='fill-current'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z'></path>
-                    <path d='M16.125 2.625H7.875C6.4831 2.62658 5.14865 3.18021 4.16443 4.16443C3.18021 5.14865 2.62658 6.4831 2.625 7.875V16.125C2.62658 17.5169 3.18021 18.8513 4.16443 19.8356C5.14865 20.8198 6.4831 21.3734 7.875 21.375H16.125C17.5169 21.3734 18.8513 20.8198 19.8356 19.8356C20.8198 18.8513 21.3734 17.5169 21.375 16.125V7.875C21.3734 6.4831 20.8198 5.14865 19.8356 4.16443C18.8513 3.18021 17.5169 2.62658 16.125 2.625ZM12 16.5C11.11 16.5 10.24 16.2361 9.49993 15.7416C8.75991 15.2471 8.18314 14.5443 7.84254 13.7221C7.50195 12.8998 7.41283 11.995 7.58647 11.1221C7.7601 10.2492 8.18868 9.44736 8.81802 8.81802C9.44736 8.18868 10.2492 7.7601 11.1221 7.58647C11.995 7.41283 12.8998 7.50195 13.7221 7.84254C14.5443 8.18314 15.2471 8.75991 15.7416 9.49993C16.2361 10.24 16.5 11.11 16.5 12C16.4987 13.1931 16.0241 14.3369 15.1805 15.1805C14.3369 16.0241 13.1931 16.4987 12 16.5ZM16.875 8.25C16.6525 8.25 16.435 8.18402 16.25 8.0604C16.065 7.93679 15.9208 7.76109 15.8356 7.55552C15.7505 7.34995 15.7282 7.12375 15.7716 6.90552C15.815 6.68729 15.9222 6.48684 16.0795 6.3295C16.2368 6.17217 16.4373 6.06502 16.6555 6.02162C16.8738 5.97821 17.1 6.00049 17.3055 6.08564C17.5111 6.17078 17.6868 6.31498 17.8104 6.49998C17.934 6.68499 18 6.9025 18 7.125C18 7.42337 17.8815 7.70952 17.6705 7.9205C17.4595 8.13147 17.1734 8.25 16.875 8.25Z'></path>
-                  </svg>
-                </a>
-                <a
-                  href='https://google.com'
-                  className='mx-4 text-black transition hover:text-gray-400'
-                >
-                  <svg
-                    className='fill-current'
-                    width='25'
-                    height='25'
-                    viewBox='0 0 25 25'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M21.5952 12.4998C22.1776 11.988 22.5489 11.2779 22.6367 10.5076C22.7245 9.73723 22.5226 8.96177 22.0703 8.33205C21.618 7.70233 20.9476 7.2634 20.1895 7.10064C19.4315 6.93788 18.64 7.06293 17.969 7.45147V5.46854C17.9694 4.83357 17.7763 4.21356 17.4153 3.69117C17.0544 3.16878 16.5427 2.76884 15.9486 2.54466C15.3546 2.32048 14.7063 2.28271 14.0902 2.4364C13.4741 2.59009 12.9195 2.92793 12.5003 3.40487C11.9885 2.82243 11.2784 2.45118 10.5081 2.36336C9.73772 2.27555 8.96225 2.47744 8.33253 2.92976C7.70282 3.38208 7.26388 4.05249 7.10112 4.81054C6.93836 5.5686 7.06342 6.36009 7.45197 7.03104H5.46904C4.83406 7.03063 4.21405 7.22379 3.69166 7.58476C3.16927 7.94573 2.76933 8.45736 2.54515 9.05144C2.32097 9.64552 2.28321 10.2938 2.4369 10.9099C2.59059 11.526 2.92843 12.0806 3.40538 12.4998C2.82293 13.0115 2.45168 13.7217 2.36386 14.492C2.27603 15.2624 2.47792 16.0378 2.93024 16.6676C3.38257 17.2973 4.05297 17.7362 4.81103 17.899C5.56909 18.0617 6.36059 17.9367 7.03154 17.5481V19.531C7.03113 20.166 7.22428 20.786 7.58525 21.3084C7.94622 21.8308 8.45785 22.2307 9.05193 22.4549C9.64602 22.6791 10.2943 22.7169 10.9104 22.5632C11.5265 22.4095 12.0811 22.0717 12.5003 21.5947C13.012 22.1772 13.7222 22.5484 14.4925 22.6362C15.2629 22.724 16.0383 22.5221 16.668 22.0698C17.2978 21.6175 17.7367 20.9471 17.8995 20.189C18.0622 19.431 17.9372 18.6395 17.5486 17.9685H19.5315C20.1665 17.969 20.7865 17.7758 21.3089 17.4148C21.8313 17.0539 22.2312 16.5422 22.4554 15.9481C22.6796 15.3541 22.7174 14.7058 22.5637 14.0897C22.41 13.4736 22.0721 12.919 21.5952 12.4998ZM8.59404 5.46854C8.59404 5.05414 8.75866 4.65671 9.05168 4.36369C9.34471 4.07066 9.74214 3.90604 10.1565 3.90604C10.5709 3.90604 10.9684 4.07066 11.2614 4.36369C11.5544 4.65671 11.719 5.05414 11.719 5.46854V7.03104H10.1565C9.74228 7.03057 9.34513 6.8658 9.05221 6.57287C8.75928 6.27995 8.59451 5.8828 8.59404 5.46854ZM3.90654 10.156C3.90701 9.74179 4.07178 9.34463 4.36471 9.05171C4.65763 8.75879 5.05478 8.59402 5.46904 8.59354H10.1565C10.5708 8.59402 10.9679 8.75879 11.2609 9.05171C11.5538 9.34463 11.7186 9.74179 11.719 10.156V11.7185H5.46904C5.05478 11.7181 4.65763 11.5533 4.36471 11.2604C4.07178 10.9675 3.90701 10.5703 3.90654 10.156ZM16.4065 19.531C16.4065 19.9454 16.2419 20.3429 15.9489 20.6359C15.6559 20.9289 15.2584 21.0935 14.844 21.0935C14.4296 21.0935 14.0322 20.9289 13.7392 20.6359C13.4462 20.3429 13.2815 19.9454 13.2815 19.531V17.9685H14.844C15.2583 17.969 15.6554 18.1338 15.9484 18.4267C16.2413 18.7196 16.4061 19.1168 16.4065 19.531ZM19.5315 16.406H14.844C14.4298 16.4056 14.0326 16.2408 13.7397 15.9479C13.4468 15.655 13.282 15.2578 13.2815 14.8435V13.281H19.5315C19.9459 13.281 20.3434 13.4457 20.6364 13.7387C20.9294 14.0317 21.094 14.4291 21.094 14.8435C21.094 15.2579 20.9294 15.6554 20.6364 15.9484C20.3434 16.2414 19.9459 16.406 19.5315 16.406Z'></path>
-                  </svg>
-                </a>
-                <a
-                  href='https://google.com'
-                  className='mx-4 text-black transition hover:text-gray-400'
-                >
-                  <svg
-                    className='fill-current'
-                    width='25'
-                    height='25'
-                    viewBox='0 0 25 25'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M23.9883 7.58391L21.0426 10.5297C20.4545 17.354 14.6994 22.6565 7.81089 22.6565C6.39249 22.6565 5.22357 22.4316 4.33651 21.9881C3.62063 21.6301 3.32738 21.246 3.25461 21.1367C3.18933 21.0388 3.14702 20.9274 3.13083 20.8108C3.11464 20.6943 3.12499 20.5755 3.16112 20.4635C3.19724 20.3515 3.2582 20.2491 3.33945 20.164C3.42069 20.0789 3.52012 20.0132 3.63031 19.9718C3.65544 19.9624 5.95923 19.0775 7.44821 17.3929C6.52206 16.7334 5.70694 15.9305 5.0335 15.0145C3.69483 13.1977 2.27901 10.0427 3.13598 5.32923C3.16148 5.18895 3.22489 5.05833 3.31932 4.95152C3.41376 4.8447 3.53562 4.76577 3.67171 4.72326C3.8078 4.68075 3.95293 4.67629 4.09137 4.71037C4.22981 4.74445 4.35629 4.81575 4.4571 4.91657C4.49153 4.9509 7.74246 8.15592 11.7166 9.19118L11.7171 8.59361C11.7256 7.34276 12.2303 6.14644 13.1204 5.26759C14.0105 4.38874 15.2132 3.89929 16.4641 3.90682C17.2766 3.91808 18.0724 4.1399 18.7737 4.55063C19.4749 4.96136 20.0576 5.54694 20.4649 6.25019L23.4359 6.25024C23.5904 6.25024 23.7414 6.29606 23.8699 6.3819C23.9984 6.46774 24.0985 6.58975 24.1577 6.73251C24.2168 6.87526 24.2323 7.03234 24.2021 7.18389C24.172 7.33543 24.0976 7.47464 23.9883 7.58391Z'></path>
-                  </svg>
-                </a>
-              </div>
-              <p className='font-inter text-sm text-gray-500 lg:mt-0'>
-                © Copyright 2021. All rights reserved.
-              </p>
-            </div>
           </div>
         </section>
       </div>
