@@ -50,7 +50,7 @@ export default function ProjectBaseInfo() {
             </div>
           </div>
         </div>
-        <div className='text-default-500 pt-2 text-sm'>
+        <div className='text-muted-foreground pt-2 text-sm'>
           {project.description}
         </div>
       </div>

@@ -1,3 +1,5 @@
+@import url('./switchThemes.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,10 +29,12 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 8.6%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
+
+    /* --card-primary: 0 0% 17.2%; */
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;

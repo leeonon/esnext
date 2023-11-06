@@ -38,8 +38,8 @@ function SidebarItem({
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       className={cn(
-        'hover:bg-accent mt-2 flex h-10 cursor-pointer items-center gap-4 rounded-lg px-4 transition-colors',
-        isActive && 'bg-accent',
+        'mt-2 flex h-10 cursor-pointer items-center gap-4 rounded-md px-4 transition-colors hover:border',
+        isActive && 'bg-accent border-[rgb(57, 57, 57)]',
       )}
       onClick={onClick}
     >
