@@ -3,20 +3,21 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { redirect } from 'next/navigation';
 import { Icon } from '@iconify/react';
-import {
-  Button,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from '@nextui-org/react';
 import { toast } from 'sonner';
 
 import { useProjectInfoContext } from '~/app/info/[name]/context';
 import FavoritesModal from '~/components/FavoritesModal';
+import { Button } from '~/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/components/ui/dialog';
+import { Input } from '~/components/ui/input';
+import { useDisclosure } from '~/hooks/useDisclosure';
 import { api } from '~/trpc/react';
 
 import FavoritesItem from './FavoritesItem';
@@ -24,7 +25,7 @@ import FavoritesItem from './FavoritesItem';
 const FavoritesButton = () => {
   const { project, onRefresh } = useProjectInfoContext();
   const [checkedKeys, setCheckedKeys] = useState<Set<number>>(new Set([]));
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const disclosure = useDisclosure();
   const {
     data: userFavorites,
@@ -103,45 +104,37 @@ const FavoritesButton = () => {
 
   return (
     <div>
-      <Button
-        isIconOnly
-        size='md'
-        onClick={onOpen}
-        color={project?.isCollection ? 'secondary' : 'default'}
-      >
-        <Icon icon='material-symbols:bookmark-add-outline' fontSize={22} />
-      </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='top-center'>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className='flex flex-col gap-1'>
-                Collection
-              </ModalHeader>
-              <ModalBody>
-                <Input placeholder='Search' fullWidth />
-                <div className='scrollbar-none flex max-h-[400px] flex-col gap-2 overflow-y-scroll'>
-                  {itemList}
-                </div>
-              </ModalBody>
-              <ModalFooter className='border-t-1 border-default-100'>
-                <FavoritesModal
-                  disclosure={disclosure}
-                  onSuccess={() => {
-                    void refetch();
-                  }}
-                />
-                <Button color='danger' variant='flat' onPress={onClose}>
-                  Cancel
-                </Button>
-                <Button color='primary' onClick={onOk}>
-                  Done
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <Dialog open={isOpen} onOpenChange={onToggle}>
+        <DialogTrigger asChild>
+          <Button
+            onClick={onOpen}
+            color={project?.isCollection ? 'secondary' : 'default'}
+          >
+            <Icon icon='material-symbols:bookmark-add-outline' fontSize={22} />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className='sm:max-w-[425px]'>
+          <DialogHeader>
+            <DialogTitle>Collection</DialogTitle>
+          </DialogHeader>
+          <Input placeholder='Search' />
+          <div className='scrollbar-none flex max-h-[400px] flex-col gap-2 overflow-y-scroll'>
+            {itemList}
+          </div>
+          <DialogFooter>
+            <FavoritesModal
+              disclosure={disclosure}
+              onSuccess={() => {
+                void refetch();
+              }}
+            />
+            <Button variant='outline' onClick={onClose}>
+              Cancel
+            </Button>
+            <Button onClick={onOk}>Done</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

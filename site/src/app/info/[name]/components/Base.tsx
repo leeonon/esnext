@@ -1,9 +1,9 @@
-import NextImage from 'next/image';
+import Image from 'next/image';
 import { Icon } from '@iconify/react';
-import { Button, Image } from '@nextui-org/react';
 
+import CollectionButton from '~/app/info/[name]/components/Favorites';
 import { useProjectInfoContext } from '~/app/info/[name]/context';
-import CollectionButton from '~/components/Info/Favorites';
+import { Button } from '~/components/ui/button';
 
 export default function ProjectBaseInfo() {
   const { project } = useProjectInfoContext();
@@ -13,16 +13,13 @@ export default function ProjectBaseInfo() {
   }
 
   return (
-    <div className='border-b-1 border-default-50 flex items-center justify-between pb-3'>
+    <div className='flex items-center justify-between border-b-[1px] pb-3'>
       <div className='flex flex-col'>
         <div className='flex items-center gap-4'>
-          <div className='shadow-default-100 overflow-hidden rounded-sm shadow-[0_1px_4px_0px]'>
+          <div className='overflow-hidden rounded-sm '>
             <Image
-              as={NextImage}
-              isBlurred
               width={70}
               height={70}
-              radius='lg'
               className='projectBoxImage'
               src='https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202310091757604.jpg'
               alt=''
@@ -59,18 +56,12 @@ export default function ProjectBaseInfo() {
       </div>
       <div className='flex items-center gap-3'>
         <CollectionButton />
-        <Button
-          startContent={<Icon icon='mdi:github' fontSize={22} />}
-          radius='sm'
-          size='md'
-        >
+        <Button>
+          <Icon icon='mdi:github' fontSize={22} />
           View on Github
         </Button>
-        <Button
-          startContent={<Icon icon='tabler:home' fontSize={22} />}
-          radius='sm'
-          size='md'
-        >
+        <Button>
+          <Icon icon='tabler:home' fontSize={22} />
           Visit Website
         </Button>
       </div>

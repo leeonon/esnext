@@ -36,7 +36,7 @@ export function MainNav({
           getActiveClass(pathname, '/projects'),
         )}
       >
-        Products
+        Projects
       </Link>
       <Link
         href='/trend'

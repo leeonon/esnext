@@ -2,27 +2,50 @@
 'use client';
 
 import type { UserFavoritesItemType } from '@esnext/server';
-import type { useDisclosure } from '@nextui-org/react';
+import type { UseDisclosureReturn } from '~/hooks/useDisclosure';
 import type { FC } from 'react';
 
-import { isValidElement, memo, useEffect, useState } from 'react';
-import {
-  Button,
-  Checkbox,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Textarea,
-} from '@nextui-org/react';
+import { isValidElement, memo } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
 
-import { useImmer } from '~/hooks/useImmer';
+import { Button } from '~/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { Textarea } from '~/components/ui/textarea';
 import { api } from '~/trpc/react';
 
-type UseDisclosureReturn = ReturnType<typeof useDisclosure>;
+const FormSchema = z.object({
+  name: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.',
+    })
+    .max(30, {
+      message: 'Username must be at most 30 characters.',
+    }),
+  description: z.string().max(100, {
+    message: 'Description must be at most 100 characters.',
+  }),
+});
 
 interface FavoritesModalProps {
   onSuccess: () => void;
@@ -36,15 +59,14 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
   disclosure,
   item,
 }) => {
-  const { onClose, isOpen, onOpenChange, onOpen } = disclosure;
-  const [params, setParams] = useImmer<{
-    name?: string;
-    description?: string | null;
-  }>({
-    name: item?.name,
-    description: item?.description,
+  const { onClose, isOpen, onOpen, onToggle } = disclosure;
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      name: '',
+      description: '',
+    },
   });
-  const [isPublic, setIsPublic] = useState(true);
   const mutation = api.favorites.update.useMutation({
     onSuccess: () => {
       onClose();
@@ -54,22 +76,6 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
       });
     },
   });
-
-  const onCheck = () => {
-    if (!params.name || params.name.length > 30) {
-      return false;
-    }
-    return true;
-  };
-
-  useEffect(() => {
-    if (item) {
-      setParams((draft) => {
-        draft.name = item.name ?? '';
-        draft.description = item.description ?? '';
-      });
-    }
-  }, [item, setParams]);
 
   const createFavorites = api.favorites.create.useMutation({
     onSuccess: () => {
@@ -84,119 +90,100 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
     },
   });
 
-  const onUpdateFavorites = async () => {
-    if (!onCheck()) {
-      return;
-    }
+  const onUpdateFavorites = async (values: z.infer<typeof FormSchema>) => {
     await mutation.mutateAsync({
       id: item?.id ?? 0,
-      name: params.name!,
-      description: params.description!,
+      ...values,
     });
   };
 
-  const onCreate = async () => {
-    if (!onCheck()) {
-      return;
-    }
-    await createFavorites.mutateAsync({
-      name: params.name!,
-      description: params.description!,
-    });
+  const onCreate = async (values: z.infer<typeof FormSchema>) => {
+    await createFavorites.mutateAsync(values);
   };
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name as keyof typeof params;
-    setParams((draft) => {
-      draft[name] = e.target.value;
-    });
-  };
-
-  const handleClose = () => {
-    setParams((draft) => {
-      draft.name = '';
-      draft.description = '';
-    });
-  };
-
-  const handleOk = () => {
-    if (item) {
-      void onUpdateFavorites();
-    } else {
-      void onCreate();
-    }
+  const handleOk = async (values: z.infer<typeof FormSchema>) => {
+    console.log(
+      '🚀 ~ file: FavoritesModal.tsx:105 ~ handleOk ~ values:',
+      values,
+    );
+    try {
+      if (item) {
+        await onUpdateFavorites(values);
+      } else {
+        await onCreate(values);
+      }
+    } catch (error) {}
   };
 
   return (
     <div className='mr-auto'>
-      {isValidElement(title) ? (
-        <div onClick={onOpen}>{title}</div>
-      ) : (
-        <Button color='default' variant='flat' onPress={onOpen}>
-          {title ?? 'Create'}
-        </Button>
-      )}
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        onClose={handleClose}
-        placement='top-center'
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className='flex flex-col gap-1'>
-                {item ? 'Edit Favorites' : 'Add Favorites'}
-              </ModalHeader>
-              <ModalBody>
-                <Input
-                  name='name'
-                  value={params.name}
-                  isInvalid={!!params.name && params.name?.length > 30}
-                  errorMessage={
-                    params?.name &&
-                    params.name.length > 30 &&
-                    'Name up to 30 characters'
-                  }
-                  onChange={onValueChange}
-                  isRequired
-                  label='Name'
-                  placeholder='Enter your favorites name'
-                  variant='bordered'
-                />
-                <Textarea
-                  max={100}
-                  maxLength={100}
-                  variant='bordered'
-                  name='description'
-                  onChange={onValueChange}
-                  placeholder='Please enter a description.'
-                  value={params?.description ?? ''}
-                />
-                <div className='flex justify-between px-1 py-2'>
-                  <Checkbox
-                    isSelected={isPublic}
-                    onValueChange={setIsPublic}
-                    classNames={{
-                      label: 'text-small',
-                    }}
-                  >
-                    Public
-                  </Checkbox>
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button color='danger' variant='flat' onPress={onClose}>
+      <Dialog open={isOpen} onOpenChange={onToggle}>
+        <DialogTrigger asChild>
+          {isValidElement(title) ? (
+            <div onClick={onOpen}>{title}</div>
+          ) : (
+            <Button color='default' onClick={onOpen}>
+              {title ?? 'Create'}
+            </Button>
+          )}
+        </DialogTrigger>
+        <DialogContent>
+          <Form {...form}>
+            <form
+              onSubmit={void form.handleSubmit(handleOk)}
+              className='w-2/3 space-y-6'
+            >
+              <DialogHeader className='flex flex-col gap-1'>
+                <DialogTitle>
+                  {item ? 'Edit Favorites' : 'Add Favorites'}
+                </DialogTitle>
+              </DialogHeader>
+
+              <FormField
+                control={form.control}
+                name='name'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Enter your favorites name'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder='Please enter a description.'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter>
+                <Button variant='destructive' onClick={onClose}>
                   Cancel
                 </Button>
-                <Button color='primary' onClick={handleOk}>
-                  {item ? 'Update' : 'Create'}
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+                <Button type='submit'>{item ? 'Update' : 'Create'}</Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
