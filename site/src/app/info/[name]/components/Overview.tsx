@@ -1,11 +1,12 @@
 import type { FC } from 'react';
 
-import { Card, CardBody } from '@nextui-org/react';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
+
+import { Card, CardContent } from '~/components/ui/card';
 
 import '~/styles/readme.css';
 
@@ -18,8 +19,8 @@ const OverView: FC<OverViewProps> = ({ readme }) => {
     return <div>Error</div>;
   }
   return (
-    <Card radius='sm'>
-      <CardBody className='p-0'>
+    <Card className='bg-accent'>
+      <CardContent className='p-0'>
         <Markdown
           className='markdown-body'
           remarkPlugins={[remarkGfm]}
@@ -49,7 +50,7 @@ const OverView: FC<OverViewProps> = ({ readme }) => {
         >
           {readme}
         </Markdown>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 };

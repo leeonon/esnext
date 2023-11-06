@@ -1,6 +1,5 @@
-import { Card, CardBody, CardHeader } from '@nextui-org/react';
-
-import Tag from '~/components/Tag';
+import { Badge } from '~/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 
 export type TagsCardProps = {
   tags?: string[];
@@ -12,15 +11,15 @@ const TagsCard = ({ tags }: TagsCardProps) => {
   }
 
   return (
-    <Card className='h-fit'>
-      <CardHeader className='pb-0'>
-        <p className='text-tiny font-bold uppercase'>Tags</p>
+    <Card className='bg-accent h-fit'>
+      <CardHeader>
+        <CardTitle className='uppercase'>Tags</CardTitle>
       </CardHeader>
-      <CardBody className='h-fit flex-row flex-wrap gap-2'>
+      <CardContent className='h-fit flex-row flex-wrap gap-2'>
         {tags.map((v) => (
-          <Tag key={v}>{v}</Tag>
+          <Badge key={v}>{v}</Badge>
         ))}
-      </CardBody>
+      </CardContent>
     </Card>
   );
 };

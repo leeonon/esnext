@@ -3,7 +3,6 @@
 import { useMemo } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import { Icon } from '@iconify/react';
-import { Tab, Tabs } from '@nextui-org/react';
 
 import ProjectBaseInfo from '~/app/info/[name]/components/Base';
 import ProjectOverview from '~/app/info/[name]/components/Overview';
@@ -11,6 +10,7 @@ import { ProjectInfoContext } from '~/app/info/[name]/context';
 import NpmInfo from '~/components/Info/NpmInfo';
 import Recommend from '~/components/Info/Recommend';
 import ProjectTags from '~/components/Info/TagsCard';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { api } from '~/trpc/react';
 
 const Title = ({
@@ -55,22 +55,33 @@ export default function ProjectInfo() {
         <ProjectBaseInfo />
         <div className='mt-3 flex gap-2'>
           <div className='flex-1'>
-            <Tabs aria-label='Options' variant='light' color='secondary'>
-              <Tab
-                key='photos'
-                title={
+            <Tabs defaultValue='overflow'>
+              <TabsList className='grid w-full grid-cols-4'>
+                <TabsTrigger value='overview'>
                   <Title icon='material-symbols:text-snippet-rounded'>
                     OverView
                   </Title>
-                }
-              >
+                </TabsTrigger>
+                <TabsTrigger value='compare'>
+                  <Title icon='material-symbols:text-snippet-rounded'>
+                    Compare
+                  </Title>
+                </TabsTrigger>
+                <TabsTrigger value='dependencies'>
+                  <Title icon='material-symbols:text-snippet-rounded'>
+                    Dependencies
+                  </Title>
+                </TabsTrigger>
+                <TabsTrigger value='devDependencies'>
+                  <Title icon='material-symbols:text-snippet-rounded'>
+                    DevDependencies
+                  </Title>
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value='overview'>
                 <ProjectOverview readme={data?.readme?.content} />
-              </Tab>
-              <Tab
-                key='trend'
-                defaultChecked
-                title={<Title icon='material-symbols:compare'>Compare</Title>}
-              >
+              </TabsContent>
+              <TabsContent value='compare'>
                 <div className='flex h-[300px] items-center justify-center'>
                   <i>⚠️</i>
                   <span>
@@ -78,7 +89,9 @@ export default function ProjectInfo() {
                     tuned!
                   </span>
                 </div>
-              </Tab>
+              </TabsContent>
+              <TabsContent value='dependencies'>dependencies</TabsContent>
+              <TabsContent value='devDependencies'>devDependencies</TabsContent>
             </Tabs>
           </div>
           <div className='mt-[3.2rem] flex w-[250px] flex-col gap-4'>

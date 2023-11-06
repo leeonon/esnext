@@ -1,6 +1,5 @@
-import NextImage from 'next/image';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Image } from '@nextui-org/react';
 
 const RecommendCard = () => {
   const router = useRouter();
@@ -16,15 +15,9 @@ const RecommendCard = () => {
       onClick={onClick}
     >
       <Image
-        as={NextImage}
-        isBlurred
         width={60}
         height={60}
-        radius='lg'
-        classNames={{
-          wrapper: 'col-span-1 row-span-2',
-        }}
-        className='projectBoxImage'
+        className='projectBoxImage col-span-1 row-span-2'
         src='https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202310091757604.jpg'
         alt=''
       />
