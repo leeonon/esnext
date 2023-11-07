@@ -1,19 +1,24 @@
 import type { UserFavoritesItemType } from '@esnext/server';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
+
+import { Button } from '~/components/ui/button';
 import {
-  Avatar,
-  AvatarGroup,
-  Button,
   Card,
-  CardBody,
+  CardContent,
+  CardDescription,
   CardFooter,
-  Dropdown,
-  DropdownItem,
+  CardHeader,
+  CardTitle,
+} from '~/components/ui/card';
+import {
   DropdownMenu,
-  DropdownTrigger,
-} from '@nextui-org/react';
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu';
 
 type FavoritesItemProps = {
   item: UserFavoritesItemType;
@@ -28,15 +33,6 @@ export default function FavoritesItem({
 }: FavoritesItemProps) {
   const router = useRouter();
 
-  const onAction = (key: React.Key) => {
-    if (key === 'edit') {
-      onEdit(item);
-    }
-    if (key === 'delete') {
-      onRemove(item);
-    }
-  };
-
   const onClick = () => {
     alert('TODO: Navigate to favorites page');
     router.push(`/user/favorites/${encodeURIComponent(item.name)}`);
@@ -44,44 +40,44 @@ export default function FavoritesItem({
 
   return (
     <Card
-      className='h-[160px] max-w-[560px] cursor-pointer rounded-md'
-      isHoverable
-      isPressable
-      onPress={onClick}
+      className='hover:bg-accent flex max-w-[560px] cursor-pointer flex-col rounded-md transition-colors'
+      onClick={onClick}
     >
-      <CardBody>
-        <div className='mb-4 flex items-center justify-between overflow-hidden'>
-          <div className='font-mono font-semibold'>{item.name}</div>
-          <Dropdown>
-            <DropdownTrigger>
-              <Button isIconOnly size='sm' variant='light'>
-                <Icon icon='iconamoon:options' />
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label='Edit Favorites Item' onAction={onAction}>
-              <DropdownItem key='edit'>Edit</DropdownItem>
-              <DropdownItem key='delete' className='text-danger' color='danger'>
-                Delete
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </div>
-        <AvatarGroup
-          size='sm'
-          isBordered
-          max={6}
-          total={item.projects.length}
-          className='justify-start'
-        >
+      <CardHeader className='flex flex-row items-center justify-between overflow-hidden'>
+        <CardTitle>{item.name}</CardTitle>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button size='sm' variant='outline'>
+              <Icon icon='iconamoon:options' />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => onEdit(item)}>
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onRemove(item)}>
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </CardHeader>
+      <CardContent>
+        <div className='flex items-center justify-start gap-1'>
           {item.projects.map((project) => (
-            <Avatar key={project.id} src={project.logo ?? ''} />
+            <Image
+              width={35}
+              height={35}
+              key={project.id}
+              src={project.logo ?? ''}
+              alt={project.name}
+            />
           ))}
-        </AvatarGroup>
-      </CardBody>
-      <CardFooter className='p-2'>
-        <p className='text-small text-default-400 line-clamp-2 text-left font-sans leading-4'>
+        </div>
+      </CardContent>
+      <CardFooter className='mt-auto p-2'>
+        <CardDescription className='line-clamp-2 text-left text-xs leading-4'>
           {item.description ?? '-'}
-        </p>
+        </CardDescription>
       </CardFooter>
     </Card>
   );

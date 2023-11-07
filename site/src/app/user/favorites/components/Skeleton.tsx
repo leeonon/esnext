@@ -1,8 +1,9 @@
-import { Card, Skeleton } from '@nextui-org/react';
+import { Card } from '~/components/ui/card';
+import { Skeleton } from '~/components/ui/skeleton';
 
 export default function SkeletonItem() {
   return (
-    <Card className='max-w-[560px]  space-y-5 p-4' radius='sm'>
+    <Card className='max-w-[560px]  space-y-5 p-4'>
       <div className='flex justify-between'>
         <Skeleton className='h-6 w-3/5 rounded-full'></Skeleton>
         <Skeleton className='h-6 w-10 rounded-full'></Skeleton>

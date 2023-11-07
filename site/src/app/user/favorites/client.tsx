@@ -3,16 +3,16 @@
 import type { UserFavoritesItemType } from '@esnext/server';
 
 import { useCallback, useState } from 'react';
-import { Pagination, useDisclosure } from '@nextui-org/react';
 import { toast } from 'sonner';
 import tw from 'twin.macro';
 
 import UserLayoutTitle from '~/app/user/components/Title';
-import Confirm from '~/components/Confirm';
 import FavoritesModal from '~/components/FavoritesModal';
+import { Button } from '~/components/ui/button';
+import { useDisclosure } from '~/hooks/useDisclosure';
 import { api } from '~/trpc/react';
 
-import FavoritesItem from './components/Item';
+import { FavoritesList } from './components/List';
 import SkeletonItem from './components/Skeleton';
 
 const Container = tw.div`
@@ -21,34 +21,11 @@ const Container = tw.div`
   max-md:grid-cols-1
 `;
 
-const FavoritesList = ({
-  list,
-  onEdit,
-  onRemove,
-}: {
-  list: UserFavoritesItemType[];
-  onEdit: (item: UserFavoritesItemType) => void;
-  onRemove: (item: UserFavoritesItemType) => void;
-}) => {
-  return (
-    <>
-      {list.map((_, index) => (
-        <FavoritesItem
-          key={index}
-          item={_}
-          onEdit={onEdit}
-          onRemove={onRemove}
-        />
-      ))}
-    </>
-  );
-};
-
 export default function Client() {
   const [page, setPage] = useState(1);
   const [currentItem, setCurrentItem] = useState<UserFavoritesItemType>();
 
-  const { onClose, isOpen, onOpenChange, onOpen, ...rest } = useDisclosure();
+  const { onOpen, ...rest } = useDisclosure();
 
   const {
     data: { list = [], hasMore, total, totalPage } = {},
@@ -92,14 +69,22 @@ export default function Client() {
 
   const onRemove = useCallback(
     (item: UserFavoritesItemType) => {
-      Confirm.open({
-        onOk: () => {
-          removeMutation.mutateAsync(item.id);
-        },
-      });
+      // TODO confirm -> alert dialog
+      removeMutation.mutateAsync(item.id);
     },
     [removeMutation],
   );
+
+  const onNextPage = () => {
+    if (hasMore) {
+      setPage((page) => page + 1);
+    }
+  };
+
+  const onLastPage = () => {
+    if (page === 1) return;
+    setPage((page) => page - 1);
+  };
 
   if (isLoading) {
     return (
@@ -119,11 +104,11 @@ export default function Client() {
   }
   return (
     <>
-      <UserLayoutTitle title='My Favorites'>
+      <UserLayoutTitle title='Favorites'>
         <div>
           <FavoritesModal
             item={currentItem}
-            disclosure={{ isOpen, onClose, onOpenChange, onOpen, ...rest }}
+            disclosure={{ onOpen, ...rest }}
             onSuccess={onSuccess}
             title='New Favorites'
           />
@@ -133,13 +118,16 @@ export default function Client() {
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <FavoritesList list={list} onEdit={onEdit} onRemove={onRemove} />
       </Container>
-      <div className='mt-11 flex justify-center'>
-        <Pagination
-          total={totalPage ?? 0}
-          color='secondary'
-          page={page}
-          onChange={setPage}
-        />
+      <div className='mt-11 flex items-center justify-around'>
+        <Button onClick={onLastPage} disabled={page === 1}>
+          Last Page
+        </Button>
+        <div>
+          {page}/{totalPage}
+        </div>
+        <Button onClick={onNextPage} disabled={!hasMore}>
+          Next Page
+        </Button>
       </div>
     </>
   );
