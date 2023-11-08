@@ -6,7 +6,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import ProjectList from '~/app/projects/components/List';
 import Sidebar from '~/app/projects/components/Sidebar';
 import SortFilter from '~/app/projects/components/Sort';
-import Tags from '~/app/projects/components/Tags';
 import Top from '~/components/Top';
 
 export default function ProjectPage() {
@@ -32,7 +31,6 @@ export default function ProjectPage() {
       <div className='relative flex'>
         <Sidebar onChangeParams={onChangeParams} />
         <div className='m-auto flex flex-1 flex-col overflow-hidden px-8'>
-          <Tags onChangeParams={onChangeParams} />
           <SortFilter onChangeParams={onChangeParams} />
           <ProjectList />
         </div>

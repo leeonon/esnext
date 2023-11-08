@@ -5,10 +5,11 @@
   "scripts": {
     "postinstall": "prisma generate",
     "push": "pnpm with-env prisma db push",
-    "migrate": "prisma migrate dev --create-only",
-    "migrate:apply": "prisma migrate dev",
+    "migrate": "pnpm with-env prisma migrate dev --create-only",
+    "migrate:apply": "pnpm with-env prisma migrate dev",
     "generate": "prisma generate",
-    "format": "prisma format"
+    "format": "prisma format",
+    "with-env": "dotenv -e ../../.env --"
   },
   "author": "LeeOnOn",
   "license": "ISC",
