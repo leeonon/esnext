@@ -1,11 +1,16 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { Icon } from '@iconify/react';
 
 import { Logo2 } from '~/components/Logos';
 import { Input } from '~/components/ui/input';
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname !== '/') {
+    return null;
+  }
   return (
     <section className='border-t-2'>
       <div className='flex flex-col px-6 py-20 lg:px-10 xl:px-24'>

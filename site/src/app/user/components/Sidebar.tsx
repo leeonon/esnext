@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { Icon } from '@iconify/react';
 
 import { ListBox, ListBoxItem } from '~/components/ListBox';
 
@@ -16,12 +17,16 @@ export default function Sidebar() {
   );
 
   return (
-    <div className='bg-card sticky top-[calc(4rem+1px)] h-screen w-[200px] self-start border-r px-4 pt-4'>
-      <ListBox value='info' onSelect={onSelect}>
-        <ListBoxItem value='info'>User Info</ListBoxItem>
-        <ListBoxItem value='favorites'>My Favorites</ListBoxItem>
-        <ListBoxItem value='stars'>My Stars</ListBoxItem>
-        <ListBoxItem value='loved'>My Loved</ListBoxItem>
+    <div className='sticky top-[calc(4rem+1px)] w-[200px] self-start px-4 pt-10'>
+      <ListBox value='profile' onSelect={onSelect}>
+        <ListBoxItem value='favorites'>
+          <Icon icon='icon-park-outline:weixin-favorites' fontSize={18} />
+          <span>Favorites</span>
+        </ListBoxItem>
+        <ListBoxItem value='stars'>
+          <Icon icon='material-symbols:star-outline-rounded' fontSize={20} />
+          <span>Stars</span>
+        </ListBoxItem>
       </ListBox>
     </div>
   );

@@ -18,13 +18,13 @@ export default async function Page({ params: { name } }: PageProps) {
         title={
           <div>
             <span className='flex items-center text-2xl'>
-              <Link href='/user/favorites' className='text-default-500'>
-                Favorites&nbsp;/&nbsp;
-              </Link>
-              <span className='text-default-900'>{startCase(detail.name)}</span>
+              <Link href='/user/favorites'>Favorites&nbsp;/&nbsp;</Link>
+              <span className='text-muted-foreground'>
+                {startCase(detail.name)}
+              </span>
             </span>
-            <span className='text-default-400 ml-2 text-xs'>
-              共{detail.projects.length}个项目
+            <span className='text-xs'>
+              There are {detail.projects.length} projects in total.
             </span>
           </div>
         }

@@ -33,8 +33,9 @@ export const ListBoxItem: FC<PropsWithChildren<ListBoxItemProps>> = ({
       onKeyDown={handleSelect}
       onClick={handleSelect}
       className={cn(
-        'hover:bg-accent cursor-pointer rounded-md p-2 text-sm transition-colors',
+        'hover:bg-accent hover:text-muted-foreground flex cursor-pointer items-center gap-2 rounded-sm p-2 text-sm transition-colors',
         isActive && 'bg-accent',
+        !isActive && 'text-muted-foreground',
       )}
     >
       {children}

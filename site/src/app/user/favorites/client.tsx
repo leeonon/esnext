@@ -9,6 +9,7 @@ import tw from 'twin.macro';
 import UserLayoutTitle from '~/app/user/components/Title';
 import FavoritesModal from '~/components/FavoritesModal';
 import { Button } from '~/components/ui/button';
+import { Card } from '~/components/ui/card';
 import { useDisclosure } from '~/hooks/useDisclosure';
 import { api } from '~/trpc/react';
 
@@ -114,11 +115,12 @@ export default function Client() {
           />
         </div>
       </UserLayoutTitle>
-      <Container>
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-        <FavoritesList list={list} onEdit={onEdit} onRemove={onRemove} />
-      </Container>
-      <div className='mt-11 flex items-center justify-around'>
+      <div className='min-h-[calc(100vh-250px)]'>
+        <Container>
+          <FavoritesList list={list} onEdit={onEdit} onRemove={onRemove} />
+        </Container>
+      </div>
+      <Card className='ml-auto mt-8 inline-flex items-center gap-4 p-4'>
         <Button onClick={onLastPage} disabled={page === 1}>
           Last Page
         </Button>
@@ -128,7 +130,7 @@ export default function Client() {
         <Button onClick={onNextPage} disabled={!hasMore}>
           Next Page
         </Button>
-      </div>
+      </Card>
     </>
   );
 }

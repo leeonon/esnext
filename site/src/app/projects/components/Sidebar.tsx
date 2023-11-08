@@ -16,7 +16,7 @@ const IconWrapper: FC<
   <div
     className={cn(
       className,
-      'rounded-small flex h-7 w-7 min-w-[1.75rem] items-center justify-center',
+      'flex h-6 w-6 items-center justify-center rounded-sm',
     )}
     style={styles}
   >
@@ -35,19 +35,21 @@ function SidebarItem({
 }) {
   const onClick = () => onChangeParams('category', item.name);
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       className={cn(
-        'mt-2 flex h-10 cursor-pointer items-center gap-4 rounded-md px-4 transition-colors hover:border',
-        isActive && 'bg-accent border-[rgb(57, 57, 57)]',
+        'hover:bg-accent mt-2 flex h-8 cursor-pointer items-center gap-4 rounded-md px-4 transition-colors',
+        isActive && 'bg-accent',
       )}
+      onKeyDown={onClick}
       onClick={onClick}
     >
       <IconWrapper styles={{ backgroundColor: item.color }}>
-        <Icon fontSize={16} icon={item.icon} />
+        <Icon fontSize={14} icon={item.icon} />
       </IconWrapper>
       <div className='text-sm'>{item.name}</div>
-      <div className='text-muted-foreground ml-auto text-xs'>{item.count}</div>
+      <div className='text-muted-foreground bg-accent ml-auto rounded-lg p-1 text-xs'>
+        {item.count}
+      </div>
     </div>
   );
 }
@@ -58,7 +60,7 @@ export default memo(function Sidebar({
   onChangeParams: onChangeParams;
 }) {
   return (
-    <div className='sticky top-[calc(4rem+1px)] self-start px-4 pt-4'>
+    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[240px] self-start px-4 pt-4'>
       <div className='text-small mb-4 font-bold text-fuchsia-500'>
         Categories
       </div>

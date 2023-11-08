@@ -60,14 +60,12 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => router.push('/user/info')}>
-            Profile
-          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push('/user/favorites')}>
             My Favorites
           </DropdownMenuItem>
-          <DropdownMenuItem>My Stars</DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push('/user/stars')}>
+            My Stars
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => void signOut()}>

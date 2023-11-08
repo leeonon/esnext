@@ -75,6 +75,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           /* 用作卡片内容的前景色，例如文字 */
           foreground: 'hsl(var(--card-foreground))',
+          primary: 'hsl(var(--card-primary))',
         },
       },
       borderRadius: {

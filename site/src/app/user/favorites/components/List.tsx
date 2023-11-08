@@ -11,16 +11,7 @@ export const FavoritesList = ({
   onEdit: (item: UserFavoritesItemType) => void;
   onRemove: (item: UserFavoritesItemType) => void;
 }) => {
-  return (
-    <>
-      {list.map((_, index) => (
-        <FavoritesItem
-          key={index}
-          item={_}
-          onEdit={onEdit}
-          onRemove={onRemove}
-        />
-      ))}
-    </>
-  );
+  return list.map((_, index) => (
+    <FavoritesItem key={index} item={_} onEdit={onEdit} onRemove={onRemove} />
+  ));
 };

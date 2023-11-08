@@ -64,7 +64,7 @@ export default function ProjectBox(props: ProjectBoxProps) {
   return (
     <Card
       onClick={onClick}
-      className={`bg-accent h-full w-full cursor-pointer rounded-md  ${className}`}
+      className={`bg-card-primary h-full w-full cursor-pointer rounded-md  ${className}`}
     >
       <CardHeader className='flex-col'>
         <div className='flex w-full justify-start gap-3'>

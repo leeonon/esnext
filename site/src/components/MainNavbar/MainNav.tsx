@@ -39,15 +39,6 @@ export function MainNav({
         Projects
       </Link>
       <Link
-        href='/trending'
-        className={cn(
-          'hover:text-primary text-sm font-medium transition-colors',
-          getActiveClass(pathname, '/trending'),
-        )}
-      >
-        Trend
-      </Link>
-      <Link
         href='/more'
         className={cn(
           'hover:text-primary text-sm font-medium transition-colors',

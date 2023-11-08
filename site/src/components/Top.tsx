@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 
+import { Button } from '~/components/ui/button';
+
 export type TopProps = {
   target?: HTMLDivElement | null;
 };
@@ -33,11 +35,11 @@ export default function Top(props: TopProps) {
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
+    <Button
       onClick={onClick}
-      className='bg-accent hover:bg-accent fixed bottom-12 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-all'
+      className='fixed bottom-12 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full p-0 transition-all'
     >
-      <Icon icon='radix-icons:pin-top' fontSize={20} />
-    </div>
+      <Icon icon='radix-icons:pin-top' fontSize={16} />
+    </Button>
   );
 }

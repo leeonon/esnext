@@ -34,13 +34,12 @@ export default function FavoritesItem({
   const router = useRouter();
 
   const onClick = () => {
-    alert('TODO: Navigate to favorites page');
     router.push(`/user/favorites/${encodeURIComponent(item.name)}`);
   };
 
   return (
     <Card
-      className='hover:bg-accent flex max-w-[560px] cursor-pointer flex-col rounded-md transition-colors'
+      className='bg-card-primary hover:bg-card flex h-[180px] max-w-[560px] cursor-pointer flex-col rounded-md transition-colors'
       onClick={onClick}
     >
       <CardHeader className='flex flex-row items-center justify-between overflow-hidden'>
