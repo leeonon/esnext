@@ -39,7 +39,7 @@ export const category = [
     name: 'Build',
     icon: 'logos:webpack',
     count: 46,
-    color: '##8ED6FB30',
+    color: '#8ED6FB30',
   },
   {
     name: 'Mobile',

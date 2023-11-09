@@ -102,10 +102,6 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
   };
 
   const handleOk = async (values: z.infer<typeof FormSchema>) => {
-    console.log(
-      '🚀 ~ file: FavoritesModal.tsx:105 ~ handleOk ~ values:',
-      values,
-    );
     try {
       if (item) {
         await onUpdateFavorites(values);

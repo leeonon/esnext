@@ -39,7 +39,8 @@
     "nextui",
     "preinstall",
     "stylelint",
-    "trpc"
+    "trpc",
+    "zustand"
   ],
   "testing.automaticallyOpenPeekView": "never",
 }

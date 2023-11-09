@@ -67,9 +67,9 @@ export const projectRouter = createTRPCRouter({
       },
       include: {
         readme: true,
-        tags: {
+        categories: {
           include: {
-            tag: {
+            categories: {
               select: {
                 name: true,
               },
@@ -98,8 +98,10 @@ export const projectRouter = createTRPCRouter({
       const isCollection = projectData.projectInFavorites?.length > 0;
       project = {
         ...projectData,
-        tags: projectData.tags
-          ? projectData.tags.map((tagRelation) => tagRelation.tag.name)
+        categories: projectData.categories
+          ? projectData.categories.map(
+              (tagRelation) => tagRelation.categories.name,
+            )
           : undefined,
         isCollection,
       };
@@ -159,4 +161,33 @@ export const projectRouter = createTRPCRouter({
         }),
       );
     }),
+  categories: publicProcedure.query(async ({ ctx }) => {
+    const categories = await ctx.db.category.findMany();
+    const counts = await ctx.db.categoryOnProject.groupBy({
+      by: ['categoryId'],
+      _count: {
+        categoryId: true,
+      },
+    });
+
+    const result: Array<{
+      id: number;
+      name: string;
+      slug: string;
+      icon: string | null;
+      bgColor: string | null;
+      count: number;
+    }> = [];
+
+    // 为每个 category 添加 count 属性
+    categories.forEach((category) => {
+      const count = counts.find((c) => c.categoryId === category.id);
+      result.push({
+        ...category,
+        count: count?._count?.categoryId || 0,
+      });
+    });
+
+    return result;
+  }),
 });

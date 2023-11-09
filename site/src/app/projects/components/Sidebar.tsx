@@ -1,12 +1,13 @@
 'use client';
 
+import type { Category } from '@esnext/server';
 import type { FC, PropsWithChildren } from 'react';
 
 import { memo } from 'react';
 import { Icon } from '@iconify/react';
 
-import { category } from '~/constant/category';
 import { cn } from '~/lib/utils';
+import { useGlobalDataContext } from '~/store/index.store';
 
 export type onChangeParams = (name: string, value: string) => void;
 
@@ -29,7 +30,7 @@ function SidebarItem({
   isActive,
   onChangeParams,
 }: {
-  item: (typeof category)[0];
+  item: Category;
   isActive: boolean;
   onChangeParams: onChangeParams;
 }) {
@@ -43,8 +44,8 @@ function SidebarItem({
       onKeyDown={onClick}
       onClick={onClick}
     >
-      <IconWrapper styles={{ backgroundColor: item.color }}>
-        <Icon fontSize={14} icon={item.icon} />
+      <IconWrapper styles={{ backgroundColor: item.bgColor ?? '' }}>
+        <Icon fontSize={14} icon={item.icon ?? 'logos:javascript'} />
       </IconWrapper>
       <div className='text-sm'>{item.name}</div>
       <div className='text-muted-foreground bg-accent ml-auto rounded-lg p-1 text-xs'>
@@ -59,12 +60,13 @@ export default memo(function Sidebar({
 }: {
   onChangeParams: onChangeParams;
 }) {
+  const categories = useGlobalDataContext((state) => state.categories);
   return (
     <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[240px] self-start px-4 pt-4'>
       <div className='text-small mb-4 font-bold text-fuchsia-500'>
         Categories
       </div>
-      {category.map((item) => (
+      {categories.map((item) => (
         <SidebarItem
           key={item.name}
           item={item}

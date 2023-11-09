@@ -22,7 +22,7 @@ model Project {
   owner              String?
   license            String
   readme             ProjectReadme?
-  categories         CategoriesOnProject[]
+  categories         CategoryOnProject[]
   projectInFavorites ProjectInFavorites[]
 
   @@map("projects")
@@ -37,21 +37,24 @@ model ProjectReadme {
   @@map("project_readme")
 }
 
-model Categories {
+model Category {
   id       Int                   @id @default(autoincrement())
   name     String                @unique
-  projects CategoriesOnProject[]
+  slug     String                @unique
+  icon     String?
+  bgColor  String?               @map("bg_color")
+  projects CategoryOnProject[]
 
-  @@map("categories")
+  @@map("category")
 }
 
-model CategoriesOnProject {
-  categoriesId Int        @map("categories_id")
+model CategoryOnProject {
+  categoryId Int        @map("category_id")
   projectId    Int        @map("project_id")
-  categories   Categories @relation(fields: [categoriesId], references: [id], onDelete: Cascade)
+  categories   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   project      Project    @relation(fields: [projectId], references: [id])
 
-  @@id([categoriesId, projectId])
+  @@id([categoryId, projectId])
   @@map("categories_on_project")
 }
 

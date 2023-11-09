@@ -7,3 +7,4 @@ export type ProjectItemType = RouterOutput['project']['all'][number];
 export type ProjectDetailType = RouterOutput['project']['detail'];
 export type UserFavoritesItemType =
   RouterOutput['user']['userFavorites'][number];
+export type Category = RouterOutput['project']['categories'][number];

@@ -21,7 +21,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        sans: ['var(--font-sans)', 'var(--font-recursive)', ...fontFamily.sans],
       },
       colors: {
         /* 用于元素边框的颜色，通常是淡色以定义分隔线和形状轮廓。 */
