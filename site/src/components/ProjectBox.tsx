@@ -19,6 +19,7 @@ import { Skeleton } from '~/components/ui/skeleton';
 
 export type ProjectBoxProps = {
   item: ProjectItemType;
+  onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
   className?: string;
 };
 
@@ -44,7 +45,7 @@ export function ProjectSkeleton() {
 }
 
 export default function ProjectBox(props: ProjectBoxProps) {
-  const { item, className } = props;
+  const { item, className, onChangeParams } = props;
   const router = useRouter();
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -99,27 +100,20 @@ export default function ProjectBox(props: ProjectBoxProps) {
       </CardHeader>
       <CardFooter className='relative overflow-hidden'>
         <div className='mt-auto flex flex-row items-center justify-start gap-2'>
-          <Button
-            variant='outline'
-            size='sm'
-            className='dark:hover:bg-card dark:border-[hsl(0,0%,28%)]'
-          >
-            React
-          </Button>
-          <Button
-            variant='outline'
-            size='sm'
-            className='dark:hover:bg-card dark:border-[hsl(0,0%,28%)]'
-          >
-            Zod
-          </Button>
-          <Button
-            variant='outline'
-            size='sm'
-            className='dark:hover:bg-card dark:border-[hsl(0,0%,28%)]'
-          >
-            Vue
-          </Button>
+          {props.item.keywords?.split(',').map((keyword) => (
+            <Button
+              key={keyword}
+              onClick={(e) => {
+                e.stopPropagation();
+                onChangeParams('keywords', keyword);
+              }}
+              variant='outline'
+              size='sm'
+              className='dark:hover:bg-card dark:border-[hsl(0,0%,28%)]'
+            >
+              {keyword}
+            </Button>
+          ))}
         </div>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
         <div

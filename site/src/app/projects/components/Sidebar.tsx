@@ -9,7 +9,7 @@ import { Icon } from '@iconify/react';
 import { cn } from '~/lib/utils';
 import { useGlobalDataContext } from '~/store/index.store';
 
-export type onChangeParams = (name: string, value: string) => void;
+export type onChangeParams = (name: string, value: string | number) => void;
 
 const IconWrapper: FC<
   PropsWithChildren<{ className?: string; styles?: React.CSSProperties }>
@@ -34,7 +34,7 @@ function SidebarItem({
   isActive: boolean;
   onChangeParams: onChangeParams;
 }) {
-  const onClick = () => onChangeParams('category', item.name);
+  const onClick = () => onChangeParams('category', item.id);
   return (
     <div
       className={cn(
@@ -48,7 +48,7 @@ function SidebarItem({
         <Icon fontSize={14} icon={item.icon ?? 'logos:javascript'} />
       </IconWrapper>
       <div className='text-sm'>{item.name}</div>
-      <div className='text-muted-foreground bg-accent ml-auto rounded-lg p-1 text-xs'>
+      <div className='text-muted-foreground bg-accent ml-auto rounded-md px-2 py-1 text-xs'>
         {item.count}
       </div>
     </div>

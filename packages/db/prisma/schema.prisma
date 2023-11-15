@@ -21,6 +21,7 @@ model Project {
   logo               String?
   owner              String?
   license            String
+  keywords           String?
   readme             ProjectReadme?
   categories         CategoryOnProject[]
   projectInFavorites ProjectInFavorites[]

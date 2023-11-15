@@ -1,8 +1,7 @@
-'use client';
-
 import type { ProjectItemType } from '@esnext/server';
 
 import { useEffect, useMemo, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Icon } from '@iconify/react';
 
 import ProjectBox, { ProjectSkeleton } from '~/components/ProjectBox';
@@ -12,21 +11,23 @@ import { api } from '~/trpc/react';
 const listClass =
   'grid h-fit grid-cols-3 gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1';
 
-export const List = ({ list }: { list: ProjectItemType[] }) => {
-  return list.map((project) => <ProjectBox key={project.id} item={project} />);
-};
-
 export const SkeletonList = () => {
   return Array.from({ length: 10 }).map((_, index) => (
     <ProjectSkeleton key={index} />
   ));
 };
 
-export default function Project() {
+export default function Project({
+  onChangeParams,
+}: {
+  onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
+}) {
   const loadingRef = useRef<HTMLDivElement>(null);
+  const categoryId = useSearchParams().get('category');
   const query = api.project.query.useInfiniteQuery(
     {
       limit: 10,
+      categoryId: categoryId || undefined,
     },
     {
       refetchOnWindowFocus: false,
@@ -59,7 +60,13 @@ export default function Project() {
   return (
     <div>
       <div className={listClass}>
-        <List list={currentList} />
+        {currentList.map((item: ProjectItemType) => (
+          <ProjectBox
+            key={item.id}
+            item={item}
+            onChangeParams={onChangeParams}
+          />
+        ))}
       </div>
       {hasNextPage || isLoading ? (
         <div ref={loadingRef} className={listClass}>

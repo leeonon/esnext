@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 
 import { Card } from '~/components/ui/card';
 import { Toggle } from '~/components/ui/toggle';
-import { tags } from '~/constant/tags';
 
 export type OnChangeParams = (
   name: string,
@@ -20,7 +19,7 @@ export type TagProps = PropsWithChildren<{
 
 const Tag: FC<TagProps> = ({ children, value, onChangeParams }) => {
   const searchParams = useSearchParams();
-  const tag = searchParams.get('tag') ?? '';
+  const tag = searchParams.get('keywords') ?? '';
   const isActive = useMemo(
     () => tag.split(',').some((item) => item === value),
     [tag, value],
@@ -57,6 +56,12 @@ export interface TagsProps {
 
 export default function Tags({ onChangeParams }: TagsProps) {
   const listRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const keywords = searchParams.get('keywords');
+  if (!keywords) {
+    return null;
+  }
+  const keywordsArr = keywords.split(',');
 
   return (
     <Card className='bg-default-50 my-4 flex w-full items-center rounded-md py-4'>
@@ -65,9 +70,9 @@ export default function Tags({ onChangeParams }: TagsProps) {
           className='scrollbar-none flex w-full flex-1 flex-wrap justify-start gap-2 px-3'
           ref={listRef}
         >
-          {tags.map((tag) => (
-            <Tag key={tag.name} value={tag.key} onChangeParams={onChangeParams}>
-              {tag.name}
+          {keywordsArr.map((words) => (
+            <Tag key={words} value={words} onChangeParams={onChangeParams}>
+              {words}
             </Tag>
           ))}
         </div>

@@ -37,10 +37,27 @@ export const projectRouter = createTRPCRouter({
   query: publicProcedure
     .input(QueryProjectListSchema)
     .query(async ({ ctx, input }) => {
-      const { limit, cursor } = input;
+      const { limit, categoryId, keywords, cursor } = input;
+      const categoryWhere = categoryId
+        ? {
+            categories: {
+              some: {
+                categoryId: Number(categoryId),
+              },
+            },
+          }
+        : {};
+
+      const keywordsWhere = keywords
+        ? { keywords: { contains: keywords } }
+        : {};
+
       const list = await ctx.db.project.findMany({
         take: limit + 1,
         cursor: cursor ? { id: cursor } : undefined,
+        where: {
+          AND: [categoryWhere, keywordsWhere],
+        },
       });
 
       let nextCursor: typeof cursor | undefined = undefined;
