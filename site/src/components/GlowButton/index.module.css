@@ -1,0 +1,259 @@
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-descending-specificity */
+
+/* https://codepen.io/jh3y/pen/vYbyKeL */
+
+.glowBtn {
+  --saturation: 20%;
+  --transition: 0.15s;
+  --glow: hsl(var(--hue, 150) 80% 70% / var(--alpha, 1));
+  --border-radius: calc(var(--radius) * 1px);
+  --border-width: calc(var(--thickness) * 1px);
+  --active: 0;
+  --glow-spread: calc(var(--spread) * 1deg);
+  --text: 'Deploy';
+  --hue: 180;
+  --alpha: 1;
+  --window: 1.4;
+  --speed: 1;
+  --blur: 10;
+  --spread: 120;
+  --thickness: 2;
+  --radius: 32;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 80px;
+  font-size: 2rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 0;
+  border-radius: var(--border-radius);
+
+  /* box-shadow:
+	  0 0.025em 0.4em -0.02em hsl(0deg 0% 100% / 25%),
+		0 0.05em 0 0 hsl(260deg 0% 50%) inset,
+		0 -0.05em 0 0 hsl(260deg 0% 0%) inset; */
+  transition:
+    box-shadow var(--transition),
+    scale var(--transition),
+    background var(--transition);
+}
+
+.glowBtn::before {
+  --saturation: 90%;
+
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+}
+
+.glowBtn:active {
+  scale: 1;
+}
+
+@keyframes flip {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.spark::before {
+  position: absolute;
+  content: '';
+}
+
+/* Purely to decorate the use of CQ elements sliding along */
+.spark::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  /*	background: red; */
+  content: '';
+}
+
+/* Optional backdrop – For some reason, if you go with the mask-composite, you lose the glow... */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(transparent 5%, hsl(0deg 0% 0% / 50%), transparent)
+      padding-box,
+    radial-gradient(
+        40% 50% at center 100%,
+        hsl(var(--hue) var(--saturation) 72% / 15%),
+        transparent
+      )
+      padding-box,
+    radial-gradient(
+        80% 100% at center 120%,
+        hsl(var(--hue) var(--saturation) 70% / 20%),
+        transparent
+      )
+      padding-box,
+    linear-gradient(
+        hsl(var(--hue) var(--saturation) 5%),
+        hsl(var(--hue) var(--saturation) 4%)
+      )
+      padding-box;
+
+  /* border: var(--border-width) solid transparent; */
+
+  /* border-radius: var(--border-radius); */
+  transition: background var(--transition) opacity var(--transition);
+}
+
+.glowBtn:is(:hover, :focus-visible) {
+  --active: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+}
+
+.glowBtn .spark__container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.glows {
+  position: absolute;
+  inset: 0;
+  filter: blur(calc(var(--blur) * 1px));
+  container-type: size;
+}
+
+.glowBtn > .spark__container {
+  container-type: size;
+}
+
+.glowBtn .spark:nth-of-type(2) {
+  rotate: 180deg;
+  animation-direction: alternate-reverse;
+}
+
+.glowBtn .spark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+  border-radius: 0;
+  mask: none;
+  animation: slide calc(var(--speed) * 1s) ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.glowBtn:hover .spark {
+  animation-play-state: running;
+}
+
+.glowBtn .spark::before {
+  inset: -100%;
+  width: auto;
+  background: conic-gradient(
+    from calc(270deg - (var(--glow-spread) * 0.5)),
+    var(--glow) 0,
+    var(--glow) var(--glow-spread),
+    transparent var(--glow-spread)
+  );
+  transform: rotate(0deg);
+  translate: 0 0;
+  animation: spin calc(var(--speed) * 2s) infinite linear;
+  animation-play-state: paused;
+}
+
+.glowBtn:is(:hover, :focus-visible) .spark::before {
+  animation-play-state: running;
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+
+  15%,
+  35% {
+    rotate: 90deg;
+  }
+
+  65%,
+  85% {
+    rotate: 270deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes slide {
+  to {
+    translate: calc(100cqw - 100%) 0;
+  }
+}
+
+/* Overrides */
+.glowBtn .spark {
+  background: transparent;
+}
+
+.glowBtn .spark__container {
+  border-radius: var(--border-radius);
+  opacity: 0;
+}
+
+.spark {
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.glowBtn:is(:hover, :focus-visible) .spark {
+  opacity: 1;
+}
+
+.glowBtn:is(:hover, :focus-visible) .spark__container {
+  animation: reveal calc(var(--window) * 1s) both;
+}
+
+@keyframes reveal {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 1;
+  }
+}
+
+.label {
+  pointer-events: none;
+  transition: opacity 0.5s 1.2s;
+}
+
+.label:nth-of-type(2) {
+  transition: opacity 0.5s 1.1s;
+}
+
+.label:nth-of-type(3) {
+  transition: opacity 0.5s 1s;
+}
+
+.spark__container,
+.glows {
+  transition: transform 1s 4s;
+}
+
+.scene {
+  transition: transform 1s 6s;
+}
