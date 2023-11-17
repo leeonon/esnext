@@ -1,8 +1,5 @@
 'use client';
 
-import type { Category } from '@esnext/server';
-
-import { useRef } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
@@ -11,19 +8,15 @@ import {
   createGlobalDataStore,
   GlobalDataStoreContext,
 } from '~/store/index.store';
+import { api } from '~/trpc/react';
 
-export function ESNextProviders({
-  children,
-  categories,
-}: {
-  children: React.ReactNode;
-  categories: Category[];
-}) {
-  const store = useRef(
-    createGlobalDataStore({
-      categories: categories ?? [],
-    }),
-  ).current;
+import '~/styles/globals.css';
+
+export function ESNextProviders({ children }: { children: React.ReactNode }) {
+  const { data: categories } = api.project.categories.useQuery();
+  const store = createGlobalDataStore({
+    categories: categories ?? [],
+  });
   return (
     <ThemeProvider attribute='class' storageKey='theme' defaultTheme='dark'>
       <GlobalDataStoreContext.Provider value={store}>

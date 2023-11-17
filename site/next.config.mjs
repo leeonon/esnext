@@ -1,5 +1,3 @@
-import withTwin from './withTwin.cjs';
-
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
@@ -7,7 +5,7 @@ import withTwin from './withTwin.cjs';
 await import('@esnext/env');
 
 /** @type {import("next").NextConfig} */
-const config = withTwin({
+const config = {
   reactStrictMode: true,
 
   /**
@@ -39,6 +37,6 @@ const config = withTwin({
       },
     ],
   },
-});
+};
 
 export default config;
