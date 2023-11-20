@@ -1,0 +1,89 @@
+{
+  "name": "extract-style-variable",
+  "version": "1.0.1",
+  "description": "Extract variables from the style file, support css, less, scss",
+  "private": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leeonon/extract-style-variable.git"
+  },
+  "keywords": [
+    "style",
+    "css",
+    "variable"
+  ],
+  "author": {
+    "name": "leeOnOn"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leeonon/extract-style-variable/issues"
+  },
+  "homepage": "https://github.com/leeonon/extract-style-variable#readme",
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "globals": "^13.20.0",
+    "prettier": "^2.8.4",
+    "tsup": "^6.6.3",
+    "vitest": "^0.28.5"
+  },
+  "dependencies": {
+    "@types/node": "^18.14.0",
+    "eslint": "^8.34.0",
+    "postcss-css-variables": "^0.18.0",
+    "postcss": "^8.4.21",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "watch": "tsup src/index.ts --watch",
+    "dev": "vitest",
+    "test": "vitest run",
+    "lint": "eslint",
+    "ci": "pnpm run lint && pnpm run test && pnpm run build",
+    "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish"
+  },
+  "_id": "extract-style-variable@1.0.1",
+  "_integrity": "sha512-M6AiamSFoI6PjnHyE3rqHr4jtLVHDdpWBaZqEpUv0CoSiQR3r6j8W812dHx42FF5K9vukQJtDWt0VB6cm2XY3A==",
+  "_resolved": "/tmp/819281d0c6d9610ddbfd01f5b11b0f6b/extract-style-variable-1.0.1.tgz",
+  "_from": "file:extract-style-variable-1.0.1.tgz",
+  "_nodeVersion": "16.20.2",
+  "_npmVersion": "8.19.4",
+  "dist": {
+    "integrity": "sha512-M6AiamSFoI6PjnHyE3rqHr4jtLVHDdpWBaZqEpUv0CoSiQR3r6j8W812dHx42FF5K9vukQJtDWt0VB6cm2XY3A==",
+    "shasum": "5da049e36cf57503eeacddb32d5a0088575c1892",
+    "tarball": "https://registry.npmjs.org/extract-style-variable/-/extract-style-variable-1.0.1.tgz",
+    "fileCount": 9,
+    "unpackedSize": 21901,
+    "signatures": [
+      {
+        "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA",
+        "sig": "MEYCIQCiuTmDouQ7dpemcRgW+ntb2OdEH9gh3TclFC+xkUXBZwIhAOPXVFAVReYHz1ZO1ft6mJBlU/bq9u1AYMMhPxpnGHAr"
+      }
+    ]
+  },
+  "_npmUser": {
+    "name": "manlou",
+    "email": "v5sollee@gmail.com"
+  },
+  "directories": {
+
+  },
+  "maintainers": [
+    {
+      "name": "manlou",
+      "email": "v5sollee@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/extract-style-variable_1.0.1_1695303845521_0.9710488773577786"
+  },
+  "_hasShrinkwrap": false
+}

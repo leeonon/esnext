@@ -8,21 +8,43 @@ datasource db {
 }
 
 model Project {
-  id                 Int                   @id @default(autoincrement())
-  name               String
-  fullName           String                @map("full_name")
-  description        String
-  homePage           String?               @map("home_page")
-  stars              Int
-  projectCreateTime  DateTime?             @map("project_create_time")
-  lastCommitTime     DateTime?             @map("last_commit_time")
-  version            String?
-  versionUpdateTime  DateTime?             @map("version_update_time")
-  logo               String?
-  owner              String?
-  license            String
-  keywords           String?
-  readme             ProjectReadme?
+  id              Int     @id @unique
+  name            String
+  fullName        String  @map("full_name")
+  description     String
+  htmlUrl         String  @map("html_url")
+  homepage        String?
+  languagesUrl    String  @map("languages_url")
+  createdAt       String  @map("created_at")
+  updatedAt       String  @map("updated_at")
+  pushedAt        String  @map("pushed_at")
+  stargazersCount Int     @map("stargazers_count")
+  size            Int
+  openIssues      Int     @map("open_issues")
+  forks           Int
+  language        String
+  isTemplate      Boolean @map("is_template")
+  licenseKey      String? @map("license_key")
+  licenseName     String? @map("license_name")
+  licenseSpdxId   String? @map("license_spdx_id")
+  logo            String?
+  topics          String?
+  keywords        String?
+
+  ownerLogin     String @map("owner_login")
+  ownerId        Int    @map("owner_id")
+  ownerAvatarUrl String @map("owner_avatar_url")
+  ownerHtmlUrl   String @map("owner_html_url")
+  ownerType      String @map("owner_type")
+
+  version         String
+  modified        String
+  weeklyDownloads Int?           @map("weekly_downloads")
+  readme          ProjectReadme?
+
+  dbCreatedAt DateTime @default(now()) @map("db_created_at")
+  dbUpdatedAt DateTime @updatedAt @map("db_updated_at")
+
   categories         CategoryOnProject[]
   projectInFavorites ProjectInFavorites[]
 
@@ -39,21 +61,21 @@ model ProjectReadme {
 }
 
 model Category {
-  id       Int                   @id @default(autoincrement())
-  name     String                @unique
-  slug     String                @unique
+  id       Int                 @id @default(autoincrement())
+  name     String              @unique
+  slug     String              @unique
   icon     String?
-  bgColor  String?               @map("bg_color")
+  bgColor  String?             @map("bg_color")
   projects CategoryOnProject[]
 
   @@map("category")
 }
 
 model CategoryOnProject {
-  categoryId Int        @map("category_id")
-  projectId    Int        @map("project_id")
-  categories   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  project      Project    @relation(fields: [projectId], references: [id])
+  categoryId Int      @map("category_id")
+  projectId  Int      @map("project_id")
+  categories Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  project    Project  @relation(fields: [projectId], references: [id])
 
   @@id([categoryId, projectId])
   @@map("categories_on_project")
