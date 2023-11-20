@@ -1,4 +1,10 @@
-import type { Repos } from './type';
+import type {
+  GithubRepository,
+  PackageDownloadInfo,
+  PackageMetadata,
+  Repos,
+} from './type';
+import type { Project } from '@esnext/db';
 
 export type Period = 'last-day' | 'last-week' | 'last-month' | 'last-year';
 
@@ -18,6 +24,101 @@ export function getPackageMetadataUrl(name: string) {
   return `${NPM_HOST}${name}`;
 }
 
-export function combineData() {
-  //..
+export function combineCreateData({
+  repos,
+  packageMetadata,
+  packageDownloadInfo,
+}: {
+  repos: GithubRepository;
+  packageMetadata: PackageMetadata;
+  packageDownloadInfo: PackageDownloadInfo;
+  readme: string;
+}) {
+  const data = {
+    id: repos.id,
+    name: repos.name,
+    fullName: repos.full_name,
+    description: repos.description,
+    htmlUrl: repos.html_url,
+    homepage: repos.homepage,
+    languagesUrl: repos.languages_url,
+    createdAt: repos.created_at,
+    updatedAt: repos.updated_at,
+    pushedAt: repos.pushed_at,
+    stargazersCount: repos.stargazers_count,
+    size: repos.size,
+    openIssues: repos.open_issues,
+    forks: repos.forks,
+    language: repos.language,
+    isTemplate: repos.is_template,
+    licenseKey: repos.license?.key,
+    licenseName: repos.license?.name,
+    licenseSpdxId: repos.license?.spdx_id,
+    topics: repos.topics.join(','),
+
+    ownerLogin: repos.owner.login,
+    ownerId: repos.owner.id,
+    ownerAvatarUrl: repos.owner.avatar_url,
+    ownerHtmlUrl: repos.owner.html_url,
+    ownerType: repos.owner.type,
+
+    version: packageMetadata['dist-tags'].latest || '',
+    modified: packageMetadata.modified,
+
+    weeklyDownloads: packageDownloadInfo.downloads,
+  };
+  return data;
+}
+
+export function combineUpdateData({
+  repos,
+  packageMetadata,
+  packageDownloadInfo,
+  readme,
+}: {
+  repos: GithubRepository;
+  packageMetadata: PackageMetadata;
+  packageDownloadInfo: PackageDownloadInfo;
+  readme: string;
+}) {
+  const data = {
+    id: repos.id,
+    name: repos.name,
+    fullName: repos.full_name,
+    description: repos.description,
+    htmlUrl: repos.html_url,
+    homepage: repos.homepage,
+    languagesUrl: repos.languages_url,
+    createdAt: repos.created_at,
+    updatedAt: repos.updated_at,
+    pushedAt: repos.pushed_at,
+    stargazersCount: repos.stargazers_count,
+    size: repos.size,
+    openIssues: repos.open_issues,
+    forks: repos.forks,
+    language: repos.language,
+    isTemplate: repos.is_template,
+    licenseKey: repos.license?.key,
+    licenseName: repos.license?.name,
+    licenseSpdxId: repos.license?.spdx_id,
+    topics: repos.topics.join(','),
+
+    ownerLogin: repos.owner.login,
+    ownerId: repos.owner.id,
+    ownerAvatarUrl: repos.owner.avatar_url,
+    ownerHtmlUrl: repos.owner.html_url,
+    ownerType: repos.owner.type,
+
+    version: packageMetadata['dist-tags'].latest || '',
+    modified: packageMetadata.modified,
+
+    weeklyDownloads: packageDownloadInfo.downloads,
+
+    readme: {
+      create: {
+        content: readme,
+      },
+    },
+  };
+  return data;
 }

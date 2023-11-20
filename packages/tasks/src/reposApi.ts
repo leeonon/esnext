@@ -10,6 +10,8 @@ import { db } from '@esnext/db';
 import fetch from 'node-fetch';
 
 import {
+  combineCreateData,
+  combineUpdateData,
   getGithubReposPath,
   getPackageDownloadUrl,
   getPackageMetadataUrl,
@@ -50,40 +52,58 @@ export default class ReposApi {
         repos.reposName,
         'last-week',
       );
-      const readme = ReposApi.getReposReadme(repos);
-      const data = {
-        id: gitRepos.id,
-        name: gitRepos.name,
-        fullName: gitRepos.full_name,
-        description: gitRepos.description,
-        htmlUrl: gitRepos.html_url,
-        homepage: gitRepos.homepage,
-        languagesUrl: gitRepos.languages_url,
-        createdAt: gitRepos.created_at,
-        updatedAt: gitRepos.updated_at,
-        pushedAt: gitRepos.pushed_at,
-        stargazersCount: gitRepos.stargazers_count,
-        size: gitRepos.size,
-        openIssues: gitRepos.open_issues,
-        forks: gitRepos.forks,
-        language: gitRepos.language,
-        isTemplate: gitRepos.is_template,
-        licenseKey: gitRepos.license?.key,
-        licenseName: gitRepos.license?.name,
-        licenseSpdxId: gitRepos.license?.spdx_id,
-        topics: gitRepos.topics.join(','),
-
-        version: '1.0.0',
-        versionUpdateTime: new Date(),
-        logo: '',
-      };
-      await db.project.upsert({
+      const project = await db.project.findUnique({
         where: {
           id: gitRepos.id,
         },
-        create: data,
-        update: data,
       });
+      const readme = ReposApi.getReposReadme(repos);
+      if (!project) {
+        const data = combineCreateData({
+          repos: gitRepos,
+          packageMetadata: packageInfo,
+          packageDownloadInfo,
+          readme,
+        });
+        const result = await db.project.create({
+          data,
+        });
+        await db.projectReadme.create({
+          data: {
+            content: readme,
+            projectId: result.id,
+          },
+        });
+
+        // TODO change category
+        const categoryIds = [1, 2, 3];
+        for (const categoryId of categoryIds) {
+          await db.categoryOnProject.create({
+            data: {
+              categoryId: categoryId,
+              projectId: result.id,
+            },
+          });
+        }
+      } else {
+        const data = combineUpdateData({
+          repos: gitRepos,
+          packageMetadata: packageInfo,
+          packageDownloadInfo,
+          readme,
+        });
+        await db.project.update({
+          where: { id: gitRepos.id },
+          data,
+        });
+      }
+      // await db.project.upsert({
+      //   where: {
+      //     id: gitRepos.id,
+      //   },
+      //   create: data,
+      //   update: data,
+      // });
     } catch (error) {
       throw error;
     }
