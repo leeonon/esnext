@@ -4,7 +4,6 @@ import type {
   PackageMetadata,
   Repos,
 } from './type';
-import type { Project } from '@esnext/db';
 
 export type Period = 'last-day' | 'last-week' | 'last-month' | 'last-year';
 
@@ -24,6 +23,10 @@ export function getPackageMetadataUrl(name: string) {
   return `${NPM_HOST}${name}`;
 }
 
+export function getReposReadmeUrl(repos: Repos) {
+  return `${GITHUB_HOST}repos/${repos.reposOwner}/${repos.reposName}/contents/README.md`;
+}
+
 export function combineCreateData({
   repos,
   packageMetadata,
@@ -32,7 +35,6 @@ export function combineCreateData({
   repos: GithubRepository;
   packageMetadata: PackageMetadata;
   packageDownloadInfo: PackageDownloadInfo;
-  readme: string;
 }) {
   const data = {
     id: repos.id,
@@ -74,12 +76,10 @@ export function combineUpdateData({
   repos,
   packageMetadata,
   packageDownloadInfo,
-  readme,
 }: {
   repos: GithubRepository;
   packageMetadata: PackageMetadata;
   packageDownloadInfo: PackageDownloadInfo;
-  readme: string;
 }) {
   const data = {
     id: repos.id,
@@ -113,12 +113,6 @@ export function combineUpdateData({
     modified: packageMetadata.modified,
 
     weeklyDownloads: packageDownloadInfo.downloads,
-
-    readme: {
-      create: {
-        content: readme,
-      },
-    },
   };
   return data;
 }

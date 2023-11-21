@@ -71,12 +71,12 @@ model Category {
 }
 
 model CategoryOnProject {
-  categoryId Int      @map("category_id")
-  projectId  Int      @map("project_id")
-  categories Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  project    Project  @relation(fields: [projectId], references: [id])
+  categorySlug String      @map("category_slug")
+  projectId    Int      @map("project_id")
+  categories   Category @relation(fields: [categorySlug], references: [slug], onDelete: Cascade)
+  project      Project  @relation(fields: [projectId], references: [id])
 
-  @@id([categoryId, projectId])
+  @@id([categorySlug, projectId])
   @@map("categories_on_project")
 }
 

@@ -1,5 +1,6 @@
 import type {
   GithubRepository,
+  GithubReposWithReadme,
   PackageDownloadInfo,
   PackageMetadata,
   Repos,
@@ -7,6 +8,7 @@ import type {
 import type { Period } from './utils';
 
 import { db } from '@esnext/db';
+import { decode } from 'js-base64';
 import fetch from 'node-fetch';
 
 import {
@@ -15,6 +17,7 @@ import {
   getGithubReposPath,
   getPackageDownloadUrl,
   getPackageMetadataUrl,
+  getReposReadmeUrl,
 } from './utils';
 
 export default class ReposApi {
@@ -40,11 +43,17 @@ export default class ReposApi {
     return (await res.json()) as Promise<PackageDownloadInfo>;
   };
 
-  static getReposReadme = (repos: Repos) => {
-    return repos.reposName;
+  static getReposReadme = async (repos: Repos) => {
+    const url = getReposReadmeUrl(repos);
+    const res = await fetch(url);
+    const data = (await res.json()) as GithubReposWithReadme;
+    if (res.ok) {
+      return decode(data.content);
+    }
+    return '';
   };
 
-  static createRepos = async (repos: Repos) => {
+  static createRepos = async (repos: Repos, categorySlugs: string[] = []) => {
     try {
       const gitRepos = await ReposApi.getReposDetail(repos);
       const packageInfo = await ReposApi.getPackageInfo(repos);
@@ -57,13 +66,12 @@ export default class ReposApi {
           id: gitRepos.id,
         },
       });
-      const readme = ReposApi.getReposReadme(repos);
+      const readme = await ReposApi.getReposReadme(repos);
       if (!project) {
         const data = combineCreateData({
           repos: gitRepos,
           packageMetadata: packageInfo,
           packageDownloadInfo,
-          readme,
         });
         const result = await db.project.create({
           data,
@@ -75,35 +83,37 @@ export default class ReposApi {
           },
         });
 
-        // TODO change category
-        const categoryIds = [1, 2, 3];
-        for (const categoryId of categoryIds) {
+        for (const slug of categorySlugs) {
           await db.categoryOnProject.create({
             data: {
-              categoryId: categoryId,
+              categorySlug: slug,
               projectId: result.id,
             },
           });
         }
+
+        return result;
       } else {
         const data = combineUpdateData({
           repos: gitRepos,
           packageMetadata: packageInfo,
           packageDownloadInfo,
-          readme,
         });
-        await db.project.update({
+        const result = await db.project.update({
           where: { id: gitRepos.id },
           data,
         });
+        await db.projectReadme.update({
+          where: {
+            projectId: result.id,
+          },
+          data: {
+            content: readme,
+          },
+        });
+
+        return result;
       }
-      // await db.project.upsert({
-      //   where: {
-      //     id: gitRepos.id,
-      //   },
-      //   create: data,
-      //   update: data,
-      // });
     } catch (error) {
       throw error;
     }

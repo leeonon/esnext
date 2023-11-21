@@ -2,15 +2,18 @@
   "name": "@esnext/tasks",
   "version": "1.0.0",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "with-env": "dotenv -e ../../.env --",
-    "dev": "pnpm with-env ts-node ./src/index.ts",
+    "dev": "pnpm with-env tsx ./src/index.ts",
     "build": "tsc",
     "start": "pnpm with-env pm2 start ecosystem.config.js",
     "deploy": "pnpm with-env pnpm run build && pnpm run start",
     "test": "pnpm with-env vitest --run"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
+    "js-base64": "^3.7.5",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
@@ -21,7 +24,7 @@
     "@esnext/tsconfig": "workspace:^",
     "@types/node-fetch": "^2.6.9",
     "eslint": "^8.52.0",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.1.4",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
