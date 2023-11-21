@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const QueryProjectListSchema = z.object({
   limit: z.number().default(20),
   cursor: z.number().optional(),
-  categoryId: z.string().optional(),
+  categorySlug: z.nullable(z.string()),
   keywords: z.string().optional(),
 });
 

@@ -4,7 +4,6 @@ import type { UserFavoritesItemType } from '@esnext/server';
 
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
-import tw from 'twin.macro';
 
 import UserLayoutTitle from '~/app/user/components/Title';
 import FavoritesModal from '~/components/FavoritesModal';
@@ -15,12 +14,6 @@ import { api } from '~/trpc/react';
 
 import { FavoritesList } from './components/List';
 import SkeletonItem from './components/Skeleton';
-
-const Container = tw.div`
-  grid grid-flow-row grid-cols-5 gap-4 py-4
-  max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2
-  max-md:grid-cols-1
-`;
 
 export default function Client() {
   const [page, setPage] = useState(1);
@@ -89,7 +82,11 @@ export default function Client() {
 
   if (isLoading) {
     return (
-      <Container>
+      <div
+        className='grid grid-flow-row grid-cols-5 gap-4 py-4
+      max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2
+      max-md:grid-cols-1'
+      >
         <SkeletonItem />
         <SkeletonItem />
         <SkeletonItem />
@@ -100,7 +97,7 @@ export default function Client() {
         <SkeletonItem />
         <SkeletonItem />
         <SkeletonItem />
-      </Container>
+      </div>
     );
   }
   return (
@@ -116,9 +113,13 @@ export default function Client() {
         </div>
       </UserLayoutTitle>
       <div className='min-h-[calc(100vh-250px)]'>
-        <Container>
+        <div
+          className='grid grid-flow-row grid-cols-5 gap-4 py-4
+  max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2
+  max-md:grid-cols-1'
+        >
           <FavoritesList list={list} onEdit={onEdit} onRemove={onRemove} />
-        </Container>
+        </div>
       </div>
       <Card className='ml-auto mt-8 inline-flex items-center gap-4 p-4'>
         <Button onClick={onLastPage} disabled={page === 1}>

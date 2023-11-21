@@ -14,7 +14,7 @@ export const projectRouter = createTRPCRouter({
   popular: publicProcedure.query(async ({ ctx }) => {
     const result = await ctx.db.project.findMany({
       orderBy: {
-        stars: 'desc',
+        stargazersCount: 'desc',
       },
       take: 10,
     });
@@ -37,26 +37,26 @@ export const projectRouter = createTRPCRouter({
   query: publicProcedure
     .input(QueryProjectListSchema)
     .query(async ({ ctx, input }) => {
-      const { limit, categoryId, keywords, cursor } = input;
-      const categoryWhere = categoryId
+      const { limit, categorySlug, cursor } = input;
+      const categoryWhere = categorySlug
         ? {
             categories: {
               some: {
-                categoryId: Number(categoryId),
+                categorySlug,
               },
             },
           }
         : {};
 
-      const keywordsWhere = keywords
-        ? { keywords: { contains: keywords } }
-        : {};
+      // const keywordsWhere = keywords
+      //   ? { keywords: { contains: keywords } }
+      //   : {};
 
       const list = await ctx.db.project.findMany({
         take: limit + 1,
         cursor: cursor ? { id: cursor } : undefined,
         where: {
-          AND: [categoryWhere, keywordsWhere],
+          AND: [categoryWhere],
         },
       });
 
@@ -181,9 +181,9 @@ export const projectRouter = createTRPCRouter({
   categories: publicProcedure.query(async ({ ctx }) => {
     const categories = await ctx.db.category.findMany();
     const counts = await ctx.db.categoryOnProject.groupBy({
-      by: ['categoryId'],
+      by: ['categorySlug'],
       _count: {
-        categoryId: true,
+        categorySlug: true,
       },
     });
 
@@ -198,10 +198,10 @@ export const projectRouter = createTRPCRouter({
 
     // 为每个 category 添加 count 属性
     categories.forEach((category) => {
-      const count = counts.find((c) => c.categoryId === category.id);
+      const count = counts.find((c) => c.categorySlug === category.slug);
       result.push({
         ...category,
-        count: count?._count?.categoryId || 0,
+        count: count?._count?.categorySlug || 0,
       });
     });
 

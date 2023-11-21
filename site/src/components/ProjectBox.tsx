@@ -76,7 +76,7 @@ export default function ProjectBox(props: ProjectBoxProps) {
               height={40}
               width={40}
               ref={imgRef}
-              src='https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202310181428834.png'
+              src={item.ownerAvatarUrl}
             />
           </div>
           <div className='flex flex-col items-start'>
@@ -100,7 +100,7 @@ export default function ProjectBox(props: ProjectBoxProps) {
       </CardHeader>
       <CardFooter className='relative overflow-hidden'>
         <div className='mt-auto flex flex-row items-center justify-start gap-2'>
-          {props.item.keywords?.split(',').map((keyword) => (
+          {props.item.topics?.split(',').map((keyword) => (
             <Button
               key={keyword}
               onClick={(e) => {

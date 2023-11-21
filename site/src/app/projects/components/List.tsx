@@ -23,11 +23,11 @@ export default function Project({
   onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
 }) {
   const loadingRef = useRef<HTMLDivElement>(null);
-  const categoryId = useSearchParams().get('category');
+  const categorySlug = useSearchParams().get('category');
   const query = api.project.query.useInfiniteQuery(
     {
       limit: 10,
-      categoryId: categoryId || undefined,
+      categorySlug,
     },
     {
       refetchOnWindowFocus: false,
