@@ -4,7 +4,7 @@
   box-sizing: border-box;
   min-width: 200px;
   max-width: 980px;
-  padding: 25px;
+  padding: 16px 8px;
   margin: 0 auto;
   background-color: var(--esnext-background);
 }
@@ -16,7 +16,12 @@
 }
 
 .markdown-body a {
+  display: inline-flex;
   color: hsl(var(--esnext-primary-500));
+}
+
+.markdown-body img {
+  border-radius: 0.25rem;
 }
 
 .markdown-body h1 {

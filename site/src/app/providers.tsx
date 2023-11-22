@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ClickToComponent } from 'click-to-react-component';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
@@ -21,6 +22,7 @@ export function ESNextProviders({ children }: { children: React.ReactNode }) {
     <ThemeProvider attribute='class' storageKey='theme' defaultTheme='dark'>
       <GlobalDataStoreContext.Provider value={store}>
         <SessionProvider>{children}</SessionProvider>
+        <ClickToComponent />
         <ReactQueryDevtools initialIsOpen={true} />
       </GlobalDataStoreContext.Provider>
     </ThemeProvider>

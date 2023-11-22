@@ -43,12 +43,12 @@ const NpmInfo: FC<NpmInfoProps> = ({ project }) => {
           <div className='flex items-center gap-2'>
             <span>Last publish:</span>
             <span className='text-muted-foreground'>
-              {dayjs(project.versionUpdateTime).format('YYYY-MM-DD')}
+              {dayjs(project.modified).format('YYYY-MM-DD')}
             </span>
           </div>
           <div className='flex items-center gap-2'>
             <span>License:</span>
-            <span className='text-muted-foreground'>{project.license}</span>
+            <span className='text-muted-foreground'>{project.licenseName}</span>
           </div>
         </div>
       </CardContent>

@@ -62,7 +62,7 @@ export default memo(function Sidebar({
 }) {
   const categories = useGlobalDataContext((state) => state.categories);
   return (
-    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[240px] self-start px-4 pt-4'>
+    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[420px] self-start px-4 pt-4'>
       <div className='text-small mb-4 font-bold text-fuchsia-500'>
         Categories
       </div>

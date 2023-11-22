@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 'use client';
 
 import type { ProjectItemType } from '@esnext/server';
@@ -16,6 +17,8 @@ import {
   CardTitle,
 } from '~/components/ui/card';
 import { Skeleton } from '~/components/ui/skeleton';
+import dayjs from '~/lib/dayjs';
+import { num2k } from '~/lib/utils';
 
 export type ProjectBoxProps = {
   item: ProjectItemType;
@@ -61,46 +64,59 @@ export default function ProjectBox(props: ProjectBoxProps) {
     e.stopPropagation();
     window.open(`https://github.com/${item.fullName}`);
   };
+  const linkToHome = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    window.open(item.homepage!);
+  };
+
+  const topics = item.topics ? item.topics?.split(',').slice(0, 3) || [] : [];
 
   return (
     <Card
       onClick={onClick}
-      className={`bg-card-primary h-full w-full cursor-pointer rounded-md  ${className}`}
+      className={`bg-card-primary group relative h-full w-full cursor-pointer overflow-hidden rounded-md ${className}`}
     >
       <CardHeader className='flex-col'>
         <div className='flex w-full justify-start gap-3'>
-          <div className='h-[40px] w-[40px]'>
+          <div className='h-[50px] w-[50px]'>
             <Image
-              alt='nextui logo'
-              className='min-w-[40px]'
+              className='min-w-[50px] rounded-md'
               height={40}
               width={40}
               ref={imgRef}
+              alt={item.name}
               src={item.ownerAvatarUrl}
             />
           </div>
-          <div className='flex flex-col items-start'>
+          <div className='flex flex-col items-start justify-around'>
             <CardTitle>{item.name}</CardTitle>
             <div className='border-b-1 border-default-300 flex w-full items-center gap-3'>
-              <div className='text-default-400 flex items-center'>
-                <span className='text-xs'>120K</span>
+              <div className='flex items-center'>
+                <span className='text-xs'>{num2k(item.stargazersCount)}</span>
                 <Icon icon='material-symbols:star-outline' fontSize={12} />
               </div>
-              <div className='text-default-400 flex items-center'>
-                <span className='text-xs'>1220M&nbsp;·&nbsp;week</span>
+              <div className='flex items-center'>
+                <span className='text-xs'>
+                  {Number(item.weeklyDownloads).toLocaleString()}
+                  &nbsp;·&nbsp;Weekly Downloads
+                </span>
                 <Icon icon='material-symbols:download' fontSize={12} />
               </div>
-              <div className='text-default-400 flex items-center'>
-                <span className='text-xs'>Created 10 years ago</span>
+              <div className='flex items-center'>
+                <span className='text-xs'>
+                  Created by {dayjs(item.createdAt).fromNow()}
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <CardDescription>{item.description}</CardDescription>
+        <CardDescription className='line-clamp-2'>
+          {item.description}
+        </CardDescription>
       </CardHeader>
-      <CardFooter className='relative overflow-hidden'>
+      <CardFooter>
         <div className='mt-auto flex flex-row items-center justify-start gap-2'>
-          {props.item.topics?.split(',').map((keyword) => (
+          {topics.map((keyword) => (
             <Button
               key={keyword}
               onClick={(e) => {
@@ -115,14 +131,23 @@ export default function ProjectBox(props: ProjectBoxProps) {
             </Button>
           ))}
         </div>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+      </CardFooter>
+      <div className='absolute bottom-0 right-0 ml-auto flex items-center justify-end gap-1 opacity-0 transition duration-300 group-hover:opacity-100'>
+        {item.homepage && (
+          <div
+            onClick={linkToHome}
+            className='transition-background hover:bg-accent flex items-center justify-center rounded-md p-2'
+          >
+            <Icon icon='material-symbols:home-outline' fontSize={24} />
+          </div>
+        )}
         <div
           onClick={linkToGithub}
-          className='transition-background hover:bg-accent absolute -bottom-1 -right-1 flex items-center justify-center rounded-md p-2'
+          className='transition-background hover:bg-accent flex items-center justify-center rounded-md p-2'
         >
           <Icon icon='mdi:github' fontSize={24} />
         </div>
-      </CardFooter>
+      </div>
     </Card>
   );
 }

@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react';
 import CollectionButton from '~/app/info/[name]/components/Favorites';
 import { useProjectInfoContext } from '~/app/info/[name]/context';
 import { Button } from '~/components/ui/button';
+import dayjs from '~/lib/dayjs';
+import { num2k } from '~/lib/utils';
 
 export default function ProjectBaseInfo() {
   const { project } = useProjectInfoContext();
@@ -20,32 +22,31 @@ export default function ProjectBaseInfo() {
             <Image
               width={70}
               height={70}
-              className='projectBoxImage'
-              src='https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202310091757604.jpg'
-              alt=''
+              className='projectBoxImage rounded-md'
+              src={project.ownerAvatarUrl}
+              alt={project.name}
             />
           </div>
           <div>
             <div className='text-2xl font-bold'>{project.name}</div>
-            <div className='text-default-500'>{project.fullName}</div>
+            <div className=''>{project.fullName}</div>
             <div className='mt-auto flex gap-2'>
               <div>
-                <span className='text-default-600 mr-1 text-sm font-bold'>
-                  {project.stars}K
+                <span className='mr-1 text-sm font-bold'>
+                  {num2k(project.stargazersCount)}
                 </span>
-                <span className='text-default-400 text-xs'>Star</span>
+                <span className='text-xs'>Star</span>
               </div>
               <div>
-                <span className='text-default-600 mr-1 text-sm font-bold'>
-                  124k
+                <span className='mr-1 text-sm font-bold'>
+                  {Number(project.weeklyDownloads).toLocaleString()}
                 </span>
-                <span className='text-default-400 text-xs'>Download/week</span>
+                <span className='text-xs'>Weekly Downloads</span>
               </div>
               <div>
-                <span className='text-default-600 mr-1 text-sm font-bold'>
-                  89
+                <span className='mr-1 text-sm'>
+                  Created by {dayjs(project.createdAt).fromNow()}
                 </span>
-                <span className='text-default-400 text-xs'>Contributors</span>
               </div>
             </div>
           </div>
