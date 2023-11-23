@@ -53,7 +53,7 @@ export default function ProjectBox(props: ProjectBoxProps) {
   const imgRef = useRef<HTMLImageElement>(null);
 
   const onPushDetail = () => {
-    router.push(`/info/${item.name.toLocaleLowerCase()}`);
+    router.push(`/info/${item.name.toLocaleLowerCase()}/overview`);
   };
 
   const onClick = () => {

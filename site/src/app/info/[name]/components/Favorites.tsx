@@ -1,11 +1,12 @@
 'use client';
 
+import type { ProjectDetailType } from '@esnext/server';
+
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { redirect } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import { toast } from 'sonner';
 
-import { useProjectInfoContext } from '~/app/info/[name]/context';
 import FavoritesModal from '~/components/FavoritesModal';
 import { Button } from '~/components/ui/button';
 import {
@@ -22,8 +23,13 @@ import { api } from '~/trpc/react';
 
 import FavoritesItem from './FavoritesItem';
 
-const FavoritesButton = () => {
-  const { project, onRefresh } = useProjectInfoContext();
+const FavoritesButton = ({
+  project,
+  onRefresh,
+}: {
+  project: ProjectDetailType;
+  onRefresh?: () => void;
+}) => {
   const [checkedKeys, setCheckedKeys] = useState<Set<number>>(new Set([]));
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const disclosure = useDisclosure();

@@ -1,19 +1,17 @@
+import type { ProjectDetailType } from '@esnext/server';
+
 import Image from 'next/image';
-import { Icon } from '@iconify/react';
 
 import CollectionButton from '~/app/info/[name]/components/Favorites';
-import { useProjectInfoContext } from '~/app/info/[name]/context';
 import { Button } from '~/components/ui/button';
 import dayjs from '~/lib/dayjs';
 import { num2k } from '~/lib/utils';
 
-export default function ProjectBaseInfo() {
-  const { project } = useProjectInfoContext();
-
-  if (!project) {
-    return null;
-  }
-
+export default function ProjectBaseInfo({
+  project,
+}: {
+  project: ProjectDetailType;
+}) {
   return (
     <div className='flex items-center justify-between border-b-[1px] pb-3'>
       <div className='flex flex-col'>
@@ -56,13 +54,13 @@ export default function ProjectBaseInfo() {
         </div>
       </div>
       <div className='flex items-center gap-3'>
-        <CollectionButton />
+        <CollectionButton project={project} />
         <Button>
-          <Icon icon='mdi:github' fontSize={22} />
+          {/* <Icon icon='mdi:github' fontSize={22} /> */}
           View on Github
         </Button>
         <Button>
-          <Icon icon='tabler:home' fontSize={22} />
+          {/* <Icon icon='tabler:home' fontSize={22} /> */}
           Visit Website
         </Button>
       </div>

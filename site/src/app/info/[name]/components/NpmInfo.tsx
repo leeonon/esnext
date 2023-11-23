@@ -27,11 +27,11 @@ const NpmInfo: FC<NpmInfoProps> = ({ project }) => {
             <Button
               className='m-0 h-auto p-0 text-blue-400 underline'
               variant='link'
-              onClick={() =>
-                window.open(
-                  `https://www.npmjs.com/package/${project.name.toLocaleLowerCase()}`,
-                )
-              }
+              // onClick={() =>
+              //   window.open(
+              //     `https://www.npmjs.com/package/${project.name.toLocaleLowerCase()}`,
+              //   )
+              // }
             >
               {project.name}
             </Button>

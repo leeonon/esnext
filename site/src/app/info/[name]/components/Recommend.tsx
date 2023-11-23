@@ -1,18 +1,12 @@
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const RecommendCard = () => {
-  const router = useRouter();
-
-  const onClick = () => {
-    router.push(`/info/react`);
-  };
-
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
+    <Link
+      href='/'
       className='grid max-w-full cursor-pointer grid-cols-[60px_1fr] gap-2'
-      onClick={onClick}
     >
       <Image
         width={60}
@@ -26,7 +20,7 @@ const RecommendCard = () => {
         Boost.space tech stack Were aware of 11 technologies that tech stack Ne
         Recent launches cloud
       </p>
-    </div>
+    </Link>
   );
 };
 
