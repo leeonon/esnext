@@ -14,7 +14,9 @@ import { api } from '~/trpc/react';
 import '~/styles/globals.css';
 
 export function ESNextProviders({ children }: { children: React.ReactNode }) {
-  const { data: categories } = api.project.categories.useQuery();
+  const { data: categories } = api.project.categories.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
   const store = createGlobalDataStore({
     categories: categories ?? [],
   });

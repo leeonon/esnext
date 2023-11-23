@@ -4,12 +4,17 @@ import type { Category } from '@esnext/server';
 import type { FC, PropsWithChildren } from 'react';
 
 import { memo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Icon } from '@iconify/react';
 
 import { cn } from '~/lib/utils';
 import { useGlobalDataContext } from '~/store/index.store';
 
-export type onChangeParams = (name: string, value: string | number) => void;
+export type onChangeParams = (
+  name: string,
+  value: string | number,
+  isDelete?: boolean,
+) => void;
 
 const IconWrapper: FC<
   PropsWithChildren<{ className?: string; styles?: React.CSSProperties }>
@@ -34,7 +39,8 @@ function SidebarItem({
   isActive: boolean;
   onChangeParams: onChangeParams;
 }) {
-  const onClick = () => onChangeParams('category', item.id);
+  const onClick = () =>
+    onChangeParams('category', item.slug, item.slug === 'all');
   return (
     <div
       className={cn(
@@ -57,21 +63,38 @@ function SidebarItem({
 
 export default memo(function Sidebar({
   onChangeParams,
+  total,
 }: {
   onChangeParams: onChangeParams;
+  total: number;
 }) {
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category');
   const categories = useGlobalDataContext((state) => state.categories);
+  const _categories = [
+    {
+      id: 0,
+      name: 'ALL',
+      bgColor: '#FF8F1F30',
+      icon: 'fxemoji:fire',
+      slug: 'all',
+      count: total,
+    },
+    ...categories,
+  ];
   return (
-    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[420px] self-start px-4 pt-4'>
+    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[320px] self-start px-4 pt-4'>
       <div className='text-small mb-4 font-bold text-fuchsia-500'>
         Categories
       </div>
-      {categories.map((item) => (
+      {_categories.map((item) => (
         <SidebarItem
           key={item.name}
           item={item}
           onChangeParams={onChangeParams}
-          isActive={item.name === 'ALL'}
+          isActive={
+            item.slug === category || (item.slug === 'all' && !category)
+          }
         />
       ))}
     </div>

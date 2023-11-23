@@ -1,12 +1,10 @@
 import type { ProjectItemType } from '@esnext/server';
 
-import { useEffect, useMemo, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 import { Icon } from '@iconify/react';
 
 import ProjectBox, { ProjectSkeleton } from '~/components/ProjectBox';
 import { Button } from '~/components/ui/button';
-import { api } from '~/trpc/react';
 
 const listClass =
   'grid h-fit grid-cols-3 gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1';
@@ -18,25 +16,19 @@ export const SkeletonList = () => {
 };
 
 export default function Project({
+  list,
+  isLoading,
+  hasNextPage,
   onChangeParams,
+  onNextPage,
 }: {
+  list: ProjectItemType[];
+  hasNextPage?: boolean;
+  isLoading: boolean;
+  onNextPage: () => void;
   onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
 }) {
   const loadingRef = useRef<HTMLDivElement>(null);
-  const categorySlug = useSearchParams().get('category');
-  const query = api.project.query.useInfiniteQuery(
-    {
-      limit: 10,
-      categorySlug,
-    },
-    {
-      refetchOnWindowFocus: false,
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    },
-  );
-
-  const { data, hasNextPage, fetchNextPage, isLoading } = query;
-  const { pages = [] } = data ?? {};
 
   useEffect(() => {
     if (!loadingRef.current) return;
@@ -48,19 +40,15 @@ export default function Project({
       if (isLoading) {
         return;
       }
-      fetchNextPage().catch((err) => console.error(err));
+      onNextPage();
     });
     ob.observe(loadingRef.current);
-  }, [fetchNextPage, isLoading]);
-
-  const currentList = useMemo(() => {
-    return pages.flatMap((page) => page.list);
-  }, [pages]);
+  }, [onNextPage, isLoading]);
 
   return (
     <div>
       <div className={listClass}>
-        {currentList.map((item: ProjectItemType) => (
+        {list.map((item: ProjectItemType) => (
           <ProjectBox
             key={item.id}
             item={item}

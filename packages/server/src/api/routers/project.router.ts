@@ -59,6 +59,7 @@ export const projectRouter = createTRPCRouter({
           AND: [categoryWhere],
         },
       });
+      const total = await ctx.db.project.count();
 
       let nextCursor: typeof cursor | undefined = undefined;
       if (list.length > limit) {
@@ -68,6 +69,7 @@ export const projectRouter = createTRPCRouter({
 
       return {
         list,
+        total,
         nextCursor,
       };
     }),
