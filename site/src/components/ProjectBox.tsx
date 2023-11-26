@@ -11,6 +11,7 @@ import { Icon } from '@iconify/react';
 import { Button } from '~/components/ui/button';
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -110,10 +111,15 @@ export default function ProjectBox(props: ProjectBoxProps) {
             </div>
           </div>
         </div>
-        <CardDescription className='line-clamp-2'>
+      </CardHeader>
+      <CardContent className='p-0'>
+        {item.cover ? (
+          <Image width={1280} height={800} alt={item.name} src={item.cover} />
+        ) : null}
+        <CardDescription className='my-2 line-clamp-2 px-6'>
           {item.description}
         </CardDescription>
-      </CardHeader>
+      </CardContent>
       <CardFooter>
         <div className='mt-auto flex flex-row items-center justify-start gap-2'>
           {topics.map((keyword) => (

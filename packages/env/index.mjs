@@ -33,6 +33,12 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: z.string(),
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
+    // COS
+    COS_SECRET_ID: z.string(),
+    COS_SECRET_KEY: z.string(),
+    COS_REGION: z.string(),
+    COS_BUCKET: z.string(),
+    COS_PATH: z.string(),
   },
 
   /**
@@ -57,6 +63,12 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    // COS
+    COS_SECRET_ID: process.env.COS_SECRET_ID,
+    COS_SECRET_KEY: process.env.COS_SECRET_KEY,
+    COS_REGION: process.env.COS_REGION,
+    COS_BUCKET: process.env.COS_BUCKET,
+    COS_PATH: process.env.COS_PATH,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

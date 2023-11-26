@@ -8,6 +8,9 @@ import type {
 import type { Period } from './utils';
 
 import { db } from '@esnext/db';
+import { env } from '@esnext/env';
+import captureWebsite from 'capture-website';
+import COS from 'cos-nodejs-sdk-v5';
 import { decode } from 'js-base64';
 import fetch from 'node-fetch';
 
@@ -19,6 +22,11 @@ import {
   getPackageMetadataUrl,
   getReposReadmeUrl,
 } from './utils';
+
+const cos = new COS({
+  SecretId: env.COS_SECRET_ID,
+  SecretKey: env.COS_SECRET_KEY,
+});
 
 export default class ReposApi {
   static getReposDetail = async (repos: Repos): Promise<GithubRepository> => {
@@ -53,7 +61,71 @@ export default class ReposApi {
     return '';
   };
 
+  static getHomePageCover = async (url: string, name: string) => {
+    try {
+      const result = await captureWebsite.buffer(url, {
+        type: 'png',
+      });
+      const data = await cos.putObject({
+        Bucket: env.COS_BUCKET,
+        Region: env.COS_REGION,
+        Key: `${env.COS_PATH}/${name}.png`,
+        Body: Buffer.from(result),
+      });
+      return `https://${data.Location}`;
+    } catch (error) {
+      return null;
+    }
+  };
+
   static createRepos = async (repos: Repos, categorySlugs: string[] = []) => {
+    try {
+      const gitRepos = await ReposApi.getReposDetail(repos);
+      const packageInfo = await ReposApi.getPackageInfo(repos);
+      const packageDownloadInfo = await ReposApi.getPackageDownloadInfo(
+        repos.reposName,
+        'last-week',
+      );
+      const readme = await ReposApi.getReposReadme(repos);
+      let cover = null;
+      if (gitRepos.homepage) {
+        cover = await ReposApi.getHomePageCover(
+          gitRepos.homepage,
+          repos.reposName,
+        );
+      }
+      const data = combineCreateData({
+        repos: gitRepos,
+        packageMetadata: packageInfo,
+        packageDownloadInfo,
+        cover,
+      });
+      const result = await db.project.create({
+        data,
+      });
+      await db.projectReadme.create({
+        data: {
+          content: readme,
+          projectId: result.id,
+        },
+      });
+
+      for (const slug of categorySlugs) {
+        await db.categoryOnProject.create({
+          data: {
+            categorySlug: slug,
+            projectId: result.id,
+          },
+        });
+      }
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  static updateRepos = async (repos: Repos) => {
     try {
       const gitRepos = await ReposApi.getReposDetail(repos);
       const packageInfo = await ReposApi.getPackageInfo(repos);
@@ -66,54 +138,19 @@ export default class ReposApi {
           id: gitRepos.id,
         },
       });
-      const readme = await ReposApi.getReposReadme(repos);
       if (!project) {
-        const data = combineCreateData({
-          repos: gitRepos,
-          packageMetadata: packageInfo,
-          packageDownloadInfo,
-        });
-        const result = await db.project.create({
-          data,
-        });
-        await db.projectReadme.create({
-          data: {
-            content: readme,
-            projectId: result.id,
-          },
-        });
-
-        for (const slug of categorySlugs) {
-          await db.categoryOnProject.create({
-            data: {
-              categorySlug: slug,
-              projectId: result.id,
-            },
-          });
-        }
-
-        return result;
-      } else {
-        const data = combineUpdateData({
-          repos: gitRepos,
-          packageMetadata: packageInfo,
-          packageDownloadInfo,
-        });
-        const result = await db.project.update({
-          where: { id: gitRepos.id },
-          data,
-        });
-        await db.projectReadme.update({
-          where: {
-            projectId: result.id,
-          },
-          data: {
-            content: readme,
-          },
-        });
-
-        return result;
+        throw new Error('Project not found');
       }
+      const data = combineUpdateData({
+        repos: gitRepos,
+        packageMetadata: packageInfo,
+        packageDownloadInfo,
+      });
+      const result = await db.project.update({
+        where: { id: gitRepos.id },
+        data,
+      });
+      return result;
     } catch (error) {
       throw error;
     }

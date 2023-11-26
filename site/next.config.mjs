@@ -25,6 +25,10 @@ const config = {
       },
       {
         protocol: 'https',
+        hostname: 'esnext-1300118632.cos.ap-nanjing.myqcloud.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'lee-oss-1300118632.cos.ap-nanjing.myqcloud.com',
         port: '',
         pathname: '/**',

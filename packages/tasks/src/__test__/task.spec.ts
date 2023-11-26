@@ -27,4 +27,11 @@ describe('ReposApi', () => {
       timeout: 15000,
     },
   );
+
+  // it('get package home page cover', async () => {
+  //   const result = await ReposApi.getHomePageCover(
+  //     'https://react.dev/',
+  //     'react',
+  //   );
+  // });
 });

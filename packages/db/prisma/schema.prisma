@@ -29,6 +29,7 @@ model Project {
   licenseSpdxId   String? @map("license_spdx_id")
   logo            String?
   topics          String?
+  cover           String?
 
   ownerLogin     String @map("owner_login")
   ownerId        Int    @map("owner_id")

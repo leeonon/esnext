@@ -31,10 +31,12 @@ export function combineCreateData({
   repos,
   packageMetadata,
   packageDownloadInfo,
+  cover,
 }: {
   repos: GithubRepository;
   packageMetadata: PackageMetadata;
   packageDownloadInfo: PackageDownloadInfo;
+  cover: string | null;
 }) {
   const data = {
     id: repos.id,
@@ -57,6 +59,7 @@ export function combineCreateData({
     licenseName: repos.license?.name,
     licenseSpdxId: repos.license?.spdx_id,
     topics: repos.topics.join(','),
+    cover,
 
     ownerLogin: repos.owner.login,
     ownerId: repos.owner.id,
