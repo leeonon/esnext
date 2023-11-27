@@ -39,20 +39,22 @@ function SidebarItem({
   return (
     <div
       className={cn(
-        'text-muted-foreground hover:bg-accent border-input hover:text-accent-foreground group col-span-1 flex cursor-pointer flex-col justify-between rounded-lg border p-2 transition ease-in-out dark:hover:border-fuchsia-400',
-        isActive && 'bg-accent border-input border border-fuchsia-500',
+        'bg-card-primary text-muted-foreground hover:bg-accent border-input hover:text-accent-foreground group col-span-1 flex cursor-pointer flex-col justify-between rounded-lg border p-2 transition ease-in-out dark:hover:border-fuchsia-400',
+        isActive && 'border-input border border-fuchsia-500',
       )}
       onKeyDown={onClick}
       onClick={onClick}
     >
-      <IconWrapper styles={{ backgroundColor: item.bgColor ?? '' }}>
-        <Icon fontSize={14} icon={item.icon ?? 'logos:javascript'} />
-      </IconWrapper>
-      <div className='dark:text-primary-400 dark:group-hover:text-primary-400 mt-2 text-center text-sm font-medium sm:text-xs 2xl:text-sm'>
-        {item.name}
+      <div className='flex items-center justify-between'>
+        <IconWrapper styles={{ backgroundColor: item.bgColor ?? '' }}>
+          <Icon fontSize={14} icon={item.icon ?? 'logos:javascript'} />
+        </IconWrapper>
+        <div className='text-muted-foreground bg-accent ml-auto rounded-md px-2 py-1 text-xs'>
+          {item.count}
+        </div>
       </div>
-      <div className='text-muted-foreground bg-accent ml-auto rounded-md px-2 py-1 text-xs'>
-        {item.count}
+      <div className='dark:text-primary-400 dark:group-hover:text-primary-400 mt-2 text-left text-sm font-medium sm:text-xs 2xl:text-sm'>
+        {item.name}
       </div>
     </div>
   );
@@ -74,7 +76,7 @@ export default memo(function Sidebar({ total }: { total: number }) {
     ...categories,
   ];
   return (
-    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[320px] self-start px-4 pt-4 2xl:min-w-[350px]'>
+    <div className='sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[320px] self-start px-4 pt-4 2xl:min-w-[350px]'>
       <div className='mb-4 font-bold text-fuchsia-500'>Categories</div>
       <div className='mt-2 grid grid-cols-2 grid-rows-2 gap-2'>
         {_categories.map((item) => (

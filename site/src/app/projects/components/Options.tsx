@@ -46,7 +46,11 @@ const Options = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <ToggleGroup type='single' value={layout} onValueChange={onChangeLayout}>
+      <ToggleGroup
+        type='single'
+        value={layout}
+        onValueChange={(s) => onChangeLayout?.(s as 'list' | 'grid')}
+      >
         <ToggleGroupItem value='list' aria-label='list layout'>
           <ActivityLogIcon />
         </ToggleGroupItem>

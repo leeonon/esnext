@@ -25,6 +25,7 @@ import { cn, num2k } from '~/lib/utils';
 import S from './index.module.css';
 
 export type ProjectBoxProps = {
+  layout?: 'grid' | 'list';
   item: ProjectItemType;
   onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
   className?: string;
@@ -52,7 +53,7 @@ export function ProjectSkeleton() {
 }
 
 export default function ProjectBox(props: ProjectBoxProps) {
-  const { item, className, onChangeParams } = props;
+  const { item, className, layout = 'list', onChangeParams } = props;
   const router = useRouter();
   const imgRef = useRef<HTMLImageElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -91,21 +92,38 @@ export default function ProjectBox(props: ProjectBoxProps) {
 
   const topics = item.topics ? item.topics?.split(',').slice(0, 3) || [] : [];
 
+  const weeklyDownloadsEle = (
+    <div className='flex items-center'>
+      <span className='text-xs'>
+        {Number(item.weeklyDownloads).toLocaleString()}
+        &nbsp;·&nbsp;Weekly Downloads
+      </span>
+      <Icon icon='material-symbols:download' fontSize={12} />
+    </div>
+  );
+
   return (
     <div
       onClick={onClick}
       ref={cardRef}
-      className={cn(S.project_box, item.cover ? 'row-span-2' : '')}
+      className={cn(
+        S.project_box,
+        item.cover && layout === 'grid' ? 'row-span-2' : '',
+        layout === 'list' ? 'max-w-[800px]' : 'max-w-[320px]',
+      )}
     >
       <Card
         onClick={onClick}
         ref={cardRef}
         className={cn(
-          'bg-card-primary group relative h-full w-full cursor-pointer overflow-hidden rounded-md',
+          'bg-card-primary group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-md',
           className,
         )}
       >
-        <CardHeader className='flex-col'>
+        {item.cover && layout === 'grid' ? (
+          <Image width={1280} height={800} alt={item.name} src={item.cover} />
+        ) : null}
+        <CardHeader className={cn('flex-col pb-0')}>
           <div className='flex w-full justify-start gap-3'>
             <div className='h-[50px] w-[50px]'>
               <Image
@@ -118,19 +136,18 @@ export default function ProjectBox(props: ProjectBoxProps) {
               />
             </div>
             <div className='flex flex-col items-start justify-around'>
-              <CardTitle>{item.name}</CardTitle>
+              <CardTitle>
+                {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+                {/* <span className='ml-2 rounded-md bg-fuchsia-800 p-1 text-xs'>
+                  {item.language}
+                </span> */}
+              </CardTitle>
               <div className='border-b-1 border-default-300 flex w-full items-center gap-3'>
                 <div className='flex items-center'>
                   <span className='text-xs'>{num2k(item.stargazersCount)}</span>
                   <Icon icon='material-symbols:star-outline' fontSize={12} />
                 </div>
-                <div className='flex items-center'>
-                  <span className='text-xs'>
-                    {Number(item.weeklyDownloads).toLocaleString()}
-                    &nbsp;·&nbsp;Weekly Downloads
-                  </span>
-                  <Icon icon='material-symbols:download' fontSize={12} />
-                </div>
+                {layout === 'list' ? weeklyDownloadsEle : null}
                 <div className='flex items-center'>
                   <span className='text-xs'>
                     Created by {dayjs(item.createdAt).fromNow()}
@@ -139,12 +156,15 @@ export default function ProjectBox(props: ProjectBoxProps) {
               </div>
             </div>
           </div>
+          {layout === 'grid' ? weeklyDownloadsEle : null}
         </CardHeader>
-        <CardContent className='p-0'>
-          {item.cover ? (
-            <Image width={1280} height={800} alt={item.name} src={item.cover} />
-          ) : null}
-          <CardDescription className='my-2 line-clamp-2 px-6'>
+        <CardContent className='mt-auto p-0'>
+          <CardDescription
+            className={cn(
+              'my-2 px-6',
+              layout === 'list' ? 'line-clamp-1' : 'line-clamp-3',
+            )}
+          >
             {item.description}
           </CardDescription>
         </CardContent>
@@ -157,11 +177,11 @@ export default function ProjectBox(props: ProjectBoxProps) {
                   e.stopPropagation();
                   onChangeParams('keywords', keyword);
                 }}
-                variant='outline'
+                variant='ghost'
                 size='sm'
-                className='dark:hover:bg-card dark:border-[hsl(0,0%,28%)]'
+                className='dark:bg-accent h-auto border-none p-1 dark:border-[hsl(0,0%,28%)]'
               >
-                {keyword}
+                #{keyword}
               </Button>
             ))}
           </div>
@@ -170,14 +190,14 @@ export default function ProjectBox(props: ProjectBoxProps) {
           {item.homepage && (
             <div
               onClick={linkToHome}
-              className='transition-background hover:bg-accent flex items-center justify-center rounded-md p-2'
+              className='flex items-center justify-center rounded-md p-2 transition-colors hover:text-fuchsia-600'
             >
               <Icon icon='material-symbols:home-outline' fontSize={24} />
             </div>
           )}
           <div
             onClick={linkToGithub}
-            className='transition-background hover:bg-accent flex items-center justify-center rounded-md p-2'
+            className='flex items-center justify-center rounded-md p-2 transition-colors hover:text-fuchsia-600'
           >
             <Icon icon='mdi:github' fontSize={24} />
           </div>

@@ -11,7 +11,7 @@
   pointer-events: none;
   content: '';
   background: radial-gradient(
-    300px circle at var(--x) var(--y),
+    200px circle at var(--x) var(--y),
     #c33764 0,
     #6171fe 80%,
     transparent 100%

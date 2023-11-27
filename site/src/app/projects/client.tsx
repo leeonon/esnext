@@ -1,5 +1,7 @@
 'use client';
 
+import type { LayoutType } from './context';
+
 import { useCallback, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -13,7 +15,7 @@ import Tags from './components/Tags';
 import { ProjectsListContext } from './context';
 
 export default function ProjectPage() {
-  const [layout, setLayout] = useState('list');
+  const [layout, setLayout] = useState<LayoutType>('list');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -55,17 +57,17 @@ export default function ProjectPage() {
 
   const contextValue = useMemo(() => {
     return {
-      layout: 'list' as const,
+      layout,
       onChangeParams,
       onChangeLayout: setLayout,
     };
-  }, [onChangeParams]);
+  }, [layout, onChangeParams]);
 
   return (
     <ProjectsListContext.Provider value={contextValue}>
-      <div className='relative flex'>
+      <div className='relative flex justify-center'>
         <Sidebar total={pages[0]?.total || 0} />
-        <div className='m-auto mt-4 flex flex-1 flex-col overflow-hidden px-8'>
+        <div className='mt-4 flex flex-col overflow-hidden px-8'>
           <Tags />
           <Options />
           <ProjectList

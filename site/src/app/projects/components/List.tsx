@@ -1,14 +1,11 @@
 import type { ProjectItemType } from '@esnext/server';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Icon } from '@iconify/react';
 
 import { useProjectsListContext } from '~/app/projects/context';
 import ProjectBox, { ProjectSkeleton } from '~/components/ProjectBox';
 import { Button } from '~/components/ui/button';
-
-const listClass =
-  'grid h-fit grid-cols-3 gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1';
 
 export const SkeletonList = () => {
   return Array.from({ length: 10 }).map((_, index) => (
@@ -27,7 +24,7 @@ export default function Project({
   isLoading: boolean;
   onNextPage: () => void;
 }) {
-  const { onChangeParams } = useProjectsListContext();
+  const { layout, onChangeParams } = useProjectsListContext();
   const loadingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,12 +42,20 @@ export default function Project({
     ob.observe(loadingRef.current);
   }, [onNextPage, isLoading]);
 
+  const listClass = useMemo(() => {
+    if (layout === 'list') {
+      return 'grid h-fit grid-cols-1 gap-4 2xl:grid-cols-2';
+    }
+    return 'grid h-fit gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3';
+  }, [layout]);
+
   return (
     <div>
       <div className={listClass}>
         {list.map((item: ProjectItemType) => (
           <ProjectBox
             key={item.id}
+            layout={layout}
             item={item}
             onChangeParams={onChangeParams}
           />

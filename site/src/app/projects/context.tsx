@@ -4,10 +4,12 @@ import type { Dispatch, SetStateAction } from 'react';
 
 import { createContext, useContext } from 'react';
 
+export type LayoutType = 'grid' | 'list';
+
 export type ProjectsList = {
-  layout: 'grid' | 'list';
+  layout: LayoutType;
   onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
-  onChangeLayout?: Dispatch<SetStateAction<string>>;
+  onChangeLayout?: Dispatch<SetStateAction<LayoutType>>;
 };
 
 export const ProjectsListContext = createContext<ProjectsList>({
@@ -23,3 +25,4 @@ export const useProjectsListContext = () => {
 
   return context;
 };
+0;
