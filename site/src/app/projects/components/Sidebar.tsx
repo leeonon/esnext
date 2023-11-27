@@ -10,11 +10,7 @@ import { Icon } from '@iconify/react';
 import { cn } from '~/lib/utils';
 import { useGlobalDataContext } from '~/store/index.store';
 
-export type onChangeParams = (
-  name: string,
-  value: string | number,
-  isDelete?: boolean,
-) => void;
+import { useProjectsListContext } from '../context';
 
 const IconWrapper: FC<
   PropsWithChildren<{ className?: string; styles?: React.CSSProperties }>
@@ -33,19 +29,18 @@ const IconWrapper: FC<
 function SidebarItem({
   item,
   isActive,
-  onChangeParams,
 }: {
   item: Category;
   isActive: boolean;
-  onChangeParams: onChangeParams;
 }) {
+  const { onChangeParams } = useProjectsListContext();
   const onClick = () =>
     onChangeParams('category', item.slug, item.slug === 'all');
   return (
     <div
       className={cn(
-        'hover:bg-accent mt-2 flex h-8 cursor-pointer items-center gap-4 rounded-md px-4 transition-colors',
-        isActive && 'bg-accent',
+        'text-muted-foreground hover:bg-accent border-input hover:text-accent-foreground group col-span-1 flex cursor-pointer flex-col justify-between rounded-lg border p-2 transition ease-in-out dark:hover:border-fuchsia-400',
+        isActive && 'bg-accent border-input border border-fuchsia-500',
       )}
       onKeyDown={onClick}
       onClick={onClick}
@@ -53,7 +48,9 @@ function SidebarItem({
       <IconWrapper styles={{ backgroundColor: item.bgColor ?? '' }}>
         <Icon fontSize={14} icon={item.icon ?? 'logos:javascript'} />
       </IconWrapper>
-      <div className='text-sm'>{item.name}</div>
+      <div className='dark:text-primary-400 dark:group-hover:text-primary-400 mt-2 text-center text-sm font-medium sm:text-xs 2xl:text-sm'>
+        {item.name}
+      </div>
       <div className='text-muted-foreground bg-accent ml-auto rounded-md px-2 py-1 text-xs'>
         {item.count}
       </div>
@@ -61,13 +58,7 @@ function SidebarItem({
   );
 }
 
-export default memo(function Sidebar({
-  onChangeParams,
-  total,
-}: {
-  onChangeParams: onChangeParams;
-  total: number;
-}) {
+export default memo(function Sidebar({ total }: { total: number }) {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
   const categories = useGlobalDataContext((state) => state.categories);
@@ -83,20 +74,19 @@ export default memo(function Sidebar({
     ...categories,
   ];
   return (
-    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[320px] self-start px-4 pt-4'>
-      <div className='text-small mb-4 font-bold text-fuchsia-500'>
-        Categories
+    <div className='bg-card-primary sticky top-[calc(4rem+1px)] h-[calc(100vh-4rem)] w-[320px] self-start px-4 pt-4 2xl:min-w-[350px]'>
+      <div className='mb-4 font-bold text-fuchsia-500'>Categories</div>
+      <div className='mt-2 grid grid-cols-2 grid-rows-2 gap-2'>
+        {_categories.map((item) => (
+          <SidebarItem
+            key={item.name}
+            item={item}
+            isActive={
+              item.slug === category || (item.slug === 'all' && !category)
+            }
+          />
+        ))}
       </div>
-      {_categories.map((item) => (
-        <SidebarItem
-          key={item.name}
-          item={item}
-          onChangeParams={onChangeParams}
-          isActive={
-            item.slug === category || (item.slug === 'all' && !category)
-          }
-        />
-      ))}
     </div>
   );
 });

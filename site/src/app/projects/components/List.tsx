@@ -3,6 +3,7 @@ import type { ProjectItemType } from '@esnext/server';
 import { useEffect, useRef } from 'react';
 import { Icon } from '@iconify/react';
 
+import { useProjectsListContext } from '~/app/projects/context';
 import ProjectBox, { ProjectSkeleton } from '~/components/ProjectBox';
 import { Button } from '~/components/ui/button';
 
@@ -19,15 +20,14 @@ export default function Project({
   list,
   isLoading,
   hasNextPage,
-  onChangeParams,
   onNextPage,
 }: {
   list: ProjectItemType[];
   hasNextPage?: boolean;
   isLoading: boolean;
   onNextPage: () => void;
-  onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
 }) {
+  const { onChangeParams } = useProjectsListContext();
   const loadingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

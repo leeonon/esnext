@@ -6,6 +6,8 @@ import { useSearchParams } from 'next/navigation';
 import { Card } from '~/components/ui/card';
 import { Toggle } from '~/components/ui/toggle';
 
+import { useProjectsListContext } from '../context';
+
 export type OnChangeParams = (
   name: string,
   value: string,
@@ -14,10 +16,10 @@ export type OnChangeParams = (
 export type TagProps = PropsWithChildren<{
   value: string;
   selected?: boolean;
-  onChangeParams: OnChangeParams;
 }>;
 
-const Tag: FC<TagProps> = ({ children, value, onChangeParams }) => {
+const Tag: FC<TagProps> = ({ children, value }) => {
+  const { onChangeParams } = useProjectsListContext();
   const searchParams = useSearchParams();
   const tag = searchParams.get('keywords') ?? '';
   const isActive = useMemo(
@@ -54,7 +56,7 @@ export interface TagsProps {
   onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
 }
 
-export default function Tags({ onChangeParams }: TagsProps) {
+export default function Tags() {
   const listRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const keywords = searchParams.get('keywords');
@@ -71,7 +73,7 @@ export default function Tags({ onChangeParams }: TagsProps) {
           ref={listRef}
         >
           {keywordsArr.map((words) => (
-            <Tag key={words} value={words} onChangeParams={onChangeParams}>
+            <Tag key={words} value={words}>
               {words}
             </Tag>
           ))}
