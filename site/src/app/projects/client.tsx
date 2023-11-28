@@ -9,13 +9,14 @@ import ProjectList from '~/app/projects/components/List';
 import Options from '~/app/projects/components/Options';
 import Sidebar from '~/app/projects/components/Sidebar';
 import Top from '~/components/Top';
+import { getProjectListLayout, setProjectListLayout } from '~/lib/localStorage';
 import { api } from '~/trpc/react';
 
 import Tags from './components/Tags';
 import { ProjectsListContext } from './context';
 
 export default function ProjectPage() {
-  const [layout, setLayout] = useState<LayoutType>('list');
+  const [layout, setLayout] = useState<LayoutType>(getProjectListLayout());
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -55,13 +56,18 @@ export default function ProjectPage() {
     fetchNextPage().catch((err) => console.error(err));
   }, [fetchNextPage]);
 
+  const onChangeLayout = useCallback((key: LayoutType) => {
+    setLayout(key);
+    setProjectListLayout(key);
+  }, []);
+
   const contextValue = useMemo(() => {
     return {
       layout,
       onChangeParams,
-      onChangeLayout: setLayout,
+      onChangeLayout,
     };
-  }, [layout, onChangeParams]);
+  }, [layout, onChangeParams, onChangeLayout]);
 
   return (
     <ProjectsListContext.Provider value={contextValue}>

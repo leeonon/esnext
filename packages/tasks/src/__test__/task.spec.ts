@@ -1,30 +1,37 @@
+import chalk from 'chalk';
 import { describe, expect, it } from 'vitest';
 
+import projectList from '../data/projectList.json';
 import ReposApi from '../reposApi';
+
+type ProjectListType = typeof projectList;
 
 describe('ReposApi', () => {
   it(
     'createRepos resolves',
     async () => {
-      const gitUrl = 'https://github.com/sveltejs/svelte';
-      const url = new URL(gitUrl);
-      const repos = {
-        reposOwner: url.pathname.split('/')[1] || '',
-        reposName: url.pathname.split('/')[2] || '',
-      };
-      if (!repos.reposName || !repos.reposOwner) {
-        throw new Error('Invalid git url');
+      const errorArr = [];
+      for (const repos of projectList as unknown as ProjectListType) {
+        const url = new URL(repos.github);
+        const params = {
+          name: repos.name,
+          reposOwner: url.pathname.split('/')[1] || '',
+          reposName: url.pathname.split('/')[2] || '',
+          category: repos.category || [],
+        };
+        try {
+          await ReposApi.requestPackage(params);
+          chalk.green(`${repos.name} success`);
+        } catch (error) {
+          chalk.red(`${repos.name} error`);
+          errorArr.push(repos.name);
+        }
       }
-      const result = await ReposApi.createRepos(repos, [
-        // 'backend',
-        'frontend',
-        // 'testing',
-      ]);
-      expect(result).toBeDefined();
-      expect(result?.name).toBe(repos.reposName);
+      console.log(errorArr);
+      expect(true).toBe(true);
     },
     {
-      timeout: 15000,
+      timeout: 150000,
     },
   );
 

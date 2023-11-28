@@ -1,0 +1,77 @@
+[
+  {
+    "name": "react",
+    "github": "https://github.com/facebook/react",
+    "category": ["frontend"]
+  },
+  {
+    "name": "react-native",
+    "github": "https://github.com/facebook/react-native",
+    "category": ["frontend", "mobile"]
+  },
+  {
+    "name": "react-router",
+    "github": "https://github.com/remix-run/react-router",
+    "category": ["frontend"]
+  },
+  {
+    "name": "svelte",
+    "github": "https://github.com/sveltejs/svelte",
+    "category": ["frontend"]
+  },
+  {
+    "name": "vitest",
+    "github": "https://github.com/vitest-dev/vitest",
+    "category": ["testing"]
+  },
+  {
+    "name": "lottie-web",
+    "github": "https://github.com/airbnb/lottie-web",
+    "category": ["frontend"]
+  },
+  {
+    "name": "@effect/schema",
+    "github": "https://github.com/effect-ts/schema",
+    "category": ["backend", "frontend"]
+  },
+  {
+    "name": "bun",
+    "github": "https://github.com/oven-sh/bun",
+    "category": ["backend", "build-tools"]
+  },
+  {
+    "name": "astro",
+    "github": "https://github.com/withastro/astro",
+    "category": ["frontend", "static-site-generators"]
+  },
+  {
+    "name": "next",
+    "github": "https://github.com/vercel/next.js",
+    "category": ["frontend", "backend", "server-side-rendering-optimization"]
+  },
+  {
+    "name": "prisma",
+    "github": "https://github.com/prisma/prisma",
+    "category": ["backend", "server-side-rendering-optimization"]
+  },
+  {
+    "name": "@trpc/server",
+    "github": "https://github.com/trpc/trpc",
+    "category": ["backend", "server-side-rendering-optimization", "security-authentication"]
+  },
+  {
+    "name": "@trpc/client",
+    "github": "https://github.com/trpc/trpc",
+    "category": ["backend", "server-side-rendering-optimization", "security-authentication"]
+  },
+  {
+    "name": "zod",
+    "github": "https://github.com/colinhacks/zod",
+    "category": ["backend", "server-side-rendering-optimization", "security-authentication"]
+  },
+  {
+    "name": "zustand",
+    "github": "https://github.com/pmndrs/zustand",
+    "category": ["frontend", "state-management"]
+  }
+]

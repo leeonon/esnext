@@ -40,7 +40,7 @@ export function combineCreateData({
 }) {
   const data = {
     id: repos.id,
-    name: repos.name,
+    name: packageMetadata.name,
     fullName: repos.full_name,
     description: repos.description,
     htmlUrl: repos.html_url,

@@ -1,7 +1,5 @@
 'use client';
 
-import type { Dispatch, SetStateAction } from 'react';
-
 import { createContext, useContext } from 'react';
 
 export type LayoutType = 'grid' | 'list';
@@ -9,7 +7,7 @@ export type LayoutType = 'grid' | 'list';
 export type ProjectsList = {
   layout: LayoutType;
   onChangeParams: (name: string, value: string, isDelete?: boolean) => void;
-  onChangeLayout?: Dispatch<SetStateAction<LayoutType>>;
+  onChangeLayout?: (key: LayoutType) => void;
 };
 
 export const ProjectsListContext = createContext<ProjectsList>({

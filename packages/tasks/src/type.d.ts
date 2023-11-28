@@ -1,6 +1,8 @@
 export type Repos = {
+  name: string;
   reposOwner: string;
   reposName: string;
+  category: string[];
 };
 
 export interface GithubRepository {
