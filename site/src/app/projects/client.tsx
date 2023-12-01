@@ -73,7 +73,7 @@ export default function ProjectPage() {
     <ProjectsListContext.Provider value={contextValue}>
       <div className='relative flex justify-center'>
         <Sidebar total={pages[0]?.total || 0} />
-        <div className='mt-4 flex flex-col overflow-hidden px-8'>
+        <div className='mt-4 flex max-w-[1100px] flex-1 flex-col overflow-hidden px-8'>
           <Tags />
           <Options />
           <ProjectList

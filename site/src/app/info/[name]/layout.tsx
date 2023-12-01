@@ -30,7 +30,7 @@ export default async function InfoLayout({
   const { name } = params;
   const data = await api.project.detail.query(name);
 
-  const topics = data.topics?.split(',') ?? [];
+  const topics = data.topics ? data.topics?.split(',') ?? [] : [];
 
   return (
     <section className='m-auto max-w-screen-2xl px-8'>

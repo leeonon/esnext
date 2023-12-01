@@ -3,7 +3,6 @@ import type { FC } from 'react';
 
 import dayjs from 'dayjs';
 
-import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 
 export type NpmInfoProps = {
@@ -24,17 +23,14 @@ const NpmInfo: FC<NpmInfoProps> = ({ project }) => {
         <div className='flex flex-col gap-2 text-sm'>
           <div className='flex items-center gap-2'>
             <span>Link:</span>
-            <Button
+            <a
+              href={`https://www.npmjs.com/package/${project.name.toLocaleLowerCase()}`}
+              target='_blank'
               className='m-0 h-auto p-0 text-blue-400 underline'
-              variant='link'
-              // onClick={() =>
-              //   window.open(
-              //     `https://www.npmjs.com/package/${project.name.toLocaleLowerCase()}`,
-              //   )
-              // }
+              rel='noreferrer'
             >
               {project.name}
-            </Button>
+            </a>
           </div>
           <div className='flex items-center gap-2'>
             <span>Latest version:</span>

@@ -73,5 +73,20 @@
     "name": "zustand",
     "github": "https://github.com/pmndrs/zustand",
     "category": ["frontend", "state-management"]
+  },
+  {
+    "name": "knip",
+    "github": "https://github.com/webpro/knip",
+    "category": ["build-tools"]
+  },
+  {
+    "name": "@aws-lite/client",
+    "github": "https://github.com/architect/aws-lite",
+    "category": ["server-side-rendering-optimization", "backend"]
+  },
+  {
+    "name": "@aws-lite/dynamodb",
+    "github": "https://github.com/architect/aws-lite",
+    "category": ["server-side-rendering-optimization", "backend"]
   }
 ]
