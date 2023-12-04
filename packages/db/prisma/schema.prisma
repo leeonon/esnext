@@ -48,6 +48,9 @@ model Project {
   categories         CategoryOnProject[]
   projectInFavorites ProjectInFavorites[]
 
+  similaritiesAsProject1 ProjectSimilarity[] @relation("SimilarProject1")
+  similaritiesAsProject2 ProjectSimilarity[] @relation("SimilarProject2")
+
   @@map("projects")
 }
 
@@ -79,6 +82,19 @@ model CategoryOnProject {
 
   @@id([categorySlug, projectId])
   @@map("categories_on_project")
+}
+
+model ProjectSimilarity {
+  project1Id       Int
+  project2Id       Int
+  similarityScore  Float
+
+  similarProject1  Project @relation("SimilarProject1", fields: [project1Id], references: [id])
+  similarProject2  Project @relation("SimilarProject2", fields: [project2Id], references: [id])
+
+  @@id([project1Id, project2Id])
+  @@index([project2Id])
+  @@map("project_similarity")
 }
 
 model Example {

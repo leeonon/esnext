@@ -15,7 +15,7 @@ const TagsCard = ({ tags }: TagsCardProps) => {
       <CardHeader>
         <CardTitle className='uppercase'>Tags</CardTitle>
       </CardHeader>
-      <CardContent className='h-fit flex-row flex-wrap gap-2'>
+      <CardContent className='flex h-fit flex-row flex-wrap gap-2'>
         {tags.map((v) => (
           <Badge key={v}>{v}</Badge>
         ))}

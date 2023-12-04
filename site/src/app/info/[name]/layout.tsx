@@ -29,6 +29,7 @@ export default async function InfoLayout({
 }) {
   const { name } = params;
   const data = await api.project.detail.query(name);
+  console.log('🚀 ~ file: layout.tsx:32 ~ data:', data);
 
   const topics = data.topics ? data.topics?.split(',') ?? [] : [];
 
@@ -44,7 +45,7 @@ export default async function InfoLayout({
           <div className='mt-[3.2rem] flex w-[250px] flex-col gap-4'>
             <ProjectTags tags={topics} />
             <NpmInfo project={data} />
-            <Recommend />
+            <Recommend list={data.similarProjects} />
           </div>
         </div>
       </div>

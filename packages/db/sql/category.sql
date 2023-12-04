@@ -1,0 +1,16 @@
+INSERT INTO category (id, name, slug, icon, bg_color) VALUES
+(1, 'FrontEnd Development', 'frontend', 'logos:javascript', '#0277BD30'),
+(2, 'BackEnd Development', 'backend', 'logos:javascript', '#0277BD30'),
+(3, 'State Management', 'state-management', 'logos:javascript', '#0277BD30'),
+(4, 'Testing', 'testing', 'logos:javascript', '#0277BD30'),
+(5, 'Mobile Development', 'mobile', 'logos:javascript', '#0277BD30'),
+(6, 'Static Site Generators', 'static-site-generators', 'logos:javascript', '#0277BD30'),
+(7, 'Build Tools', 'build-tools', 'logos:javascript', '#0277BD30'),
+(8, 'Style & CSS', 'style-css', 'logos:javascript', '#0277BD30'),
+(9, 'Desktop Development', 'desktop', 'logos:javascript', '#0277BD30'),
+(10, 'Data Visualization', 'data-visualization', 'logos:javascript', '#0277BD30'),
+(11, 'Utilities', 'utilities', 'logos:javascript', '#0277BD30'),
+(12, 'Security & Authentication', 'security-authentication', 'logos:javascript', '#0277BD30'),
+(13, 'Server-Side Rendering & Optimization', 'server-side-rendering-optimization', 'logos:javascript', '#0277BD30'),
+(14, 'Cloud & DevOps', 'cloud-devops', 'logos:javascript', '#0277BD30'),
+(15, 'Internationalization & Localization', 'internationalization-localization', 'logos:javascript', '#0277BD30');

@@ -80,6 +80,27 @@ export const projectRouter = createTRPCRouter({
    * @returns {Promise<Project>} A promise that resolves to the project object.
    */
   detail: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    const getProjectInFavorites = (userId: string) => ({
+      projectInFavorites: {
+        where: {
+          favorites: {
+            userId: userId,
+          },
+        },
+        select: {
+          favoritesId: true,
+        },
+      },
+    });
+
+    const categoriesInclude = {
+      categories: {
+        select: {
+          name: true,
+        },
+      },
+    };
+
     const projectData = await ctx.db.project.findFirst({
       where: {
         name: input,
@@ -87,50 +108,64 @@ export const projectRouter = createTRPCRouter({
       include: {
         readme: true,
         categories: {
-          include: {
-            categories: {
-              select: {
-                name: true,
-              },
-            },
-          },
+          include: categoriesInclude,
         },
-        ...(ctx.session?.user && {
-          projectInFavorites: {
-            where: {
-              favorites: {
-                userId: ctx.session!.user.id,
-              },
-            },
-            select: {
-              favoritesId: true,
-            },
-          },
-        }),
+        ...(ctx.session?.user && getProjectInFavorites(ctx.session.user.id)),
       },
     });
 
-    let project;
-
-    if (projectData) {
-      // 检查项目是否已经在用户的收藏夹中
-      const isCollection = projectData.projectInFavorites?.length > 0;
-      project = {
-        ...projectData,
-        categories: projectData.categories
-          ? projectData.categories.map(
-              (tagRelation) => tagRelation.categories.name,
-            )
-          : undefined,
-        isCollection,
-      };
-      return project;
-    } else {
+    if (!projectData) {
       throw new TRPCError({
         code: 'NOT_FOUND',
         message: 'Project not found',
       });
     }
+
+    const isCollection = projectData.projectInFavorites?.length > 0;
+
+    const similarSelect = {
+      name: true,
+      id: true,
+      logo: true,
+      ownerAvatarUrl: true,
+      description: true,
+    };
+    // 获取相似项目
+    const similarProjects = await ctx.db.projectSimilarity.findMany({
+      where: {
+        OR: [{ project1Id: projectData.id }, { project2Id: projectData.id }],
+      },
+      take: 5,
+      orderBy: {
+        similarityScore: 'desc',
+      },
+      include: {
+        similarProject1: {
+          select: similarSelect,
+        },
+        similarProject2: {
+          select: similarSelect,
+        },
+      },
+    });
+
+    const similarProjectsData = similarProjects.map((item) => {
+      return item.project1Id === projectData.id
+        ? item.similarProject2
+        : item.similarProject1;
+    });
+
+    const project = {
+      ...projectData,
+      categories: projectData.categories
+        ? projectData.categories.map(
+            (tagRelation) => tagRelation.categories.name,
+          )
+        : undefined,
+      isCollection,
+      similarProjects: similarProjectsData,
+    };
+    return project;
   }),
   collection: protectedProcedure
     .input(CollectionProjectSchema)
