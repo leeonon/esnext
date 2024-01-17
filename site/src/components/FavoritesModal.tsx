@@ -5,7 +5,7 @@ import type { UserFavoritesItemType } from '@esnext/server';
 import type { UseDisclosureReturn } from '~/hooks/useDisclosure';
 import type { FC } from 'react';
 
-import { isValidElement, memo } from 'react';
+import { isValidElement, memo, useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -63,10 +63,20 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: '',
-      description: '',
+      name: item?.name ?? '',
+      description: item?.description ?? '',
     },
   });
+
+  useEffect(() => {
+    if (item) {
+      form.setValue('name', item.name);
+      form.setValue('description', item.description ?? '');
+    } else {
+      form.reset();
+    }
+  }, [form, item]);
+
   const mutation = api.favorites.update.useMutation({
     onSuccess: () => {
       onClose();
@@ -108,7 +118,9 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
       } else {
         await onCreate(values);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -126,8 +138,8 @@ const FavoritesModal: FC<FavoritesModalProps> = ({
         <DialogContent>
           <Form {...form}>
             <form
-              onSubmit={void form.handleSubmit(handleOk)}
-              className='w-2/3 space-y-6'
+              onSubmit={() => form.handleSubmit(handleOk)}
+              className='space-y-6'
             >
               <DialogHeader className='flex flex-col gap-1'>
                 <DialogTitle>

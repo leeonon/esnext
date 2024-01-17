@@ -15,11 +15,17 @@ import { api } from '~/trpc/react';
 import { FavoritesList } from './components/List';
 import SkeletonItem from './components/Skeleton';
 
+const PAGE_SIZE = 20;
+
 export default function Client() {
   const [page, setPage] = useState(1);
   const [currentItem, setCurrentItem] = useState<UserFavoritesItemType>();
 
-  const { onOpen, ...rest } = useDisclosure();
+  const { onOpen, ...rest } = useDisclosure({
+    onClose() {
+      setCurrentItem(undefined);
+    },
+  });
 
   const {
     data: { list = [], hasMore, total, totalPage } = {},
@@ -28,7 +34,7 @@ export default function Client() {
   } = api.user.userFavoritesPage.useQuery(
     {
       page,
-      pageSize: 20,
+      pageSize: PAGE_SIZE,
     },
     {
       refetchOnWindowFocus: false,
@@ -121,17 +127,19 @@ export default function Client() {
           <FavoritesList list={list} onEdit={onEdit} onRemove={onRemove} />
         </div>
       </div>
-      <Card className='ml-auto mt-8 inline-flex items-center gap-4 p-4'>
-        <Button onClick={onLastPage} disabled={page === 1}>
-          Last Page
-        </Button>
-        <div>
-          {page}/{totalPage}
-        </div>
-        <Button onClick={onNextPage} disabled={!hasMore}>
-          Next Page
-        </Button>
-      </Card>
+      {(total ?? 0) > PAGE_SIZE && (
+        <Card className='ml-auto mt-8 inline-flex items-center gap-4 p-4'>
+          <Button onClick={onLastPage} disabled={page === 1}>
+            Last Page
+          </Button>
+          <div>
+            {page}/{totalPage}
+          </div>
+          <Button onClick={onNextPage} disabled={!hasMore}>
+            Next Page
+          </Button>
+        </Card>
+      )}
     </>
   );
 }

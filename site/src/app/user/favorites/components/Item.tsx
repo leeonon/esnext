@@ -1,5 +1,7 @@
 import type { UserFavoritesItemType } from '@esnext/server';
+import type { MouseEventHandler } from 'react';
 
+import { useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
@@ -37,6 +39,24 @@ export default function FavoritesItem({
     router.push(`/user/favorites/${encodeURIComponent(item.name)}`);
   };
 
+  const avatars = item.projects.slice(0, 5).filter(Boolean);
+
+  const handleEdit: MouseEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      e.stopPropagation();
+      onEdit(item);
+    },
+    [item, onEdit],
+  );
+
+  const handleDelete: MouseEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      e.stopPropagation();
+      onRemove(item);
+    },
+    [item, onRemove],
+  );
+
   return (
     <Card
       className='bg-card-primary hover:bg-card flex h-[180px] max-w-[560px] cursor-pointer flex-col rounded-md transition-colors'
@@ -51,29 +71,26 @@ export default function FavoritesItem({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => onEdit(item)}>
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onRemove(item)}>
-              Delete
-            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </CardHeader>
-      <CardContent>
-        <div className='flex items-center justify-start gap-1'>
-          {item.projects.map((project) => (
+      <CardContent className='flex h-[40px] items-center py-0'>
+        <div className='flex items-center justify-start gap-2'>
+          {avatars.map((project) => (
             <Image
               width={35}
               height={35}
+              className='rounded-sm'
               key={project.id}
-              src={project.logo ?? ''}
+              src={project.ownerAvatarUrl ?? ''}
               alt={project.name}
             />
           ))}
         </div>
       </CardContent>
-      <CardFooter className='mt-auto p-2'>
+      <CardFooter className='mt-4 px-4'>
         <CardDescription className='line-clamp-2 text-left text-xs leading-4'>
           {item.description ?? '-'}
         </CardDescription>

@@ -1,5 +1,6 @@
-import baseConfig from '@esnext/tailwind-config';
 import { fontFamily } from 'tailwindcss/defaultTheme';
+
+import baseConfig from '@esnext/tailwind-config';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

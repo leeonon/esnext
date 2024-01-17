@@ -1,6 +1,7 @@
 import type { ProjectDetailType } from '@esnext/server';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import CollectionButton from '~/app/info/[name]/components/Favorites';
 import { Button } from '~/components/ui/button';
@@ -55,13 +56,18 @@ export default function ProjectBaseInfo({
       </div>
       <div className='flex items-center gap-3'>
         <CollectionButton project={project} />
-        <Button>
-          {/* <Icon icon='mdi:github' fontSize={22} /> */}
-          View on Github
+        <Button asChild>
+          <Link href={`https://github.com/${project.fullName}`} target='_blank'>
+            View on Github
+          </Link>
         </Button>
         <Button>
-          {/* <Icon icon='tabler:home' fontSize={22} /> */}
-          Visit Website
+          <Link
+            href={project.homepage ?? `https://gtihub.com/${project.fullName}`}
+            target='_blank'
+          >
+            Visit Website
+          </Link>
         </Button>
       </div>
     </div>

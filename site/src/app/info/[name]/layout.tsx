@@ -7,7 +7,8 @@ import ProjectTags from '~/components/Info/TagsCard';
 import { api } from '~/trpc/server';
 
 import InfoContext from './components/Context';
-import { LayoutTabs } from './components/Tabs';
+
+// import { LayoutTabs } from './components/Tabs';
 
 type Props = {
   params: { name: string };
@@ -29,7 +30,6 @@ export default async function InfoLayout({
 }) {
   const { name } = params;
   const data = await api.project.detail.query(name);
-  console.log('🚀 ~ file: layout.tsx:32 ~ data:', data);
 
   const topics = data.topics ? data.topics?.split(',') ?? [] : [];
 
@@ -39,10 +39,9 @@ export default async function InfoLayout({
         <ProjectBaseInfo project={data} />
         <div className='mt-3 flex gap-2'>
           <div className='flex-1'>
-            <LayoutTabs name={name} />
             <InfoContext project={data}>{children}</InfoContext>
           </div>
-          <div className='mt-[3.2rem] flex w-[250px] flex-col gap-4'>
+          <div className='flex w-[250px] flex-col gap-4'>
             <ProjectTags tags={topics} />
             <NpmInfo project={data} />
             <Recommend list={data.similarProjects} />

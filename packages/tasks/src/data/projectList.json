@@ -1,92 +1,168 @@
 [
   {
-    "name": "react",
-    "github": "https://github.com/facebook/react",
-    "category": ["frontend"]
+    "name": "React",
+    "github": "facebook/react",
+    "npm": "react",
+    "category": [
+      "frontend"
+    ]
   },
   {
-    "name": "react-native",
-    "github": "https://github.com/facebook/react-native",
-    "category": ["frontend", "mobile"]
+    "name": "React Native",
+    "npm": "react-native",
+    "github": "facebook/react-native",
+    "category": [
+      "frontend",
+      "mobile"
+    ]
   },
   {
-    "name": "react-router",
-    "github": "https://github.com/remix-run/react-router",
-    "category": ["frontend"]
+    "name": "React Router",
+    "npm": "react-router",
+    "github": "remix-run/react-router",
+    "category": [
+      "frontend"
+    ]
   },
   {
-    "name": "svelte",
-    "github": "https://github.com/sveltejs/svelte",
-    "category": ["frontend"]
+    "name": "Svelte",
+    "npm": "svelte",
+    "github": "sveltejs/svelte",
+    "category": [
+      "frontend"
+    ]
   },
   {
-    "name": "vitest",
-    "github": "https://github.com/vitest-dev/vitest",
-    "category": ["testing"]
+    "name": "Vitest",
+    "npm": "vitest",
+    "github": "vitest-dev/vitest",
+    "category": [
+      "testing"
+    ]
   },
   {
-    "name": "lottie-web",
-    "github": "https://github.com/airbnb/lottie-web",
-    "category": ["frontend"]
+    "name": "Lottie Web",
+    "npm": "lottie-web",
+    "github": "airbnb/lottie-web",
+    "category": [
+      "frontend"
+    ]
   },
   {
     "name": "@effect/schema",
-    "github": "https://github.com/effect-ts/schema",
-    "category": ["backend", "frontend"]
+    "npm": "@effect-ts/schema",
+    "github": "effect-ts/schema",
+    "category": [
+      "backend",
+      "frontend"
+    ]
   },
   {
-    "name": "bun",
-    "github": "https://github.com/oven-sh/bun",
-    "category": ["backend", "build-tools"]
+    "name": "Bun",
+    "npm": "bun",
+    "github": "oven-sh/bun",
+    "category": [
+      "backend",
+      "build-tools"
+    ]
   },
   {
-    "name": "astro",
-    "github": "https://github.com/withastro/astro",
-    "category": ["frontend", "static-site-generators"]
+    "name": "Astro",
+    "npm": "astro",
+    "github": "withastro/astro",
+    "category": [
+      "frontend",
+      "static-site-generators"
+    ]
   },
   {
-    "name": "next",
-    "github": "https://github.com/vercel/next.js",
-    "category": ["frontend", "backend", "server-side-rendering-optimization"]
+    "name": "NextJS",
+    "npm": "next",
+    "github": "vercel/next.js",
+    "category": [
+      "frontend",
+      "backend",
+      "server-side-rendering-optimization"
+    ]
   },
   {
-    "name": "prisma",
-    "github": "https://github.com/prisma/prisma",
-    "category": ["backend", "server-side-rendering-optimization"]
+    "name": "Prisma",
+    "npm": "prisma",
+    "github": "prisma/prisma",
+    "category": [
+      "backend",
+      "server-side-rendering-optimization"
+    ]
   },
   {
-    "name": "@trpc/server",
-    "github": "https://github.com/trpc/trpc",
-    "category": ["backend", "server-side-rendering-optimization", "security-authentication"]
+    "name": "Trpc",
+    "npm": "@trpc/server",
+    "github": "trpc/trpc",
+    "category": [
+      "backend",
+      "server-side-rendering-optimization",
+      "security-authentication"
+    ]
   },
   {
-    "name": "@trpc/client",
-    "github": "https://github.com/trpc/trpc",
-    "category": ["backend", "server-side-rendering-optimization", "security-authentication"]
+    "name": "Zod",
+    "npm": "zod",
+    "github": "colinhacks/zod",
+    "category": [
+      "backend",
+      "server-side-rendering-optimization",
+      "security-authentication"
+    ]
   },
   {
-    "name": "zod",
-    "github": "https://github.com/colinhacks/zod",
-    "category": ["backend", "server-side-rendering-optimization", "security-authentication"]
+    "name": "Zustand",
+    "npm": "zustand",
+    "github": "pmndrs/zustand",
+    "category": [
+      "frontend",
+      "state-management"
+    ]
   },
   {
-    "name": "zustand",
-    "github": "https://github.com/pmndrs/zustand",
-    "category": ["frontend", "state-management"]
+    "name": "Knip",
+    "npm": "knip",
+    "github": "webpro/knip",
+    "category": [
+      "build-tools"
+    ]
   },
   {
-    "name": "knip",
-    "github": "https://github.com/webpro/knip",
-    "category": ["build-tools"]
+    "name": "@aws-lite",
+    "npm": "@aws-lite/client",
+    "github": "architect/aws-lite",
+    "category": [
+      "server-side-rendering-optimization",
+      "backend"
+    ]
   },
   {
-    "name": "@aws-lite/client",
-    "github": "https://github.com/architect/aws-lite",
-    "category": ["server-side-rendering-optimization", "backend"]
+    "name": "htmx",
+    "npm": "htmx.org",
+    "github": "bigskysoftware/htmx",
+    "category": [
+      "frontend"
+    ]
   },
   {
-    "name": "@aws-lite/dynamodb",
-    "github": "https://github.com/architect/aws-lite",
-    "category": ["server-side-rendering-optimization", "backend"]
+    "name": "Farm",
+    "npm": "farm",
+    "github": "farm-ng/farm",
+    "category": [
+      "frontend",
+      "build-tools"
+    ]
+  },
+  {
+    "name": "StyleX",
+    "npm": "@stylexjs/stylex",
+    "github": "facebook/stylex",
+    "category": [
+      "frontend"
+    ]
   }
 ]
