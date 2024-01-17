@@ -72,7 +72,7 @@ const FavoritesButton = ({
       });
       setCheckedKeys(next);
     }
-  }, [userFavorites, project]);
+  }, [project?.id, userFavorites]);
 
   const onCheck = useCallback((id: number) => {
     setCheckedKeys((prev) => {

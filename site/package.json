@@ -64,11 +64,11 @@
   },
   "devDependencies": {
     "@esnext/env": "workspace:^",
-    "@esnext/eslint-config": "^1.0.0",
-    "@esnext/prettier-config": "^1.0.0",
-    "@esnext/stylelint-config": "^1.0.0",
-    "@esnext/tailwind-config": "^1.0.0",
-    "@esnext/tsconfig": "^1.0.0",
+    "@otter-hacker/eslint-config": "^2.1.1",
+    "@otter-hacker/prettier-config": "^2.1.1",
+    "@otter-hacker/stylelint-config": "^2.1.1",
+    "@otter-hacker/tailwind-config": "^2.1.3",
+    "@otter-hacker/tsconfig": "^2.1.1",
     "@types/react-syntax-highlighter": "^15.5.8",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.52.0",
@@ -80,14 +80,13 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@esnext/eslint-config/base",
-      "@esnext/eslint-config/nextjs",
-      "@esnext/eslint-config/react"
+      "@otter-hacker/eslint-config/base",
+      "@otter-hacker/eslint-config/nextjs",
+      "@otter-hacker/eslint-config/react"
     ]
   },
-  "prettier": "@esnext/prettier-config",
   "stylelint": {
-    "extends": "@esnext/stylelint-config"
+    "extends": "@otter-hacker/stylelint-config"
   },
   "ct3aMetadata": {
     "initVersion": "7.20.2"

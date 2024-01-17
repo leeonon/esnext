@@ -1,11 +1,17 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 
 import styles from './styles.module.css';
 
 export default function Icons() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    console.log(open);
+  }, []);
   return (
     <>
       <motion.div
