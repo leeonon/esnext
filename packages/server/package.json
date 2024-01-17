@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "types": "index.ts",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "LeeOnOn",
   "license": "ISC",
   "dependencies": {
@@ -21,17 +20,17 @@
   "devDependencies": {
     "@esnext/db": "workspace:^",
     "@esnext/env": "workspace:^",
-    "@esnext/eslint-config": "workspace:^",
-    "@esnext/prettier-config": "workspace:^1.0.0",
-    "@esnext/tsconfig": "workspace:^",
+    "@otter-hacker/eslint-config": "^2.1.1",
+    "@otter-hacker/prettier-config": "^2.1.1",
+    "@otter-hacker/tsconfig": "^2.1.1",
     "eslint": "^8.52.0",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@esnext/eslint-config/base"
+      "@otter-hacker/eslint-config/base"
     ]
   },
-  "prettier": "@esnext/prettier-config"
+  "prettier": "@otter-hacker/prettier-config"
 }

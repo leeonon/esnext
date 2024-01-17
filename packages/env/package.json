@@ -11,17 +11,17 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@esnext/tsconfig": "^1.0.0",
-    "@esnext/prettier-config": "^1.0.0",
-    "@esnext/eslint-config": "^1.0.0",
+    "@otter-hacker/tsconfig": "^2.1.1",
+    "@otter-hacker/prettier-config": "^2.1.1",
+    "@otter-hacker/eslint-config": "^2.1.1",
     "eslint": "^8.52.0",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@esnext/eslint-config/base"
+      "@otter-hacker/eslint-config/base"
     ]
   },
-  "prettier": "@esnext/prettier-config"
+  "prettier": "@otter-hacker/prettier-config"
 }

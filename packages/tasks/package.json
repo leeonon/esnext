@@ -21,9 +21,9 @@
   "devDependencies": {
     "@esnext/db": "workspace:^",
     "@esnext/env": "workspace:^",
-    "@esnext/eslint-config": "workspace:^",
-    "@esnext/prettier-config": "workspace:^1.0.0",
-    "@esnext/tsconfig": "workspace:^",
+    "@otter-hacker/eslint-config": "^2.1.1",
+    "@otter-hacker/prettier-config": "^2.1.1",
+    "@otter-hacker/tsconfig": "^2.1.1",
     "@types/node-fetch": "^2.6.9",
     "eslint": "^8.52.0",
     "tsx": "^4.1.4",
@@ -32,10 +32,10 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@esnext/eslint-config/base"
+      "@otter-hacker/eslint-config/base"
     ]
   },
-  "prettier": "@esnext/prettier-config",
+  "prettier": "@otter-hacker/prettier-config",
   "author": "LeeOnOn",
   "license": "ISC"
 }

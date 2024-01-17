@@ -1,5 +1,5 @@
 {
-  "extends": "@esnext/tsconfig/base.json",
+  "extends": "@otter-hacker/tsconfig/base.json",
   "compilerOptions": {
     "esModuleInterop": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
